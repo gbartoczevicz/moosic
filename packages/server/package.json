@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Application Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielbartoczevicz/give-me-a-chorus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielbartoczevicz/give-me-a-chorus/issues"
+  },
+  "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme"
+}

@@ -1,0 +1,26 @@
+{
+  "name": "give-me-a-chorus",
+  "version": "1.0.0",
+  "description": "Projeto da Jornada de Aprendizagem - Segundo Semestre de 2021",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielbartoczevicz/give-me-a-chorus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrielbartoczevicz/give-me-a-chorus/issues"
+  },
+  "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme",
+  "workspaces": [
+    "packages/server"
+  ],
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}
