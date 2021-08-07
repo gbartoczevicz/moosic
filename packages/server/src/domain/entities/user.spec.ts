@@ -16,7 +16,7 @@ describe('User Unitary Tests', () => {
   });
 
   it("should validate user's email", () => {
-    const testable = User.create({ email: '' });
+    const testable = User.create({ email: nullAsType() });
 
     expect(testable).toBeInstanceOf(Error);
     expect((testable as Error).message).toEqual('Email is required');
