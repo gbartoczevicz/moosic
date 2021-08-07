@@ -19,6 +19,6 @@ describe('User Unitary Tests', () => {
     const testable = User.create({ email: nullAsType() });
 
     expect(testable).toBeInstanceOf(Error);
-    expect((testable as Error).message).toEqual('Email is required');
+    expect((testable as Error).message).toEqual('Address is required');
   });
 });

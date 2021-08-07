@@ -1,11 +1,13 @@
-export type UserProps = {
+import { Email } from './values';
+
+type UserProps = {
   email: string;
 };
 
 export class User {
-  public readonly email: string;
+  public readonly email: Email;
 
-  private constructor(email: string) {
+  private constructor(email: Email) {
     this.email = email;
   }
 
@@ -14,10 +16,10 @@ export class User {
       return new Error('Props is required');
     }
 
-    const { email } = props;
+    const email = Email.create({ value: props.email });
 
-    if (!email) {
-      return new Error('Email is required');
+    if (email instanceof Error) {
+      return email;
     }
 
     return new User(email);
