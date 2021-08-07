@@ -5,7 +5,7 @@ import { nullAsType } from '@/utils';
 
 describe('User Unitary Tests', () => {
   it('should create a valid user', () => {
-    const testable = User.create({ email: 'user+01@email.com', password: { value: 'password' } });
+    const testable = User.create({ email: { value: 'user+01@email.com' }, password: { value: 'password' } });
 
     expect(testable.isRight()).toBeTruthy();
 
@@ -28,7 +28,7 @@ describe('User Unitary Tests', () => {
 
   describe('value objects validation', () => {
     it("should validate user's email", () => {
-      const testable = User.create({ email: nullAsType(), password: { value: 'password' } });
+      const testable = User.create({ email: { value: nullAsType() }, password: { value: 'password' } });
 
       expect(testable.isLeft()).toBeTruthy();
 
@@ -37,7 +37,7 @@ describe('User Unitary Tests', () => {
     });
 
     it("should validate user's password", () => {
-      const testable = User.create({ email: 'user+01@email.com', password: { value: nullAsType() } });
+      const testable = User.create({ email: { value: 'user+01@email.com' }, password: { value: nullAsType() } });
 
       expect(testable.isLeft()).toBeTruthy();
 

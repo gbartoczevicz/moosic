@@ -1,10 +1,10 @@
 import { Either, left, right } from '@shared/utils';
 
-import { Email, Password, PasswordProps } from '@/domain/entities/values';
+import { Email, EmailProps, Password, PasswordProps } from '@/domain/entities/values';
 import { InvalidEmail, InvalidPassword, InvalidUser } from '@/domain/entities/errors';
 
 type UserProps = {
-  email: string;
+  email: EmailProps;
   password: PasswordProps;
 };
 
@@ -25,14 +25,12 @@ export class User {
 
     const { email, password } = props;
 
-    const emailOrError = Email.create({ value: email });
-
+    const emailOrError = Email.create(email);
     if (emailOrError.isLeft()) {
       return left(emailOrError.value);
     }
 
     const passwordOrError = Password.create(password);
-
     if (passwordOrError.isLeft()) {
       return left(passwordOrError.value);
     }

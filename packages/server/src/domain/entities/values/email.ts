@@ -2,7 +2,7 @@ import { Either, left, right } from '@shared/utils';
 
 import { InvalidEmail } from '@/domain/entities/errors';
 
-type EmailProps = {
+export type EmailProps = {
   value: string;
 };
 
