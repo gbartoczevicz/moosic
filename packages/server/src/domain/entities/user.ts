@@ -1,4 +1,7 @@
-import { Email } from './values';
+import { Either, left, right } from '@shared/utils';
+
+import { Email } from '@/domain/entities/values';
+import { InvalidEmail, InvalidUser } from '@/domain/entities/errors';
 
 type UserProps = {
   email: string;
@@ -11,17 +14,19 @@ export class User {
     this.email = email;
   }
 
-  public static create(props: UserProps): User | Error {
+  public static create(props: UserProps): Either<InvalidUser | InvalidEmail, User> {
     if (!props) {
-      return new Error('Props is required');
+      return left(new InvalidUser('Props is required'));
     }
 
-    const email = Email.create({ value: props.email });
+    const emailOrError = Email.create({ value: props.email });
 
-    if (email instanceof Error) {
-      return email;
+    if (emailOrError.isLeft()) {
+      return left(emailOrError.value);
     }
 
-    return new User(email);
+    const user = new User(emailOrError.value);
+
+    return right(user);
   }
 }

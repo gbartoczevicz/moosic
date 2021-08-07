@@ -18,8 +18,12 @@
   },
   "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme",
   "workspaces": [
-    "packages/server"
+    "packages/server",
+    "packages/_shared"
   ],
+  "dependencies": {
+    "@shared/utils": "*"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.13",

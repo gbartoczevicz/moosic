@@ -16,14 +16,19 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "no-use-before-define": "off",
     "import/prefer-default-export": "off",
+    "max-classes-per-file": "off",
+    "class-methods-use-this": "off",
+    "no-useless-constructor": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
       {
         "ts": "never"
       }
-    ]
+    ],
+    "import/no-extraneous-dependencies": "off"
   },
   "settings": {
     "import/resolver": {

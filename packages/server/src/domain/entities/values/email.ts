@@ -1,3 +1,7 @@
+import { Either, left, right } from '@shared/utils';
+
+import { InvalidEmail } from '@/domain/entities/errors';
+
 type EmailProps = {
   value: string;
 };
@@ -13,22 +17,22 @@ export class Email {
     this.value = value;
   }
 
-  public static create(props: EmailProps): Email | Error {
+  public static create(props: EmailProps): Either<InvalidEmail, Email> {
     if (!props) {
-      return new Error('Props is required');
+      return left(new InvalidEmail('Props is required'));
     }
 
     const { value } = props;
 
     if (!value) {
-      return new Error('Address is required');
+      return left(new InvalidEmail('Address is required'));
     }
 
     if (!this.isValid(value)) {
-      return new Error('Address is invalid');
+      return left(new InvalidEmail('Address is invalid'));
     }
 
-    return new Email(value);
+    return right(new Email(value));
   }
 
   private static isValid(value: string): boolean {
