@@ -1,15 +1,20 @@
 import { User } from '@/domain/entities/user';
-import { InvalidEmail, InvalidUser } from '@/domain/entities/errors';
+import { InvalidEmail, InvalidPassword, InvalidUser } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
 describe('User Unitary Tests', () => {
   it('should create a valid user', () => {
-    const testable = User.create({ email: 'user+01@email.com' });
+    const testable = User.create({ email: 'user+01@email.com', password: { value: 'password' } });
 
     expect(testable.isRight()).toBeTruthy();
 
     expect(testable.value).toBeInstanceOf(User);
+
+    const user = testable.value as User;
+
+    expect(user.email.value).toEqual('user+01@email.com');
+    expect(user.password.value).toEqual('password');
   });
 
   it('should validate props itself', () => {
@@ -21,12 +26,23 @@ describe('User Unitary Tests', () => {
     expect((testable.value as InvalidUser).message).toEqual('Props is required');
   });
 
-  it("should validate user's email", () => {
-    const testable = User.create({ email: nullAsType() });
+  describe('value objects validation', () => {
+    it("should validate user's email", () => {
+      const testable = User.create({ email: nullAsType(), password: { value: 'password' } });
 
-    expect(testable.isLeft()).toBeTruthy();
+      expect(testable.isLeft()).toBeTruthy();
 
-    expect(testable.value).toBeInstanceOf(InvalidEmail);
-    expect((testable.value as InvalidEmail).message).toEqual('Address is required');
+      expect(testable.value).toBeInstanceOf(InvalidEmail);
+      expect((testable.value as InvalidEmail).message).toEqual('Address is required');
+    });
+
+    it("should validate user's password", () => {
+      const testable = User.create({ email: 'user+01@email.com', password: { value: nullAsType() } });
+
+      expect(testable.isLeft()).toBeTruthy();
+
+      expect(testable.value).toBeInstanceOf(InvalidPassword);
+      expect((testable.value as InvalidPassword).message).toEqual('Password is required');
+    });
   });
 });

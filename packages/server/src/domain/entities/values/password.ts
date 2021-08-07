@@ -2,7 +2,7 @@ import { Either, left, right } from '@shared/utils';
 
 import { InvalidPassword } from '@/domain/entities/errors';
 
-type PasswordProps = {
+export type PasswordProps = {
   value: string;
   isHashed?: boolean;
 };

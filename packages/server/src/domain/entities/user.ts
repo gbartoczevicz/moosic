@@ -1,31 +1,43 @@
 import { Either, left, right } from '@shared/utils';
 
-import { Email } from '@/domain/entities/values';
-import { InvalidEmail, InvalidUser } from '@/domain/entities/errors';
+import { Email, Password, PasswordProps } from '@/domain/entities/values';
+import { InvalidEmail, InvalidPassword, InvalidUser } from '@/domain/entities/errors';
 
 type UserProps = {
   email: string;
+  password: PasswordProps;
 };
 
 export class User {
   public readonly email: Email;
 
-  private constructor(email: Email) {
+  public readonly password: Password;
+
+  private constructor(email: Email, password: Password) {
     this.email = email;
+    this.password = password;
   }
 
-  public static create(props: UserProps): Either<InvalidUser | InvalidEmail, User> {
+  public static create(props: UserProps): Either<InvalidUser | InvalidEmail | InvalidPassword, User> {
     if (!props) {
       return left(new InvalidUser('Props is required'));
     }
 
-    const emailOrError = Email.create({ value: props.email });
+    const { email, password } = props;
+
+    const emailOrError = Email.create({ value: email });
 
     if (emailOrError.isLeft()) {
       return left(emailOrError.value);
     }
 
-    const user = new User(emailOrError.value);
+    const passwordOrError = Password.create(password);
+
+    if (passwordOrError.isLeft()) {
+      return left(passwordOrError.value);
+    }
+
+    const user = new User(emailOrError.value, passwordOrError.value);
 
     return right(user);
   }
