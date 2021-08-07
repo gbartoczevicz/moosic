@@ -10,5 +10,6 @@ module.exports = {
   },
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1'
-  }
+  },
+  collectCoverageFrom: ['**/*.ts', '!**/index.ts', '!**/errors/*.ts']
 };
