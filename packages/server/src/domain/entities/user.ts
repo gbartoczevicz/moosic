@@ -1,7 +1,7 @@
 import { Either, left, right } from '@shared/utils';
 
 import { Email, EmailProps, Password, PasswordProps } from '@/domain/entities/values';
-import { InvalidEmail, InvalidPassword, InvalidUser } from '@/domain/entities/errors';
+import { InvalidEmail, InvalidPassword, PropsAreRequired } from '@/domain/entities/errors';
 
 type UserProps = {
   email: EmailProps;
@@ -18,9 +18,9 @@ export class User {
     this.password = password;
   }
 
-  public static create(props: UserProps): Either<InvalidUser | InvalidEmail | InvalidPassword, User> {
+  public static create(props: UserProps): Either<InvalidEmail | InvalidPassword | PropsAreRequired, User> {
     if (!props) {
-      return left(new InvalidUser('Props is required'));
+      return left(new PropsAreRequired());
     }
 
     const { email, password } = props;

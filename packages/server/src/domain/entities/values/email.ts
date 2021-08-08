@@ -1,6 +1,6 @@
 import { Either, left, right } from '@shared/utils';
 
-import { InvalidEmail } from '@/domain/entities/errors';
+import { InvalidEmail, PropsAreRequired } from '@/domain/entities/errors';
 
 export type EmailProps = {
   value: string;
@@ -17,9 +17,9 @@ export class Email {
     this.value = value;
   }
 
-  public static create(props: EmailProps): Either<InvalidEmail, Email> {
+  public static create(props: EmailProps): Either<InvalidEmail | PropsAreRequired, Email> {
     if (!props) {
-      return left(new InvalidEmail('Props is required'));
+      return left(new PropsAreRequired());
     }
 
     const { value } = props;

@@ -1,5 +1,5 @@
 import { User } from '@/domain/entities/user';
-import { InvalidEmail, InvalidPassword, InvalidUser } from '@/domain/entities/errors';
+import { InvalidEmail, InvalidPassword, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -8,8 +8,6 @@ describe('User Unitary Tests', () => {
     const testable = User.create({ email: { value: 'user+01@email.com' }, password: { value: 'password' } });
 
     expect(testable.isRight()).toBeTruthy();
-
-    expect(testable.value).toBeInstanceOf(User);
 
     const user = testable.value as User;
 
@@ -22,8 +20,7 @@ describe('User Unitary Tests', () => {
 
     expect(testable.isLeft()).toBeTruthy();
 
-    expect(testable.value).toBeInstanceOf(InvalidUser);
-    expect((testable.value as InvalidUser).message).toEqual('Props is required');
+    expect(testable.value).toBeInstanceOf(PropsAreRequired);
   });
 
   describe('value objects validation', () => {

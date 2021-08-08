@@ -1,5 +1,5 @@
 import { Email } from '@/domain/entities/values/email';
-import { InvalidEmail } from '@/domain/entities/errors';
+import { InvalidEmail, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -15,7 +15,7 @@ describe('Email Unitary Tests', () => {
     const testable = Email.create(nullAsType());
 
     expect(testable.isLeft()).toBeTruthy();
-    expect((testable.value as InvalidEmail).message).toEqual('Props is required');
+    expect(testable.value).toBeInstanceOf(PropsAreRequired);
   });
 
   it("should validate user's email", () => {

@@ -1,6 +1,6 @@
 import { Either, left, right } from '@shared/utils';
 
-import { InvalidPassword } from '@/domain/entities/errors';
+import { InvalidPassword, PropsAreRequired } from '@/domain/entities/errors';
 
 export type PasswordProps = {
   value: string;
@@ -19,9 +19,9 @@ export class Password {
     this.isHashed = isHashed;
   }
 
-  public static create(props: PasswordProps): Either<InvalidPassword, Password> {
+  public static create(props: PasswordProps): Either<InvalidPassword | PropsAreRequired, Password> {
     if (!props) {
-      return left(new InvalidPassword('Props is required'));
+      return left(new PropsAreRequired());
     }
 
     const { value, isHashed } = props;

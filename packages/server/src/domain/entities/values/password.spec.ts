@@ -1,5 +1,5 @@
 import { Password } from '@/domain/entities/values';
-import { InvalidPassword } from '@/domain/entities/errors';
+import { InvalidPassword, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -35,8 +35,7 @@ describe('Password Unitary Tests', () => {
     const testable = Password.create(nullAsType());
 
     expect(testable.isLeft()).toBeTruthy();
-    expect(testable.value).toBeInstanceOf(InvalidPassword);
-    expect((testable.value as InvalidPassword).message).toEqual('Props is required');
+    expect(testable.value).toBeInstanceOf(PropsAreRequired);
   });
 
   describe('value validation', () => {
