@@ -1,19 +1,23 @@
 import { Either, left, right } from '@shared/utils';
 
 import { Email, EmailProps, Password, PasswordProps } from '@/domain/entities/values';
-import { InvalidEmail, InvalidPassword, PropsAreRequired } from '@/domain/entities/errors';
+import { InvalidEmail, InvalidPassword, InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
 
 type UserProps = {
+  name: string;
   email: EmailProps;
   password: PasswordProps;
 };
 
 export class User {
+  public readonly name: string;
+
   public readonly email: Email;
 
   public readonly password: Password;
 
-  private constructor(email: Email, password: Password) {
+  private constructor(name: string, email: Email, password: Password) {
+    this.name = name;
     this.email = email;
     this.password = password;
   }
@@ -23,7 +27,11 @@ export class User {
       return left(new PropsAreRequired());
     }
 
-    const { email, password } = props;
+    const { name, email, password } = props;
+
+    if (!name) {
+      return left(new InvalidUser('Name is required'));
+    }
 
     const emailOrError = Email.create(email);
     if (emailOrError.isLeft()) {
@@ -35,7 +43,7 @@ export class User {
       return left(passwordOrError.value);
     }
 
-    const user = new User(emailOrError.value, passwordOrError.value);
+    const user = new User(name, emailOrError.value, passwordOrError.value);
 
     return right(user);
   }
