@@ -1,5 +1,5 @@
 import { User } from '@/domain/entities/user';
-import { InvalidEmail, InvalidPassword, InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
+import { InvalidEmail, InvalidPassword, InvalidPhone, InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -8,7 +8,8 @@ describe('User Unitary Tests', () => {
     const testable = User.create({
       name: 'user',
       email: { value: 'user+01@email.com' },
-      password: { value: 'password' }
+      password: { value: 'password' },
+      phone: { value: '00 0000 0000' }
     });
 
     expect(testable.isRight()).toBeTruthy();
@@ -27,11 +28,12 @@ describe('User Unitary Tests', () => {
   });
 
   describe('value objects validation', () => {
-    it("should validate user's email", () => {
+    it("should validate user's name", () => {
       const testable = User.create({
         name: nullAsType(),
         email: { value: 'user+01@email.com' },
-        password: { value: 'password' }
+        password: { value: 'password' },
+        phone: { value: '00 0000 0000' }
       });
 
       expect(testable.isLeft()).toBeTruthy();
@@ -43,7 +45,8 @@ describe('User Unitary Tests', () => {
       const testable = User.create({
         name: 'user',
         email: { value: nullAsType() },
-        password: { value: 'password' }
+        password: { value: 'password' },
+        phone: { value: '00 0000 0000' }
       });
 
       expect(testable.isLeft()).toBeTruthy();
@@ -55,12 +58,26 @@ describe('User Unitary Tests', () => {
       const testable = User.create({
         name: 'user',
         email: { value: 'user+01@email.com' },
-        password: { value: nullAsType() }
+        password: { value: nullAsType() },
+        phone: { value: '00 0000 0000' }
       });
 
       expect(testable.isLeft()).toBeTruthy();
       expect(testable.value).toBeInstanceOf(InvalidPassword);
       expect((testable.value as InvalidPassword).message).toEqual('Password is required');
+    });
+
+    it("should validate user's password", () => {
+      const testable = User.create({
+        name: 'user',
+        email: { value: 'user+01@email.com' },
+        password: { value: 'password' },
+        phone: { value: nullAsType() }
+      });
+
+      expect(testable.isLeft()).toBeTruthy();
+      expect(testable.value).toBeInstanceOf(InvalidPhone);
+      expect((testable.value as InvalidPhone).message).toEqual('Phone is required');
     });
   });
 });

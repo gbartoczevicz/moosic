@@ -1,12 +1,13 @@
 import { Either, left, right } from '@shared/utils';
 
-import { Email, EmailProps, Password, PasswordProps } from '@/domain/entities/values';
+import { Email, EmailProps, Password, PasswordProps, Phone, PhoneProps } from '@/domain/entities/values';
 import { InvalidEmail, InvalidPassword, InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
 
 type UserProps = {
   name: string;
   email: EmailProps;
   password: PasswordProps;
+  phone: PhoneProps;
 };
 
 export class User {
@@ -16,10 +17,13 @@ export class User {
 
   public readonly password: Password;
 
-  private constructor(name: string, email: Email, password: Password) {
+  public readonly phone: Phone;
+
+  private constructor(name: string, email: Email, password: Password, phone: Phone) {
     this.name = name;
     this.email = email;
     this.password = password;
+    this.phone = phone;
   }
 
   public static create(props: UserProps): Either<InvalidEmail | InvalidPassword | PropsAreRequired, User> {
@@ -27,7 +31,7 @@ export class User {
       return left(new PropsAreRequired());
     }
 
-    const { name, email, password } = props;
+    const { name, email, password, phone } = props;
 
     if (!name) {
       return left(new InvalidUser('Name is required'));
@@ -43,7 +47,12 @@ export class User {
       return left(passwordOrError.value);
     }
 
-    const user = new User(name, emailOrError.value, passwordOrError.value);
+    const phoneOrError = Phone.create(phone);
+    if (phoneOrError.isLeft()) {
+      return left(phoneOrError.value);
+    }
+
+    const user = new User(name, emailOrError.value, passwordOrError.value, phoneOrError.value);
 
     return right(user);
   }
