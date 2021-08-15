@@ -1,7 +1,7 @@
 import { User } from '@/domain/entities/user';
 import { Email, Password, Phone } from '@/domain/entities/values';
 import { makeEmail, makePassword, makePhone } from '@/domain/entities/values/fakes';
-import { InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -41,8 +41,8 @@ describe('User Unitary Tests', () => {
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidUser);
-      expect((testable.value as InvalidUser).message).toEqual('Name is required');
+      expect(testable.value).toBeInstanceOf(FieldIsRequired);
+      expect((testable.value as FieldIsRequired).field).toEqual('name');
     });
 
     it("should validate user's email", () => {
@@ -54,8 +54,8 @@ describe('User Unitary Tests', () => {
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidUser);
-      expect((testable.value as InvalidUser).message).toEqual('Email is required');
+      expect(testable.value).toBeInstanceOf(FieldIsRequired);
+      expect((testable.value as FieldIsRequired).field).toEqual('email');
     });
 
     it("should validate user's password", () => {
@@ -67,8 +67,8 @@ describe('User Unitary Tests', () => {
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidUser);
-      expect((testable.value as InvalidUser).message).toEqual('Password is required');
+      expect(testable.value).toBeInstanceOf(FieldIsRequired);
+      expect((testable.value as FieldIsRequired).field).toEqual('password');
     });
 
     it("should validate user's phone", () => {
@@ -80,8 +80,8 @@ describe('User Unitary Tests', () => {
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidUser);
-      expect((testable.value as InvalidUser).message).toEqual('Phone is required');
+      expect(testable.value).toBeInstanceOf(FieldIsRequired);
+      expect((testable.value as FieldIsRequired).field).toEqual('phone');
     });
   });
 });

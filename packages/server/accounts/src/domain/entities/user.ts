@@ -1,7 +1,7 @@
 import { Either, left, right } from '@shared/utils';
 
 import { Email, Password, Phone } from '@/domain/entities/values';
-import { InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
+import { PropsAreRequired, FieldIsRequired } from '@/domain/entities/errors';
 
 type UserProps = {
   name: string;
@@ -26,7 +26,7 @@ export class User {
     this.phone = phone;
   }
 
-  public static create(props: UserProps): Either<InvalidUser | PropsAreRequired, User> {
+  public static create(props: UserProps): Either<FieldIsRequired | PropsAreRequired, User> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -34,19 +34,19 @@ export class User {
     const { name, email, password, phone } = props;
 
     if (!name) {
-      return left(new InvalidUser('Name is required'));
+      return left(new FieldIsRequired('name'));
     }
 
     if (!email) {
-      return left(new InvalidUser('Email is required'));
+      return left(new FieldIsRequired('email'));
     }
 
     if (!password) {
-      return left(new InvalidUser('Password is required'));
+      return left(new FieldIsRequired('password'));
     }
 
     if (!phone) {
-      return left(new InvalidUser('Phone is required'));
+      return left(new FieldIsRequired('phone'));
     }
 
     const user = new User(name, email, password, phone);
