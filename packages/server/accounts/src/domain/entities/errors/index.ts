@@ -5,3 +5,4 @@ export * from '@/domain/entities/errors/invalid-password';
 export * from '@/domain/entities/errors/invalid-phone';
 export * from '@/domain/entities/errors/invalid-document';
 export * from '@/domain/entities/errors/invalid-restaurateur';
+export * from '@/domain/entities/errors/invalid-establishment';
