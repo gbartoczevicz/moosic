@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme",
   "workspaces": [
-    "packages/server",
+    "packages/server/accounts",
     "packages/_shared"
   ],
   "dependencies": {

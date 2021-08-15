@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "@server/accounts",
   "version": "1.0.0",
-  "description": "Application Server",
+  "description": "Accounts application server",
   "main": "index.js",
   "scripts": {
     "test:coverage": "jest --coverage"
