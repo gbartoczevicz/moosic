@@ -1,6 +1,6 @@
 import { Either, left, right } from '@shared/utils';
 
-import { InvalidPassword, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
 
 export type PasswordProps = {
   value: string;
@@ -19,7 +19,7 @@ export class Password {
     this.isHashed = isHashed;
   }
 
-  public static create(props: PasswordProps): Either<InvalidPassword | PropsAreRequired, Password> {
+  public static create(props: PasswordProps): Either<MinimumLength | PropsAreRequired | FieldIsRequired, Password> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -27,11 +27,13 @@ export class Password {
     const { value, isHashed } = props;
 
     if (!value) {
-      return left(new InvalidPassword('Password is required'));
+      return left(new FieldIsRequired('password'));
     }
 
-    if (value.length < this.MINIMUM_LENGTH) {
-      return left(new InvalidPassword(`The minimum length for password is ${this.MINIMUM_LENGTH}`));
+    if (!isHashed) {
+      if (value.length < this.MINIMUM_LENGTH) {
+        return left(new MinimumLength(this.MINIMUM_LENGTH));
+      }
     }
 
     const password = new Password(value, !!isHashed);

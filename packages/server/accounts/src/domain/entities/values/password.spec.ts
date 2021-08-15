@@ -1,5 +1,5 @@
 import { Password } from '@/domain/entities/values';
-import { InvalidPassword, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -43,18 +43,14 @@ describe('Password Unitary Tests', () => {
       const testable = Password.create({ value: nullAsType() });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidPassword);
-      expect((testable.value as InvalidPassword).message).toEqual('Password is required');
+      expect((testable.value as FieldIsRequired).field).toEqual('password');
     });
 
     it('should validate value length', () => {
       const testable = Password.create({ value: '123' });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidPassword);
-      expect((testable.value as InvalidPassword).message).toEqual(
-        `The minimum length for password is ${Password.MINIMUM_LENGTH}`
-      );
+      expect(testable.value).toEqual(new MinimumLength(Password.MINIMUM_LENGTH));
     });
   });
 });
