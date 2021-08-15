@@ -1,7 +1,7 @@
 import { Either, left, right } from '@shared/utils';
-import { InvalidDocument, PropsAreRequired } from '../errors';
+import { InvalidDocument, PropsAreRequired } from '@/domain/entities/errors';
 
-type DocumentProps = {
+export type DocumentProps = {
   value: string;
   isSanitized?: boolean;
 };
