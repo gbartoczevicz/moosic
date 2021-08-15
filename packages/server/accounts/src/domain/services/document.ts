@@ -2,7 +2,7 @@ import { Either, left } from '@shared/utils';
 import { DocumentHandler } from '@/domain/services/ports';
 import { InvalidDocumentPattern } from '@/domain/services/errors';
 import { Document } from '@/domain/entities/values';
-import { InvalidDocument } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 export class DocumentService {
   private readonly documentHandler: DocumentHandler;
@@ -14,7 +14,7 @@ export class DocumentService {
   public createDocumentFromPlainCpnjValue(
     plainValue: string,
     toSanitize: boolean
-  ): Either<InvalidDocumentPattern | InvalidDocument, Document> {
+  ): Either<InvalidDocumentPattern | FieldIsRequired | PropsAreRequired, Document> {
     if (!this.documentHandler.isValidCnpj(plainValue)) {
       return left(new InvalidDocumentPattern('CNPJ'));
     }
@@ -32,7 +32,7 @@ export class DocumentService {
   public createDocumentFromPlainCpfValue(
     plainValue: string,
     toSanitize: boolean
-  ): Either<InvalidDocumentPattern | InvalidDocument, Document> {
+  ): Either<InvalidDocumentPattern | FieldIsRequired | PropsAreRequired, Document> {
     if (!this.documentHandler.isValidCpf(plainValue)) {
       return left(new InvalidDocumentPattern('CPF'));
     }

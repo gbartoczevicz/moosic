@@ -1,5 +1,5 @@
 import { Either, left, right } from '@shared/utils';
-import { InvalidDocument, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 export type DocumentProps = {
   value: string;
@@ -16,7 +16,7 @@ export class Document {
     this.isSanitized = isSanitized;
   }
 
-  public static create(props: DocumentProps): Either<InvalidDocument, Document> {
+  public static create(props: DocumentProps): Either<PropsAreRequired | FieldIsRequired, Document> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -24,7 +24,7 @@ export class Document {
     const { value, isSanitized } = props;
 
     if (!value) {
-      return left(new InvalidDocument('Document is required'));
+      return left(new FieldIsRequired('document'));
     }
 
     const document = new Document(value, !!isSanitized);

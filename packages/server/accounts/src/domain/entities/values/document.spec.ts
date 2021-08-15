@@ -1,5 +1,5 @@
 import { Document } from '@/domain/entities/values';
-import { InvalidDocument, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -42,7 +42,6 @@ describe('Document Unitary Tests', () => {
     const testable = Document.create({ value: nullAsType() });
 
     expect(testable.isLeft()).toBeTruthy();
-    expect(testable.value).toBeInstanceOf(InvalidDocument);
-    expect((testable.value as InvalidDocument).message).toEqual('Document is required');
+    expect((testable.value as FieldIsRequired).field).toEqual('document');
   });
 });
