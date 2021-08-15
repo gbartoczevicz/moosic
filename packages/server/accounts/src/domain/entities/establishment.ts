@@ -1,6 +1,6 @@
 import { Either, left, right } from '@shared/utils';
 import { Phone } from '@/domain/entities/values';
-import { InvalidEstablishment, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 export type EstablishmentProps = {
   name: string;
@@ -17,7 +17,7 @@ export class Establishment {
     this.phone = phone;
   }
 
-  public static create(props: EstablishmentProps): Either<PropsAreRequired | InvalidEstablishment, Establishment> {
+  public static create(props: EstablishmentProps): Either<PropsAreRequired | FieldIsRequired, Establishment> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -25,11 +25,11 @@ export class Establishment {
     const { name, phone } = props;
 
     if (!name) {
-      return left(new InvalidEstablishment('Name is required'));
+      return left(new FieldIsRequired('name'));
     }
 
     if (!phone) {
-      return left(new InvalidEstablishment('Phone is required'));
+      return left(new FieldIsRequired('phone'));
     }
 
     const establishment = new Establishment(name, phone);

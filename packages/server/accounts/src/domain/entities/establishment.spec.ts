@@ -1,7 +1,7 @@
 import { Establishment } from '@/domain/entities/establishment';
 import { Phone } from '@/domain/entities/values';
 import { makePhone } from '@/domain/entities/values/fakes';
-import { InvalidEstablishment, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 import { nullAsType } from '@/utils';
 
 describe('Establishment Unitary Tests', () => {
@@ -34,7 +34,7 @@ describe('Establishment Unitary Tests', () => {
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect((testable.value as InvalidEstablishment).message).toEqual('Name is required');
+      expect((testable.value as FieldIsRequired).field).toEqual('name');
     });
 
     it('should validate establishment phone', () => {
@@ -44,7 +44,7 @@ describe('Establishment Unitary Tests', () => {
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect((testable.value as InvalidEstablishment).message).toEqual('Phone is required');
+      expect((testable.value as FieldIsRequired).field).toEqual('phone');
     });
   });
 });
