@@ -1,29 +1,33 @@
 import { Either, left, right } from '@shared/utils';
 
-import { InvalidPhone, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 export type PhoneProps = {
   value: string;
+  isSanitized?: boolean;
 };
 
 export class Phone {
   public readonly value: string;
 
-  private constructor(value: string) {
+  public readonly isSanitized: boolean;
+
+  private constructor(value: string, isSanitized: boolean) {
     this.value = value;
+    this.isSanitized = isSanitized;
   }
 
-  public static create(props: PhoneProps): Either<PropsAreRequired | InvalidPhone, Phone> {
+  public static create(props: PhoneProps): Either<PropsAreRequired | FieldIsRequired, Phone> {
     if (!props) {
       return left(new PropsAreRequired());
     }
 
-    const { value } = props;
+    const { value, isSanitized } = props;
 
     if (!value) {
-      return left(new InvalidPhone('Phone is required'));
+      return left(new FieldIsRequired('phone'));
     }
 
-    return right(new Phone(value));
+    return right(new Phone(value, !!isSanitized));
   }
 }
