@@ -1,5 +1,7 @@
 import { User } from '@/domain/entities/user';
-import { InvalidEmail, InvalidPassword, InvalidPhone, InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
+import { Email, Password, Phone } from '@/domain/entities/values';
+import { makeEmail, makePassword, makePhone } from '@/domain/entities/values/fakes';
+import { InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
 
 import { nullAsType } from '@/utils';
 
@@ -7,17 +9,19 @@ describe('User Unitary Tests', () => {
   it('should create a valid user', () => {
     const testable = User.create({
       name: 'user',
-      email: { value: 'user+01@email.com' },
-      password: { value: 'password' },
-      phone: { value: '00 0000 0000' }
+      email: makeEmail({}).value as Email,
+      password: makePassword({}).value as Password,
+      phone: makePhone({}).value as Phone
     });
 
     expect(testable.isRight()).toBeTruthy();
 
     const user = testable.value as User;
 
-    expect(user.email.value).toEqual('user+01@email.com');
-    expect(user.password.value).toEqual('password');
+    expect(user.name).toEqual('user');
+    expect(user.email.value).toEqual('user_email@email.com');
+    expect(user.password.value).toEqual('secret_value');
+    expect(user.phone.value).toEqual('0000-0000');
   });
 
   it('should validate props itself', () => {
@@ -31,9 +35,9 @@ describe('User Unitary Tests', () => {
     it("should validate user's name", () => {
       const testable = User.create({
         name: nullAsType(),
-        email: { value: 'user+01@email.com' },
-        password: { value: 'password' },
-        phone: { value: '00 0000 0000' }
+        email: makeEmail({}).value as Email,
+        password: makePassword({}).value as Password,
+        phone: makePhone({}).value as Phone
       });
 
       expect(testable.isLeft()).toBeTruthy();
@@ -44,40 +48,40 @@ describe('User Unitary Tests', () => {
     it("should validate user's email", () => {
       const testable = User.create({
         name: 'user',
-        email: { value: nullAsType() },
-        password: { value: 'password' },
-        phone: { value: '00 0000 0000' }
+        email: nullAsType(),
+        password: makePassword({}).value as Password,
+        phone: makePhone({}).value as Phone
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidEmail);
-      expect((testable.value as InvalidEmail).message).toEqual('Address is required');
+      expect(testable.value).toBeInstanceOf(InvalidUser);
+      expect((testable.value as InvalidUser).message).toEqual('Email is required');
     });
 
     it("should validate user's password", () => {
       const testable = User.create({
         name: 'user',
-        email: { value: 'user+01@email.com' },
-        password: { value: nullAsType() },
-        phone: { value: '00 0000 0000' }
+        email: makeEmail({}).value as Email,
+        password: nullAsType(),
+        phone: makePhone({}).value as Phone
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidPassword);
-      expect((testable.value as InvalidPassword).message).toEqual('Password is required');
+      expect(testable.value).toBeInstanceOf(InvalidUser);
+      expect((testable.value as InvalidUser).message).toEqual('Password is required');
     });
 
-    it("should validate user's password", () => {
+    it("should validate user's phone", () => {
       const testable = User.create({
         name: 'user',
-        email: { value: 'user+01@email.com' },
-        password: { value: 'password' },
-        phone: { value: nullAsType() }
+        email: makeEmail({}).value as Email,
+        password: makePassword({}).value as Password,
+        phone: nullAsType()
       });
 
       expect(testable.isLeft()).toBeTruthy();
-      expect(testable.value).toBeInstanceOf(InvalidPhone);
-      expect((testable.value as InvalidPhone).message).toEqual('Phone is required');
+      expect(testable.value).toBeInstanceOf(InvalidUser);
+      expect((testable.value as InvalidUser).message).toEqual('Phone is required');
     });
   });
 });

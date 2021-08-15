@@ -1,13 +1,13 @@
 import { Either, left, right } from '@shared/utils';
 
-import { Email, EmailProps, Password, PasswordProps, Phone, PhoneProps } from '@/domain/entities/values';
+import { Email, Password, Phone } from '@/domain/entities/values';
 import { InvalidEmail, InvalidPassword, InvalidUser, PropsAreRequired } from '@/domain/entities/errors';
 
 type UserProps = {
   name: string;
-  email: EmailProps;
-  password: PasswordProps;
-  phone: PhoneProps;
+  email: Email;
+  password: Password;
+  phone: Phone;
 };
 
 export class User {
@@ -37,22 +37,19 @@ export class User {
       return left(new InvalidUser('Name is required'));
     }
 
-    const emailOrError = Email.create(email);
-    if (emailOrError.isLeft()) {
-      return left(emailOrError.value);
+    if (!email) {
+      return left(new InvalidUser('Email is required'));
     }
 
-    const passwordOrError = Password.create(password);
-    if (passwordOrError.isLeft()) {
-      return left(passwordOrError.value);
+    if (!password) {
+      return left(new InvalidUser('Password is required'));
     }
 
-    const phoneOrError = Phone.create(phone);
-    if (phoneOrError.isLeft()) {
-      return left(phoneOrError.value);
+    if (!phone) {
+      return left(new InvalidUser('Phone is required'));
     }
 
-    const user = new User(name, emailOrError.value, passwordOrError.value, phoneOrError.value);
+    const user = new User(name, email, password, phone);
 
     return right(user);
   }
