@@ -1,6 +1,6 @@
 import { Either, left, right } from '@shared/utils';
 import { Document } from '@/domain/entities/values';
-import { InvalidRestaurateur, PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 export type RestaurateurProps = {
   document: Document;
@@ -13,7 +13,7 @@ export class Restaurateur {
     this.document = document;
   }
 
-  public static create(props: RestaurateurProps): Either<InvalidRestaurateur | PropsAreRequired, Restaurateur> {
+  public static create(props: RestaurateurProps): Either<FieldIsRequired | PropsAreRequired, Restaurateur> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -21,7 +21,7 @@ export class Restaurateur {
     const { document } = props;
 
     if (!document) {
-      return left(new InvalidRestaurateur('Document is required'));
+      return left(new FieldIsRequired('document'));
     }
 
     const restaurateur = new Restaurateur(document);

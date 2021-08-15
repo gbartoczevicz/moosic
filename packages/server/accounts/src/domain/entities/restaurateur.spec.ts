@@ -1,7 +1,7 @@
 import { Restaurateur } from '@/domain/entities/restaurateur';
 import { Document } from '@/domain/entities/values';
 import { nullAsType } from '@/utils';
-import { InvalidDocument, PropsAreRequired } from './errors';
+import { FieldIsRequired, PropsAreRequired } from './errors';
 
 describe('Restaurateur Unitary Tests', () => {
   it('should create a valid restaurateur', () => {
@@ -27,6 +27,6 @@ describe('Restaurateur Unitary Tests', () => {
     const testable = Restaurateur.create({ document: nullAsType() });
 
     expect(testable.isLeft()).toBeTruthy();
-    expect((testable.value as InvalidDocument).message).toEqual('Document is required');
+    expect((testable.value as FieldIsRequired).field).toEqual('document');
   });
 });
