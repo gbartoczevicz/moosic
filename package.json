@@ -1,5 +1,5 @@
 {
-  "name": "give-me-a-chorus",
+  "name": "moosic",
   "version": "1.0.0",
   "description": "Projeto da Jornada de Aprendizagem - Segundo Semestre de 2021",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gabrielbartoczevicz/give-me-a-chorus.git"
+    "url": "git+https://github.com/gabrielbartoczevicz/moosic.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gabrielbartoczevicz/give-me-a-chorus/issues"
+    "url": "https://github.com/gabrielbartoczevicz/moosic/issues"
   },
-  "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme",
+  "homepage": "https://github.com/gabrielbartoczevicz/moosic#readme",
   "workspaces": [
     "packages/server/accounts",
     "packages/_shared"
