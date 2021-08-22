@@ -5,6 +5,7 @@ const root = resolve(__dirname);
 module.exports = {
   rootDir: root,
   testEnvironment: 'node',
+  restoreMocks: true,
   transform: {
     '.+\\.ts$': 'ts-jest'
   },
