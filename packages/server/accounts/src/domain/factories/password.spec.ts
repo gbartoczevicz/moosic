@@ -1,4 +1,4 @@
-import { PasswordFactory } from '@/domain/entities/values/factories/password';
+import { PasswordFactory } from '@/domain/factories';
 import { FakeHashingProvider } from '@/domain/factories/ports/fakes';
 import { Password } from '@/domain/entities/values';
 
