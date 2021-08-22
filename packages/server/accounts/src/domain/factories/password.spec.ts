@@ -1,5 +1,5 @@
 import { PasswordFactory } from '@/domain/entities/values/factories/password';
-import { FakeHashingProvider } from '@/domain/services/ports/fakes';
+import { FakeHashingProvider } from '@/domain/factories/ports/fakes';
 import { Password } from '@/domain/entities/values';
 
 const makeSut = () => ({
