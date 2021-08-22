@@ -1,21 +1,22 @@
 import { left } from '@shared/utils';
-import { MakeUserProps, UserFactory } from '@/domain/entities/factories/user';
-import { HashService } from '@/domain/services/hash';
-import { PhoneService } from '@/domain/services/phone';
-import { FakeHashingProvider, FakePhoneNumber } from '@/domain/services/ports/fakes';
+
 import { nullAsType } from '@/utils';
-import { FieldIsRequired, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
-import { InvalidPhonePattern } from '@/domain/services/errors';
-import { Email, Password } from '@/domain/entities/values';
+
+import { MakeUserProps, UserFactory, PasswordFactory } from '@/domain/factories';
 import { User } from '@/domain/entities/user';
+import { PhoneService } from '@/domain/services/phone';
+import { FakeHashingProvider, FakePhoneNumber } from '@/domain/factories/ports/fakes';
+import { FieldIsRequired, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
+import { InvalidPhonePattern } from '@/domain/factories/errors';
+import { Email } from '@/domain/entities/values';
 
 const makeSut = () => {
-  const hashService = new HashService(new FakeHashingProvider(), 8);
+  const passwordFactory = new PasswordFactory(new FakeHashingProvider(), 8);
   const phoneService = new PhoneService(new FakePhoneNumber());
 
   return {
-    sut: new UserFactory(hashService, phoneService),
-    hashService,
+    sut: new UserFactory(passwordFactory, phoneService),
+    passwordFactory,
     phoneService
   };
 };
@@ -83,9 +84,9 @@ describe('User Factory Unitary Tests', () => {
   });
 
   it('should validate password', async () => {
-    const { sut } = makeSut();
+    const { sut, passwordFactory } = makeSut();
 
-    jest.spyOn(Password, 'create').mockImplementation(() => left(new MinimumLength(8)));
+    jest.spyOn(passwordFactory, 'make').mockImplementation(() => Promise.resolve(left(new MinimumLength(8))));
 
     const testable = await sut.make(makeFixture());
 

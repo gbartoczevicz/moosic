@@ -1,24 +1,25 @@
 import { left, right } from '@shared/utils';
-import { HashService } from '@/domain/services/hash';
-import { PhoneService } from '@/domain/services/phone';
-import { Email, Password } from '@/domain/entities/values';
-import { PropsAreRequired } from '@/domain/entities/errors';
+
 import { User } from '@/domain/entities/user';
+import { Email } from '@/domain/entities/values';
+import { PhoneService } from '@/domain/services/phone';
+import { MakePasswordProps, PasswordFactory } from '@/domain/factories';
+import { PropsAreRequired } from '@/domain/entities/errors';
 
 export type MakeUserProps = {
   name: string;
   email: string;
-  password: { value: string; toEncode: boolean };
+  password: MakePasswordProps;
   phone: { value: string; toSanitize: boolean };
 };
 
 export class UserFactory {
-  private readonly hashService: HashService;
+  private readonly passwordFactory: PasswordFactory;
 
   private readonly phoneService: PhoneService;
 
-  public constructor(hashService: HashService, phoneService: PhoneService) {
-    this.hashService = hashService;
+  public constructor(passwordFactory: PasswordFactory, phoneService: PhoneService) {
+    this.passwordFactory = passwordFactory;
     this.phoneService = phoneService;
   }
 
@@ -37,18 +38,7 @@ export class UserFactory {
       return left(emailOrError.value);
     }
 
-    let toCreatePassword: string;
-
-    if (password.toEncode) {
-      toCreatePassword = await this.hashService.encodePlain(password.value);
-    } else {
-      toCreatePassword = password.value;
-    }
-
-    const passwordOrError = Password.create({
-      value: toCreatePassword,
-      isHashed: password.toEncode
-    });
+    const passwordOrError = await this.passwordFactory.make(password);
 
     if (passwordOrError.isLeft()) {
       return left(passwordOrError.value);
