@@ -1,5 +1,5 @@
 import { Password } from '@/domain/entities/values';
-import { HashingProvider } from '@/domain/services/ports';
+import { HashingProvider } from '@/domain/factories/ports';
 
 export type MakePasswordProps = {
   value: string;

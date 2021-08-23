@@ -2,11 +2,11 @@ import { DocumentHandler } from '@/domain/factories/ports/document-handler';
 
 export class FakeDocumentHandler implements DocumentHandler {
   formatCnpj(document: string): string {
-    return 'formatted cnpj';
+    return 'formatted';
   }
 
   formatCpf(document: string): string {
-    return 'formatted cpf';
+    return 'formatted';
   }
 
   isValidCnpj(document: string): boolean {
@@ -18,6 +18,6 @@ export class FakeDocumentHandler implements DocumentHandler {
   }
 
   sanitize(document: string): string {
-    return 'sanitized document';
+    return 'sanitized';
   }
 }
