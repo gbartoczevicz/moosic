@@ -2,11 +2,11 @@ import { PhoneNumber } from '@/domain/factories/ports';
 
 export class FakePhoneNumber implements PhoneNumber {
   public format(value: string): string {
-    return 'formatted phone number';
+    return 'formatted';
   }
 
   public sanitize(value: string): string {
-    return 'sanitized phone number';
+    return 'sanitized';
   }
 
   public validate(value: string): boolean {
