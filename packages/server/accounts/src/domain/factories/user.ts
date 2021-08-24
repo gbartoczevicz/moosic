@@ -1,9 +1,10 @@
-import { left, right } from '@shared/utils';
+import { Either, left } from '@shared/utils';
 
 import { User } from '@/domain/entities/user';
 import { Email } from '@/domain/entities/values';
 import { MakePasswordProps, PasswordFactory, PhoneFactory, MakePhoneProps } from '@/domain/factories';
-import { PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, InvalidEmail, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
+import { InvalidPhonePattern } from '@/domain/factories/errors';
 
 export type MakeUserProps = {
   name: string;
@@ -11,6 +12,8 @@ export type MakeUserProps = {
   password: MakePasswordProps;
   phone: MakePhoneProps;
 };
+
+type UserEither = Either<PropsAreRequired | InvalidEmail | MinimumLength | FieldIsRequired | InvalidPhonePattern, User>;
 
 export class UserFactory {
   private readonly passwordFactory: PasswordFactory;
@@ -22,7 +25,7 @@ export class UserFactory {
     this.phoneFactory = phoneFactory;
   }
 
-  public async make(props: MakeUserProps) {
+  public async make(props: MakeUserProps): Promise<UserEither> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -56,10 +59,6 @@ export class UserFactory {
       phone: phoneOrError.value
     });
 
-    if (userOrError.isLeft()) {
-      return left(userOrError.value);
-    }
-
-    return right(userOrError.value);
+    return userOrError;
   }
 }
