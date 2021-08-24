@@ -1,18 +1,16 @@
 import { left } from '@shared/utils';
 
 import { nullAsType } from '@/utils';
-
-import { MakeUserProps, UserFactory, PasswordFactory } from '@/domain/factories';
-import { User } from '@/domain/entities/user';
-import { PhoneService } from '@/domain/services/phone';
-import { FakeHashingProvider, FakePhoneNumber } from '@/domain/factories/ports/fakes';
-import { FieldIsRequired, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
-import { InvalidPhonePattern } from '@/domain/factories/errors';
+import { User } from '@/domain/entities';
 import { Email } from '@/domain/entities/values';
+import { MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
+import { UserFactory, PasswordFactory, PhoneFactory, MakeUserProps } from '@/domain/factories';
+import { FakeHashingProvider, FakePhoneNumber } from '@/domain/factories/ports/fakes';
+import { InvalidPhonePattern } from '@/domain/factories/errors';
 
 const makeSut = () => {
   const passwordFactory = new PasswordFactory(new FakeHashingProvider(), 8);
-  const phoneService = new PhoneService(new FakePhoneNumber());
+  const phoneService = new PhoneFactory(new FakePhoneNumber());
 
   return {
     sut: new UserFactory(passwordFactory, phoneService),
@@ -44,23 +42,8 @@ describe('User Factory Unitary Tests', () => {
     expect(user.email.value).toEqual(fixture.email);
     expect(user.password.value).toEqual('hashed_value');
     expect(user.password.isHashed).toEqual(fixture.password.toEncode);
-    expect(user.phone.value).toEqual('sanitized phone number');
+    expect(user.phone.value).toEqual('sanitized');
     expect(user.phone.isSanitized).toEqual(fixture.phone.toSanitize);
-  });
-
-  it("should not encode user's password", async () => {
-    const { sut } = makeSut();
-
-    const fixture = makeFixture(false);
-
-    const testable = await sut.make(fixture);
-
-    expect(testable.isRight()).toBeTruthy();
-
-    const user = testable.value as User;
-
-    expect(user.password.value).toEqual(fixture.password.value);
-    expect(user.password.isHashed).toEqual(fixture.password.toEncode);
   });
 
   it('should validate props itself', async () => {
@@ -97,22 +80,11 @@ describe('User Factory Unitary Tests', () => {
   it('should validate phone', async () => {
     const { sut, phoneService } = makeSut();
 
-    jest.spyOn(phoneService, 'createFromPlainValue').mockImplementation(() => left(new InvalidPhonePattern()));
+    jest.spyOn(phoneService, 'make').mockImplementation(() => left(new InvalidPhonePattern()));
 
     const testable = await sut.make(makeFixture());
 
     expect(testable.isLeft()).toBeTruthy();
     expect(testable.value).toBeInstanceOf(InvalidPhonePattern);
-  });
-
-  it('should validade user', async () => {
-    const { sut } = makeSut();
-
-    jest.spyOn(User, 'create').mockImplementation(() => left(new FieldIsRequired('any')));
-
-    const testable = await sut.make(makeFixture());
-
-    expect(testable.isLeft()).toBeTruthy();
-    expect(testable.value).toBeInstanceOf(FieldIsRequired);
   });
 });
