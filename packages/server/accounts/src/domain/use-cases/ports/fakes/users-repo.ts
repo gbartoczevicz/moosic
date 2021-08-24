@@ -1,16 +1,16 @@
 import { right } from '@shared/utils';
 import { User } from '@/domain/entities/user';
 import { Email, Password, Phone } from '@/domain/entities/values';
-import { UsersRepo, Save, FindUnique } from '@/domain/use-cases/ports/users-repo';
+import { UsersRepo, SaveUser, FindUniqueUser } from '@/domain/use-cases/ports/users-repo';
 import { makeEmail, makePassword, makePhone } from '@/domain/entities/values/fakes';
 import { makeUser } from '@/domain/entities/fakes';
 
 export class FakeUsersRepo implements UsersRepo {
-  public async save(user: User): Promise<Save> {
+  public async save(user: User): Promise<SaveUser> {
     return Promise.resolve(right(user));
   }
 
-  public async findByEmail(email: Email): Promise<FindUnique> {
+  public async findByEmail(email: Email): Promise<FindUniqueUser> {
     const password = makePassword({ isHashed: true }).value as Password;
     const phone = makePhone({ isSanitized: true }).value as Phone;
 
@@ -23,7 +23,7 @@ export class FakeUsersRepo implements UsersRepo {
     return Promise.resolve(right(user));
   }
 
-  public async findByPhone(phone: Phone): Promise<FindUnique> {
+  public async findByPhone(phone: Phone): Promise<FindUniqueUser> {
     const password = makePassword({ isHashed: true }).value as Password;
     const email = makeEmail({}).value as Email;
 
