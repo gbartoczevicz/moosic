@@ -1,6 +1,6 @@
-import { left } from '@shared/utils';
+import { Either, left } from '@shared/utils';
 import { PhoneNumber } from '@/domain/factories/ports';
-import { PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 import { InvalidPhonePattern } from '@/domain/factories/errors';
 import { Phone } from '@/domain/entities/values';
 
@@ -16,7 +16,7 @@ export class PhoneFactory {
     this.phoneNumber = phoneNumber;
   }
 
-  public make(props: MakePhoneProps) {
+  public make(props: MakePhoneProps): Either<PropsAreRequired | InvalidPhonePattern | FieldIsRequired, Phone> {
     if (!props) {
       return left(new PropsAreRequired());
     }

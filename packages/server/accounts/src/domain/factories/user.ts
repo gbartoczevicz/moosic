@@ -2,25 +2,24 @@ import { left, right } from '@shared/utils';
 
 import { User } from '@/domain/entities/user';
 import { Email } from '@/domain/entities/values';
-import { PhoneService } from '@/domain/services/phone';
-import { MakePasswordProps, PasswordFactory } from '@/domain/factories';
+import { MakePasswordProps, PasswordFactory, PhoneFactory, MakePhoneProps } from '@/domain/factories';
 import { PropsAreRequired } from '@/domain/entities/errors';
 
 export type MakeUserProps = {
   name: string;
   email: string;
   password: MakePasswordProps;
-  phone: { value: string; toSanitize: boolean };
+  phone: MakePhoneProps;
 };
 
 export class UserFactory {
   private readonly passwordFactory: PasswordFactory;
 
-  private readonly phoneService: PhoneService;
+  private readonly phoneFactory: PhoneFactory;
 
-  public constructor(passwordFactory: PasswordFactory, phoneService: PhoneService) {
+  public constructor(passwordFactory: PasswordFactory, phoneFactory: PhoneFactory) {
     this.passwordFactory = passwordFactory;
-    this.phoneService = phoneService;
+    this.phoneFactory = phoneFactory;
   }
 
   public async make(props: MakeUserProps) {
@@ -44,7 +43,7 @@ export class UserFactory {
       return left(passwordOrError.value);
     }
 
-    const phoneOrError = this.phoneService.createFromPlainValue(phone.value, phone.toSanitize);
+    const phoneOrError = this.phoneFactory.make(phone);
 
     if (phoneOrError.isLeft()) {
       return left(phoneOrError.value);
