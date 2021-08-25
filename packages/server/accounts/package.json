@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/gabrielbartoczevicz/give-me-a-chorus/issues"
   },
-  "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme"
+  "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme",
+  "devDependencies": {
+    "prisma": "^2.30.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.30.0"
+  }
 }
