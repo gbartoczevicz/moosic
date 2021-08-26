@@ -12,7 +12,7 @@ export class Id {
     this.value = value;
   }
 
-  public static crate(props: IdProps): Either<PropsAreRequired | FieldIsRequired, Id> {
+  public static create(props: IdProps): Either<PropsAreRequired | FieldIsRequired, Id> {
     if (!props) {
       return left(new PropsAreRequired());
     }

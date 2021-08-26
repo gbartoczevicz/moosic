@@ -22,6 +22,6 @@ export class IdFactory {
 
     const value = this.idProvider.generate(props.value);
 
-    return Id.crate({ value });
+    return Id.create({ value });
   }
 }

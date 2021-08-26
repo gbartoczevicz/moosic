@@ -5,7 +5,7 @@ import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 describe('Id Unitary Tests', () => {
   it('should create a valid Id', () => {
-    const testable = Id.crate({ value: 'id' });
+    const testable = Id.create({ value: 'id' });
 
     expect(testable.isRight()).toBeTruthy();
 
@@ -15,14 +15,14 @@ describe('Id Unitary Tests', () => {
   });
 
   it('should validate props itself', () => {
-    const testable = Id.crate(nullAsType());
+    const testable = Id.create(nullAsType());
 
     expect(testable.isLeft()).toBeTruthy();
     expect(testable.value).toBeInstanceOf(PropsAreRequired);
   });
 
   it('should validate if value is null', () => {
-    const testable = Id.crate({ value: nullAsType() });
+    const testable = Id.create({ value: nullAsType() });
 
     expect(testable.isLeft()).toBeTruthy();
     expect(testable.value).toBeInstanceOf(FieldIsRequired);
@@ -30,7 +30,7 @@ describe('Id Unitary Tests', () => {
 
   describe('equals method', () => {
     it('should validate if param is nullish', () => {
-      const testable = Id.crate({ value: 'any' });
+      const testable = Id.create({ value: 'any' });
 
       const id = testable.value as Id;
 
@@ -38,7 +38,7 @@ describe('Id Unitary Tests', () => {
     });
 
     it('should compare string param', () => {
-      const testable = Id.crate({ value: 'any' });
+      const testable = Id.create({ value: 'any' });
 
       const id = testable.value as Id;
 
@@ -46,11 +46,11 @@ describe('Id Unitary Tests', () => {
     });
 
     it('should compare object param', () => {
-      const testable = Id.crate({ value: 'any' });
+      const testable = Id.create({ value: 'any' });
 
       const id = testable.value as Id;
 
-      const toCompare = Id.crate({ value: 'any' });
+      const toCompare = Id.create({ value: 'any' });
 
       const idToCompare = toCompare.value as Id;
 
