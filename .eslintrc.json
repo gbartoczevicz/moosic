@@ -21,11 +21,14 @@
     "max-classes-per-file": "off",
     "class-methods-use-this": "off",
     "no-useless-constructor": "off",
+    "react/style-prop-object": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        "ts": "never"
+        "ts": "never",
+        "tsx": "never"
       }
     ],
     "import/no-extraneous-dependencies": "off"
@@ -41,7 +44,7 @@
   "settings": {
     "import/resolver": {
       "typescript": {
-        "project": "packages/**/**/tsconfig.json"
+        "project": ["packages/**/**/tsconfig.json", "packages/mobile/tsconfig.json"]
       }
     }
   }
