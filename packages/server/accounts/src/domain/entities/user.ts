@@ -1,9 +1,10 @@
 import { Either, left, right } from '@shared/utils';
 
-import { Email, Password, Phone } from '@/domain/entities/values';
+import { Email, Id, Password, Phone } from '@/domain/entities/values';
 import { PropsAreRequired, FieldIsRequired } from '@/domain/entities/errors';
 
 type UserProps = {
+  id: Id;
   name: string;
   email: Email;
   password: Password;
@@ -11,6 +12,8 @@ type UserProps = {
 };
 
 export class User {
+  public readonly id: Id;
+
   public readonly name: string;
 
   public readonly email: Email;
@@ -19,7 +22,8 @@ export class User {
 
   public readonly phone: Phone;
 
-  private constructor(name: string, email: Email, password: Password, phone: Phone) {
+  private constructor(id: Id, name: string, email: Email, password: Password, phone: Phone) {
+    this.id = id;
     this.name = name;
     this.email = email;
     this.password = password;
@@ -31,7 +35,11 @@ export class User {
       return left(new PropsAreRequired());
     }
 
-    const { name, email, password, phone } = props;
+    const { id, name, email, password, phone } = props;
+
+    if (!id) {
+      return left(new FieldIsRequired('id'));
+    }
 
     if (!name) {
       return left(new FieldIsRequired('name'));
@@ -49,7 +57,7 @@ export class User {
       return left(new FieldIsRequired('phone'));
     }
 
-    const user = new User(name, email, password, phone);
+    const user = new User(id, name, email, password, phone);
 
     return right(user);
   }

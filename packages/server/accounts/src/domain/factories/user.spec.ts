@@ -4,22 +4,25 @@ import { nullAsType } from '@/utils';
 import { User } from '@/domain/entities';
 import { Email } from '@/domain/entities/values';
 import { MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
-import { UserFactory, PasswordFactory, PhoneFactory, MakeUserProps } from '@/domain/factories';
-import { FakeHashingProvider, FakePhoneNumber } from '@/domain/factories/ports/fakes';
+import { IdFactory, UserFactory, PasswordFactory, PhoneFactory, MakeUserProps } from '@/domain/factories';
+import { FakeHashingProvider, FakeIdProvider, FakePhoneNumber } from '@/domain/factories/ports/fakes';
 import { InvalidPhonePattern } from '@/domain/factories/errors';
 
 const makeSut = () => {
+  const idFactory = new IdFactory(new FakeIdProvider());
   const passwordFactory = new PasswordFactory(new FakeHashingProvider(), 8);
   const phoneService = new PhoneFactory(new FakePhoneNumber());
 
   return {
-    sut: new UserFactory(passwordFactory, phoneService),
+    sut: new UserFactory(idFactory, passwordFactory, phoneService),
+    idFactory,
     passwordFactory,
     phoneService
   };
 };
 
 const makeFixture = (toEncode = true): MakeUserProps => ({
+  id: {},
   name: 'User Name',
   email: 'my_contact@email.com',
   password: { value: 'my_secret_password', toEncode },
@@ -38,6 +41,7 @@ describe('User Factory Unitary Tests', () => {
 
     const user = testable.value as User;
 
+    expect(user.id.value).toEqual('generated');
     expect(user.name).toEqual(fixture.name);
     expect(user.email.value).toEqual(fixture.email);
     expect(user.password.value).toEqual('hashed_value');
@@ -50,6 +54,17 @@ describe('User Factory Unitary Tests', () => {
     const { sut } = makeSut();
 
     const testable = await sut.make(nullAsType());
+
+    expect(testable.isLeft()).toBeTruthy();
+    expect(testable.value).toBeInstanceOf(PropsAreRequired);
+  });
+
+  it('should validate id', async () => {
+    const { sut, idFactory } = makeSut();
+
+    jest.spyOn(idFactory, 'make').mockImplementation(() => left(new PropsAreRequired()));
+
+    const testable = await sut.make(makeFixture());
 
     expect(testable.isLeft()).toBeTruthy();
     expect(testable.value).toBeInstanceOf(PropsAreRequired);

@@ -16,6 +16,7 @@ export class CreateUserUseCase {
 
   public async execute(dto: CreateUserDTO) {
     const userOrError = await this.userFactory.make({
+      id: {},
       name: dto.name,
       email: dto.email,
       password: {
