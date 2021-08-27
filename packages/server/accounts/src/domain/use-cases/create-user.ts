@@ -1,6 +1,6 @@
 import { left } from '@shared/utils';
 import { UserFactory } from '@/domain/factories';
-import { UsersRepo } from '@/domain/use-cases/ports/users-repo';
+import { UsersRepo } from '@/ports/database';
 import { CreateUserDTO } from '@/domain/use-cases/dtos';
 import { EmailAlreadyInUse, PhoneAlreadyInUse } from '@/domain/use-cases/errors';
 

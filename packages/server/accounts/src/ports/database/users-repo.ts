@@ -1,6 +1,6 @@
 import { Either } from '@shared/utils';
 import { User } from '@/domain/entities/user';
-import { InfraError } from '@/domain/use-cases/ports/errors';
+import { InfraError } from '@/ports/errors';
 import { Email, Phone } from '@/domain/entities/values';
 
 export type SaveUser = Either<InfraError, User>;

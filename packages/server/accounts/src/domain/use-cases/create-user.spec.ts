@@ -2,12 +2,12 @@ import { left, right } from '@shared/utils';
 import { IdFactory, PasswordFactory, PhoneFactory, UserFactory } from '@/domain/factories';
 import { FakePasswordProvider, FakeIdProvider, FakePhoneProvider } from '@/ports/providers/fakes';
 import { CreateUserUseCase } from '@/domain/use-cases';
-import { FakeUsersRepo } from '@/domain/use-cases/ports/fakes';
+import { FakeUsersRepo } from '@/ports/database/fakes';
 import { User } from '@/domain/entities';
 import { CreateUserDTO } from '@/domain/use-cases/dtos';
 import { PropsAreRequired } from '@/domain/entities/errors';
 import { EmailAlreadyInUse, PhoneAlreadyInUse } from '@/domain/use-cases/errors';
-import { InfraError } from '@/domain/use-cases/ports/errors';
+import { InfraError } from '@/ports/errors';
 
 const makeFixture = (): CreateUserDTO => ({
   name: 'User Name',

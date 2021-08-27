@@ -1,9 +1,9 @@
 import { left, right } from '@shared/utils';
 import { prismaClient } from '@/adapters/database/prisma';
-import { FindUniqueUser, SaveUser, UsersRepo } from '@/domain/use-cases/ports/users-repo';
+import { FindUniqueUser, SaveUser, UsersRepo } from '@/ports/database';
 import { UserMapper } from '@/adapters/database/prisma/mappers';
 import { User } from '@/domain/entities';
-import { InfraError } from '@/domain/use-cases/ports/errors';
+import { InfraError } from '@/ports/errors';
 import { Email, Phone } from '@/domain/entities/values';
 
 export class PrismaUsersRepo implements UsersRepo {

@@ -1,7 +1,7 @@
 import { right } from '@shared/utils';
 import { User } from '@/domain/entities/user';
 import { Email, Id, Password, Phone } from '@/domain/entities/values';
-import { UsersRepo, SaveUser, FindUniqueUser } from '@/domain/use-cases/ports/users-repo';
+import { UsersRepo, SaveUser, FindUniqueUser } from '@/ports/database';
 import { makeEmail, makeId, makePassword, makePhone } from '@/domain/entities/values/fakes';
 import { makeUser } from '@/domain/entities/fakes';
 
