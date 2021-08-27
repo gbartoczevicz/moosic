@@ -5,13 +5,13 @@ import { User } from '@/domain/entities';
 import { Email } from '@/domain/entities/values';
 import { MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
 import { IdFactory, UserFactory, PasswordFactory, PhoneFactory, MakeUserProps } from '@/domain/factories';
-import { FakeHashingProvider, FakeIdProvider, FakePhoneNumber } from '@/domain/factories/ports/fakes';
+import { FakePasswordProvider, FakeIdProvider, FakePhoneProvider } from '@/ports/providers/fakes';
 import { InvalidPhonePattern } from '@/domain/factories/errors';
 
 const makeSut = () => {
   const idFactory = new IdFactory(new FakeIdProvider());
-  const passwordFactory = new PasswordFactory(new FakeHashingProvider(), 8);
-  const phoneService = new PhoneFactory(new FakePhoneNumber());
+  const passwordFactory = new PasswordFactory(new FakePasswordProvider(), 8);
+  const phoneService = new PhoneFactory(new FakePhoneProvider());
 
   return {
     sut: new UserFactory(idFactory, passwordFactory, phoneService),

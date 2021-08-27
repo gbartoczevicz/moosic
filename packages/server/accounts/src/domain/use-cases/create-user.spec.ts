@@ -1,6 +1,6 @@
 import { left, right } from '@shared/utils';
 import { IdFactory, PasswordFactory, PhoneFactory, UserFactory } from '@/domain/factories';
-import { FakeHashingProvider, FakeIdProvider, FakePhoneNumber } from '@/domain/factories/ports/fakes';
+import { FakePasswordProvider, FakeIdProvider, FakePhoneProvider } from '@/ports/providers/fakes';
 import { CreateUserUseCase } from '@/domain/use-cases';
 import { FakeUsersRepo } from '@/domain/use-cases/ports/fakes';
 import { User } from '@/domain/entities';
@@ -18,8 +18,8 @@ const makeFixture = (): CreateUserDTO => ({
 
 const makeSut = () => {
   const idFactory = new IdFactory(new FakeIdProvider());
-  const passwordFactory = new PasswordFactory(new FakeHashingProvider(), 8);
-  const phoneFactory = new PhoneFactory(new FakePhoneNumber());
+  const passwordFactory = new PasswordFactory(new FakePasswordProvider(), 8);
+  const phoneFactory = new PhoneFactory(new FakePhoneProvider());
 
   const userFactory = new UserFactory(idFactory, passwordFactory, phoneFactory);
   const usersRepo = new FakeUsersRepo();

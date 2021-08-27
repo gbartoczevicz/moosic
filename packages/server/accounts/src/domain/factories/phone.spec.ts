@@ -1,16 +1,16 @@
 import { Phone } from '@/domain/entities/values';
 import { PhoneFactory } from '@/domain/factories';
-import { FakePhoneNumber } from '@/domain/factories/ports/fakes';
+import { FakePhoneProvider } from '@/ports/providers/fakes';
 import { nullAsType } from '@/utils';
 import { InvalidPhonePattern } from '@/domain/factories/errors';
 import { PropsAreRequired } from '@/domain/entities/errors';
 
 const makeSut = () => {
-  const phoneNumber = new FakePhoneNumber();
+  const phoneProvider = new FakePhoneProvider();
 
   return {
-    sut: new PhoneFactory(phoneNumber),
-    phoneNumber
+    sut: new PhoneFactory(phoneProvider),
+    phoneProvider
   };
 };
 
@@ -59,9 +59,9 @@ describe('Phone Factory Unitary Tests', () => {
   });
 
   it('should validate phone number', () => {
-    const { sut, phoneNumber } = makeSut();
+    const { sut, phoneProvider } = makeSut();
 
-    jest.spyOn(phoneNumber, 'validate').mockImplementation(() => false);
+    jest.spyOn(phoneProvider, 'validate').mockImplementation(() => false);
 
     const testable = sut.make({
       value: 'number',

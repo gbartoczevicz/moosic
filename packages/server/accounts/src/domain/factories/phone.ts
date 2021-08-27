@@ -1,5 +1,5 @@
 import { Either, left } from '@shared/utils';
-import { PhoneNumber } from '@/domain/factories/ports';
+import { PhoneProvider } from '@/ports/providers';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 import { InvalidPhonePattern } from '@/domain/factories/errors';
 import { Phone } from '@/domain/entities/values';
@@ -10,10 +10,10 @@ export type MakePhoneProps = {
 };
 
 export class PhoneFactory {
-  private readonly phoneNumber: PhoneNumber;
+  private readonly phoneProvider: PhoneProvider;
 
-  public constructor(phoneNumber: PhoneNumber) {
-    this.phoneNumber = phoneNumber;
+  public constructor(phoneProvider: PhoneProvider) {
+    this.phoneProvider = phoneProvider;
   }
 
   public make(props: MakePhoneProps): Either<PropsAreRequired | InvalidPhonePattern | FieldIsRequired, Phone> {
@@ -23,12 +23,12 @@ export class PhoneFactory {
 
     const { value, toSanitize } = props;
 
-    if (!this.phoneNumber.validate(value)) {
+    if (!this.phoneProvider.validate(value)) {
       return left(new InvalidPhonePattern());
     }
 
     return Phone.create({
-      value: toSanitize ? this.phoneNumber.sanitize(value) : this.phoneNumber.format(value),
+      value: toSanitize ? this.phoneProvider.sanitize(value) : this.phoneProvider.format(value),
       isSanitized: toSanitize
     });
   }

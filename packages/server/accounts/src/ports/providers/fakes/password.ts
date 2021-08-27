@@ -1,6 +1,6 @@
-import { HashingProvider } from '@/domain/factories/ports/hashing-provider';
+import { PasswordProvider } from '@/ports/providers';
 
-export class FakeHashingProvider implements HashingProvider {
+export class FakePasswordProvider implements PasswordProvider {
   async encode(valueToEncode: string, salt: number): Promise<string> {
     return Promise.resolve('hashed_value');
   }

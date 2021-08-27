@@ -1,16 +1,16 @@
 import { Document, DocumentType } from '@/domain/entities/values';
-import { FakeDocumentHandler } from '@/domain/factories/ports/fakes';
+import { FakeDocumentProvider } from '@/ports/providers/fakes';
 import { DocumentFactory } from '@/domain/factories';
 import { InvalidDocumentPattern, InvalidDocumentType } from '@/domain/factories/errors';
 import { nullAsType } from '@/utils';
 import { PropsAreRequired } from '@/domain/entities/errors';
 
 const makeSut = () => {
-  const fakeDocumentHandler = new FakeDocumentHandler();
+  const fakeDocumentProvider = new FakeDocumentProvider();
 
   return {
-    sut: new DocumentFactory(fakeDocumentHandler),
-    fakeDocumentHandler
+    sut: new DocumentFactory(fakeDocumentProvider),
+    fakeDocumentProvider
   };
 };
 
@@ -107,9 +107,9 @@ describe('Document Factory Unitary Tests', () => {
 
   describe('plain value pattern validation', () => {
     it('should validate cnpj pattern', () => {
-      const { sut, fakeDocumentHandler } = makeSut();
+      const { sut, fakeDocumentProvider } = makeSut();
 
-      jest.spyOn(fakeDocumentHandler, 'isValidCnpj').mockImplementation(() => false);
+      jest.spyOn(fakeDocumentProvider, 'isValidCnpj').mockImplementation(() => false);
 
       const testable = sut.make({
         value: 'cnpj',
@@ -122,9 +122,9 @@ describe('Document Factory Unitary Tests', () => {
     });
 
     it('should validate cpf pattern', () => {
-      const { sut, fakeDocumentHandler } = makeSut();
+      const { sut, fakeDocumentProvider } = makeSut();
 
-      jest.spyOn(fakeDocumentHandler, 'isValidCpf').mockImplementation(() => false);
+      jest.spyOn(fakeDocumentProvider, 'isValidCpf').mockImplementation(() => false);
 
       const testable = sut.make({
         value: 'cpf',

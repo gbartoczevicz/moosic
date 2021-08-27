@@ -1,9 +1,9 @@
 import { PasswordFactory } from '@/domain/factories';
-import { FakeHashingProvider } from '@/domain/factories/ports/fakes';
+import { FakePasswordProvider } from '@/ports/providers/fakes';
 import { Password } from '@/domain/entities/values';
 
 const makeSut = () => ({
-  sut: new PasswordFactory(new FakeHashingProvider(), 8)
+  sut: new PasswordFactory(new FakePasswordProvider(), 8)
 });
 
 describe('Password Factory Unitary Tests', () => {

@@ -1,6 +1,6 @@
-import { DocumentHandler } from '@/domain/factories/ports/document-handler';
+import { DocumentProvider } from '@/ports/providers';
 
-export class FakeDocumentHandler implements DocumentHandler {
+export class FakeDocumentProvider implements DocumentProvider {
   formatCnpj(document: string): string {
     return 'formatted';
   }

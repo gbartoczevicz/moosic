@@ -1,6 +1,6 @@
-import { PhoneNumber } from '@/domain/factories/ports';
+import { PhoneProvider } from '@/ports/providers';
 
-export class FakePhoneNumber implements PhoneNumber {
+export class FakePhoneProvider implements PhoneProvider {
   public format(value: string): string {
     return 'formatted';
   }

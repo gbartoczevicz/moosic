@@ -35,7 +35,7 @@
   },
   "overrides": [
     {
-      "files": ["**/ports/*.ts", "**/fakes/*.ts"],
+      "files": ["**/ports/*.ts", "**/fakes/*.ts", "**/ports/**/*.ts"],
       "rules": {
         "no-unused-vars": "off"
       }

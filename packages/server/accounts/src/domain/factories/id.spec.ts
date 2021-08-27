@@ -1,6 +1,6 @@
 import { IdFactory } from '@/domain/factories';
 import { Id } from '@/domain/entities/values';
-import { FakeIdProvider } from '@/domain/factories/ports/fakes';
+import { FakeIdProvider } from '@/ports/providers/fakes';
 import { nullAsType } from '@/utils';
 import { PropsAreRequired } from '@/domain/entities/errors';
 

@@ -1,4 +1,4 @@
-export interface DocumentHandler {
+export interface DocumentProvider {
   formatCnpj(document: string): string;
   formatCpf(document: string): string;
   isValidCnpj(document: string): boolean;

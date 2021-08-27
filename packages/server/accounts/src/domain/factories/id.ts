@@ -1,6 +1,6 @@
 import { Either, left } from '@shared/utils';
 
-import { IdProvider } from '@/domain/factories/ports';
+import { IdProvider } from '@/ports/providers';
 import { Id } from '@/domain/entities/values';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
