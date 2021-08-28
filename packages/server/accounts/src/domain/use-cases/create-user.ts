@@ -1,8 +1,22 @@
-import { left } from '@shared/utils';
+import { Either, left } from '@shared/utils';
 import { UserFactory } from '@/domain/factories';
 import { UsersRepo } from '@/ports/database';
 import { CreateUserDTO } from '@/domain/use-cases/dtos';
 import { EmailAlreadyInUse, PhoneAlreadyInUse } from '@/domain/use-cases/errors';
+import { FieldIsRequired, InvalidEmail, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
+import { InvalidPhonePattern } from '@/domain/factories/errors';
+import { InfraError } from '@/ports/errors';
+import { User } from '@/domain/entities';
+
+type UseCaseErrors =
+  | PropsAreRequired
+  | InvalidEmail
+  | MinimumLength
+  | FieldIsRequired
+  | InvalidPhonePattern
+  | InfraError
+  | PhoneAlreadyInUse
+  | EmailAlreadyInUse;
 
 export class CreateUserUseCase {
   private readonly userFactory: UserFactory;
@@ -14,7 +28,7 @@ export class CreateUserUseCase {
     this.usersRepo = usersRepo;
   }
 
-  public async execute(dto: CreateUserDTO) {
+  public async execute(dto: CreateUserDTO): Promise<Either<UseCaseErrors, User>> {
     const userOrError = await this.userFactory.make({
       id: {},
       name: dto.name,
@@ -24,7 +38,7 @@ export class CreateUserUseCase {
         toEncode: true
       },
       phone: {
-        value: dto.password,
+        value: dto.phone,
         toSanitize: true
       }
     });

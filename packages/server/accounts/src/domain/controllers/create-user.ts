@@ -17,13 +17,12 @@ export class CreateUserController implements Controller {
     if (userOrError.isLeft()) {
       const error = userOrError.value;
 
-      switch (error.constructor) {
-        case InfraError:
-          console.error(error);
-          return serverError();
-        default:
-          return badRequest(error);
+      if (error instanceof InfraError) {
+        console.warn(error);
+        return serverError();
       }
+
+      return badRequest(error);
     }
 
     return ok(userOrError.value);
