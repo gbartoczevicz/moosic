@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@prisma/client": "^2.30.0",
+    "@tinyhttp/app": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "cpf-cnpj-validator": "^1.0.3",
     "libphonenumber-js": "^1.9.25",

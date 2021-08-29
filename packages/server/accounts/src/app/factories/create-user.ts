@@ -21,7 +21,7 @@ export const makeCreateUser = (): Factory => {
   const createUserController = new CreateUserController(createUserUseCase);
 
   return {
-    route: '/users',
+    route: '/',
     controller: createUserController
   };
 };
