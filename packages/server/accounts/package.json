@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "prisma": "^2.30.0"
   },
   "dependencies": {
     "@prisma/client": "^2.30.0",
+    "bcryptjs": "^2.4.3",
     "cpf-cnpj-validator": "^1.0.3"
   }
 }
