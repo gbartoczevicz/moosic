@@ -1,8 +1,8 @@
-import { App } from '@tinyhttp/app';
+import { Router } from 'express';
 
 import { usersRoutes } from '@/app/infra/routes/users.routes';
 
-const routes = new App();
+const routes = Router();
 
 routes.use('/users', usersRoutes);
 

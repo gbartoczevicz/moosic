@@ -1,9 +1,10 @@
-import { App } from '@tinyhttp/app';
+import express from 'express';
 
 import { routes } from '@/app/infra/routes';
 
-const app = new App();
+const app = express();
 
+app.use(express.json());
 app.use(routes);
 
 export { app };
