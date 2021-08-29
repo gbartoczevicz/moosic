@@ -3,5 +3,6 @@ export interface DocumentProvider {
   formatCpf(document: string): string;
   isValidCnpj(document: string): boolean;
   isValidCpf(document: string): boolean;
-  sanitize(document: string): string;
+  sanitizeCnpj(document: string): string;
+  sanitizeCpf(document: string): string;
 }

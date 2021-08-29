@@ -17,7 +17,11 @@ export class FakeDocumentProvider implements DocumentProvider {
     return true;
   }
 
-  sanitize(document: string): string {
+  sanitizeCnpj(document: string): string {
+    return 'sanitized';
+  }
+
+  sanitizeCpf(document: string): string {
     return 'sanitized';
   }
 }

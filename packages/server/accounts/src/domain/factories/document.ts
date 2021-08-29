@@ -40,7 +40,7 @@ export class DocumentFactory {
     }
 
     return Document.create({
-      value: toSanitize ? this.documentProvider.sanitize(value) : this.documentProvider.formatCpf(value),
+      value: toSanitize ? this.documentProvider.sanitizeCpf(value) : this.documentProvider.formatCpf(value),
       isSanitized: toSanitize
     });
   }
@@ -51,7 +51,7 @@ export class DocumentFactory {
     }
 
     return Document.create({
-      value: toSanitize ? this.documentProvider.sanitize(value) : this.documentProvider.formatCnpj(value),
+      value: toSanitize ? this.documentProvider.sanitizeCnpj(value) : this.documentProvider.formatCnpj(value),
       isSanitized: toSanitize
     });
   }
