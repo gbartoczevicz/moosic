@@ -25,6 +25,6 @@ export class CreateUserController implements Controller {
       return badRequest(error);
     }
 
-    return ok(userOrError.value);
+    return ok(userOrError.value.toPlain());
   }
 }

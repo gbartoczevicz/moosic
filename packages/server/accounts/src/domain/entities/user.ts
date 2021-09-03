@@ -61,4 +61,13 @@ export class User {
 
     return right(user);
   }
+
+  public toPlain() {
+    return {
+      id: this.id.value,
+      name: this.name,
+      email: this.email.value,
+      phone: this.phone.value
+    };
+  }
 }
