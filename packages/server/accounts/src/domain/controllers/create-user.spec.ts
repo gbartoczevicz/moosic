@@ -6,8 +6,9 @@ import { IdFactory, PasswordFactory, PhoneFactory, UserFactory } from '@/domain/
 import { FakeIdProvider, FakePasswordProvider, FakePhoneProvider } from '@/ports/providers/fakes';
 import { HttpRequest } from '@/ports/http';
 import { User } from '@/domain/entities';
-import { InfraError, ServerError } from '@/ports/errors';
+import { InfraError } from '@/ports/errors';
 import { PropsAreRequired } from '@/domain/entities/errors';
+import { serverError } from '@/ports/http/helpers';
 
 const makeSut = () => {
   const userFactory = new UserFactory(
@@ -67,6 +68,6 @@ describe('Create User Controller Unitary Tests', () => {
 
     const testable = await sut.handle(makeFixture());
 
-    expect(testable.body).toBeInstanceOf(ServerError);
+    expect(testable.statusCode).toEqual(serverError().statusCode);
   });
 });
