@@ -6,8 +6,7 @@ import { nullAsType } from '@/utils';
 describe('Phone Unitary Tests', () => {
   it('should create a valid sanitized phone', () => {
     const testable = Phone.create({
-      value: '0000000000',
-      isSanitized: true
+      value: '0000000000'
     });
 
     expect(testable.isRight()).toBeTruthy();
@@ -15,20 +14,6 @@ describe('Phone Unitary Tests', () => {
     const phone = testable.value as Phone;
 
     expect(phone.value).toEqual('0000000000');
-    expect(phone.isSanitized).toBeTruthy();
-  });
-
-  it('should create a valid unsanitized phone', () => {
-    const testable = Phone.create({
-      value: '(00) 0000-0000'
-    });
-
-    expect(testable.isRight()).toBeTruthy();
-
-    const phone = testable.value as Phone;
-
-    expect(phone.value).toEqual('(00) 0000-0000');
-    expect(phone.isSanitized).toBeFalsy();
   });
 
   it('should validate props itself', () => {

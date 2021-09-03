@@ -13,7 +13,7 @@ export class FakeUsersRepo implements UsersRepo {
   public async findByEmail(email: Email): Promise<FindUniqueUser> {
     const id = makeId({}).value as Id;
     const password = makePassword({ isHashed: true }).value as Password;
-    const phone = makePhone({ isSanitized: true }).value as Phone;
+    const phone = makePhone({}).value as Phone;
 
     const user = makeUser({
       id,
