@@ -26,7 +26,7 @@ const makeFixture = (toEncode = true): MakeUserProps => ({
   name: 'User Name',
   email: 'my_contact@email.com',
   password: { value: 'my_secret_password', toEncode },
-  phone: { value: '0000-0000', toSanitize: true }
+  phone: { value: '0000-0000' }
 });
 
 describe('User Factory Unitary Tests', () => {
@@ -47,7 +47,6 @@ describe('User Factory Unitary Tests', () => {
     expect(user.password.value).toEqual('hashed_value');
     expect(user.password.isHashed).toEqual(fixture.password.toEncode);
     expect(user.phone.value).toEqual('sanitized');
-    expect(user.phone.isSanitized).toEqual(fixture.phone.toSanitize);
   });
 
   it('should validate props itself', async () => {

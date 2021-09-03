@@ -19,8 +19,7 @@ describe('Phone Factory Unitary Tests', () => {
     const { sut } = makeSut();
 
     const testable = sut.make({
-      value: 'number',
-      toSanitize: true
+      value: 'number'
     });
 
     expect(testable.isRight()).toBeTruthy();
@@ -28,23 +27,6 @@ describe('Phone Factory Unitary Tests', () => {
     const phone = testable.value as Phone;
 
     expect(phone.value).toEqual('sanitized');
-    expect(phone.isSanitized).toEqual(true);
-  });
-
-  it('should create a formatted phone', () => {
-    const { sut } = makeSut();
-
-    const testable = sut.make({
-      value: 'number',
-      toSanitize: false
-    });
-
-    expect(testable.isRight()).toBeTruthy();
-
-    const phone = testable.value as Phone;
-
-    expect(phone.value).toEqual('formatted');
-    expect(phone.isSanitized).toEqual(false);
   });
 
   it('should validate props itself', () => {
@@ -64,8 +46,7 @@ describe('Phone Factory Unitary Tests', () => {
     jest.spyOn(phoneProvider, 'validate').mockImplementation(() => false);
 
     const testable = sut.make({
-      value: 'number',
-      toSanitize: false
+      value: 'number'
     });
 
     expect(testable.isLeft()).toBeTruthy();

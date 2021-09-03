@@ -6,7 +6,6 @@ import { Phone } from '@/domain/entities/values';
 
 export type MakePhoneProps = {
   value: string;
-  toSanitize: boolean;
 };
 
 export class PhoneFactory {
@@ -21,15 +20,14 @@ export class PhoneFactory {
       return left(new PropsAreRequired());
     }
 
-    const { value, toSanitize } = props;
+    const { value } = props;
 
     if (!this.phoneProvider.validate(value)) {
       return left(new InvalidPhonePattern());
     }
 
     return Phone.create({
-      value: toSanitize ? this.phoneProvider.sanitize(value) : this.phoneProvider.format(value),
-      isSanitized: toSanitize
+      value: this.phoneProvider.sanitize(value)
     });
   }
 }

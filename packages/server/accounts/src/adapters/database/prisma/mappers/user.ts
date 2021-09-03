@@ -20,7 +20,6 @@ export class UserMapper {
       },
       phone: {
         value: persistence.phone,
-        toSanitize: false
       }
     });
 

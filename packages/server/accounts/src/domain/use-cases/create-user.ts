@@ -38,8 +38,7 @@ export class CreateUserUseCase {
         toEncode: true
       },
       phone: {
-        value: dto.phone,
-        toSanitize: true
+        value: dto.phone
       }
     });
 

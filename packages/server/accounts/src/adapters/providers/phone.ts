@@ -6,10 +6,6 @@ export class PhoneProviderImpl implements PhoneProvider {
     return Validator.isValidNumberForRegion(value, 'BR');
   }
 
-  public format(value: string): string {
-    return Validator.format(value, 'NATIONAL');
-  }
-
   public sanitize(value: string): string {
     return Validator.parseDigits(value);
   }
