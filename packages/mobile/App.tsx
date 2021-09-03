@@ -1,13 +1,14 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 
-import { Container, Title } from '@/lib/container';
+import { AppRouter } from '@/routes/app';
 
 const App: React.FC = () => (
-  <Container>
-    <Title>Open up App.tsx to start working on your app!</Title>
+  <>
+    <AppRouter />
     <StatusBar style="auto" />
-  </Container>
+  </>
 );
 
 export default App;
