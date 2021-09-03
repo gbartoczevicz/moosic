@@ -1,7 +1,8 @@
 import { User } from '@/domain/entities/user';
-import { Email, Password, Phone } from '@/domain/entities/values';
+import { Email, Id, Password, Phone } from '@/domain/entities/values';
 
 type Props = {
+  id: Id;
   name?: string | 'username';
   email: Email;
   password: Password;

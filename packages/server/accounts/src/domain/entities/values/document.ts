@@ -6,6 +6,8 @@ export type DocumentProps = {
   isSanitized?: boolean;
 };
 
+export type DocumentType = 'CPF' | 'CNPJ';
+
 export class Document {
   public readonly value: string;
 
