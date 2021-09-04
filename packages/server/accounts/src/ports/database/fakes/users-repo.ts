@@ -10,6 +10,21 @@ export class FakeUsersRepo implements UsersRepo {
     return Promise.resolve(right(user));
   }
 
+  public async findById(id: Id): Promise<FindUniqueUser> {
+    const password = makePassword({ isHashed: true }).value as Password;
+    const phone = makePhone({}).value as Phone;
+    const email = makeEmail({}).value as Email;
+
+    const user = makeUser({
+      id,
+      email,
+      password,
+      phone
+    }).value as User;
+
+    return Promise.resolve(right(user));
+  }
+
   public async findByEmail(email: Email): Promise<FindUniqueUser> {
     const id = makeId({}).value as Id;
     const password = makePassword({ isHashed: true }).value as Password;
