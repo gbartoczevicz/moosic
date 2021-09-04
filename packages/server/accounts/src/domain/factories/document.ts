@@ -17,7 +17,9 @@ export class DocumentFactory {
     this.documentProvider = documentProvider;
   }
 
-  public make(props: MakeDocumentProps): Either<PropsAreRequired | FieldIsRequired | InvalidDocumentType, Document> {
+  public make(
+    props: MakeDocumentProps
+  ): Either<PropsAreRequired | FieldIsRequired | InvalidDocumentType | InvalidDocumentPattern, Document> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -37,7 +39,7 @@ export class DocumentFactory {
   private validateAndCreateCpf(
     value: string,
     toSanitize: boolean
-  ): Either<PropsAreRequired | FieldIsRequired, Document> {
+  ): Either<PropsAreRequired | FieldIsRequired | InvalidDocumentPattern, Document> {
     if (!this.documentProvider.isValidCpf(value)) {
       return left(new InvalidDocumentPattern('CPF'));
     }
@@ -51,7 +53,7 @@ export class DocumentFactory {
   private validateAndCreateCnpj(
     value: string,
     toSanitize: boolean
-  ): Either<PropsAreRequired | FieldIsRequired, Document> {
+  ): Either<PropsAreRequired | FieldIsRequired | InvalidDocumentPattern, Document> {
     if (!this.documentProvider.isValidCnpj(value)) {
       return left(new InvalidDocumentPattern('CNPJ'));
     }

@@ -1,13 +1,19 @@
-import { left } from '@shared/utils';
+import { Either, left } from '@shared/utils';
 import { IdFactory, DocumentFactory, MakeIdProps, MakeDocumentProps } from '@/domain/factories';
-import { PropsAreRequired } from '@/domain/entities/errors';
-import { Restaurateur } from '../entities';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
+import { Restaurateur } from '@/domain/entities';
+import { InvalidDocumentPattern, InvalidDocumentType } from '@/domain/factories/errors';
 
 export type MakeRestaurateurProps = {
   id: MakeIdProps;
   userId: MakeIdProps;
   document: MakeDocumentProps;
 };
+
+type RestaurateurEither = Either<
+  PropsAreRequired | FieldIsRequired | InvalidDocumentType | InvalidDocumentPattern,
+  Restaurateur
+>;
 
 export class RestaurateurFactory {
   private readonly idFactory: IdFactory;
@@ -19,7 +25,7 @@ export class RestaurateurFactory {
     this.documentFactory = documentFactory;
   }
 
-  public async make(props: MakeRestaurateurProps) {
+  public make(props: MakeRestaurateurProps): RestaurateurEither {
     if (!props) {
       return left(new PropsAreRequired());
     }
