@@ -18,7 +18,7 @@ describe('Restaurateur Unitary Tests', () => {
 
     expect(restaurateur.id.value).toEqual('id');
     expect(restaurateur.userId.value).toEqual('id');
-    expect(restaurateur.document).toEqual('document');
+    expect(restaurateur.document.value).toEqual('document');
 
     expect(restaurateur.toPlain()).toEqual({
       id: 'id',
