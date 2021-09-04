@@ -24,6 +24,13 @@ describe('User Unitary Tests', () => {
     expect(user.email.value).toEqual('user_email@email.com');
     expect(user.password.value).toEqual('secret_value');
     expect(user.phone.value).toEqual('0000-0000');
+
+    expect(user.toPlain()).toEqual({
+      id: 'id',
+      name: 'user',
+      email: 'user_email@email.com',
+      phone: '0000-0000'
+    });
   });
 
   it('should validate props itself', () => {
