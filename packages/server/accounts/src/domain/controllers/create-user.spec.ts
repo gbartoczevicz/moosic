@@ -8,7 +8,10 @@ import { HttpRequest } from '@/ports/http';
 import { User } from '@/domain/entities';
 import { InfraError } from '@/ports/errors';
 import { PropsAreRequired } from '@/domain/entities/errors';
-import { serverError } from '@/ports/http/helpers';
+import { serverError, badRequest } from '@/ports/http/helpers';
+import { makeUser } from '@/domain/entities/fakes';
+import { makeId, makePassword, makePhone } from '@/domain/entities/values/fakes';
+import { Id, Email, Password, Phone } from '@/domain/entities/values';
 
 const makeSut = () => {
   const userFactory = new UserFactory(
@@ -34,18 +37,31 @@ const makeFixture = (): HttpRequest => ({
   }
 });
 
+const userFixture = () => {
+  return makeUser({
+    id: makeId({}).value as Id,
+    name: "user's name",
+    email: Email.create({ value: 'user_email@email.com' }).value as Email,
+    password: makePassword({}).value as Password,
+    phone: makePhone({}).value as Phone
+  }).value as User;
+};
+
 describe('Create User Controller Unitary Tests', () => {
   it('should create an user', async () => {
     const { sut, createUserUseCase } = makeSut();
 
-    jest
-      .spyOn(createUserUseCase, 'execute')
-      .mockImplementation(() => Promise.resolve(right({ name: "user's name" } as User)));
+    jest.spyOn(createUserUseCase, 'execute').mockImplementation(() => Promise.resolve(right(userFixture())));
 
     const testable = await sut.handle(makeFixture());
 
-    expect(testable.body).toEqual({ name: "user's name" });
     expect(testable.statusCode).toEqual(200);
+    expect(testable.body).toEqual({
+      id: 'id',
+      name: "user's name",
+      email: 'user_email@email.com',
+      phone: '0000-0000'
+    });
   });
 
   it('should validate business exception', async () => {
@@ -55,8 +71,10 @@ describe('Create User Controller Unitary Tests', () => {
 
     const testable = await sut.handle(makeFixture());
 
-    expect(testable.statusCode).toEqual(400);
-    expect(testable.body).toBeInstanceOf(PropsAreRequired);
+    const response = badRequest(new PropsAreRequired());
+
+    expect(testable.statusCode).toEqual(response.statusCode);
+    expect(testable.body).toEqual(response.body);
   });
 
   it('should validate an infra error', async () => {
