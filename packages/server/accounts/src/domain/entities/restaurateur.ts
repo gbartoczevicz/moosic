@@ -49,7 +49,7 @@ export class Restaurateur {
     return {
       id: this.id.value,
       userId: this.userId.value,
-      document: this.document
+      document: this.document.value
     };
   }
 }
