@@ -1,7 +1,7 @@
-import { left } from '@shared/utils';
+import { Either, left } from '@shared/utils';
 import { DocumentProvider } from '@/ports/providers';
 import { Document, DocumentType } from '@/domain/entities/values';
-import { PropsAreRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 import { InvalidDocumentPattern, InvalidDocumentType } from '@/domain/factories/errors';
 
 export type MakeDocumentProps = {
@@ -17,7 +17,9 @@ export class DocumentFactory {
     this.documentProvider = documentProvider;
   }
 
-  public make(props: MakeDocumentProps) {
+  public make(
+    props: MakeDocumentProps
+  ): Either<PropsAreRequired | FieldIsRequired | InvalidDocumentType | InvalidDocumentPattern, Document> {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -34,7 +36,10 @@ export class DocumentFactory {
     }
   }
 
-  private validateAndCreateCpf(value: string, toSanitize: boolean) {
+  private validateAndCreateCpf(
+    value: string,
+    toSanitize: boolean
+  ): Either<PropsAreRequired | FieldIsRequired | InvalidDocumentPattern, Document> {
     if (!this.documentProvider.isValidCpf(value)) {
       return left(new InvalidDocumentPattern('CPF'));
     }
@@ -45,7 +50,10 @@ export class DocumentFactory {
     });
   }
 
-  private validateAndCreateCnpj(value: string, toSanitize: boolean) {
+  private validateAndCreateCnpj(
+    value: string,
+    toSanitize: boolean
+  ): Either<PropsAreRequired | FieldIsRequired | InvalidDocumentPattern, Document> {
     if (!this.documentProvider.isValidCnpj(value)) {
       return left(new InvalidDocumentPattern('CNPJ'));
     }

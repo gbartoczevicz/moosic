@@ -20,8 +20,10 @@ export class IdFactory {
       return left(new PropsAreRequired());
     }
 
-    const value = this.idProvider.generate(props.value);
+    const { value } = props;
 
-    return Id.create({ value });
+    const generatedValue = value ?? this.idProvider.generate(value);
+
+    return Id.create({ value: generatedValue });
   }
 }

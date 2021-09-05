@@ -3,7 +3,7 @@ import { UserFactory } from '@/domain/factories';
 import { User } from '@/domain/entities';
 
 export class UserMapper {
-  private userFactory: UserFactory;
+  private readonly userFactory: UserFactory;
 
   public constructor(userFactory: UserFactory) {
     this.userFactory = userFactory;
@@ -19,7 +19,7 @@ export class UserMapper {
         toEncode: false
       },
       phone: {
-        value: persistence.phone,
+        value: persistence.phone
       }
     });
 

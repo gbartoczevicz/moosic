@@ -4,7 +4,7 @@ import { FindUniqueUser, SaveUser, UsersRepo } from '@/ports/database';
 import { UserMapper } from '@/adapters/database/prisma/mappers';
 import { User } from '@/domain/entities';
 import { InfraError } from '@/ports/errors';
-import { Email, Phone } from '@/domain/entities/values';
+import { Email, Id, Phone } from '@/domain/entities/values';
 
 export class PrismaUsersRepo implements UsersRepo {
   private readonly userMapper: UserMapper;
@@ -24,6 +24,26 @@ export class PrismaUsersRepo implements UsersRepo {
           id: persistence.id
         }
       });
+
+      const domain = await this.userMapper.toDomain(savedPersistence);
+
+      return right(domain);
+    } catch (err) {
+      return left(new InfraError(err.message));
+    }
+  }
+
+  public async findById(id: Id): Promise<FindUniqueUser> {
+    try {
+      const savedPersistence = await prismaClient.user.findUnique({
+        where: {
+          id: id.value
+        }
+      });
+
+      if (!savedPersistence) {
+        return right(null);
+      }
 
       const domain = await this.userMapper.toDomain(savedPersistence);
 
