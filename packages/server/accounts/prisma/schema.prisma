@@ -17,5 +17,17 @@ model User {
   email    String @unique
   phone    String @unique
 
+  Restaurateur Restaurateur?
+
   @@map("users")
+}
+
+model Restaurateur {
+  id       String @id @default(uuid())
+  document String @unique
+  userId   String @unique @map("user_id")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("restaurateurs")
 }
