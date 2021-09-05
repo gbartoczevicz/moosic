@@ -32,7 +32,7 @@ const makeSut = () => {
 };
 
 const makeFixture = (): CreateRestaurateurDTO => ({
-  document: { type: 'CNPJ', value: 'document' },
+  document: 'document',
   userId: 'user_id'
 });
 

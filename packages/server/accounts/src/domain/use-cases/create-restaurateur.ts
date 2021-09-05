@@ -38,10 +38,7 @@ export class CreateRestaurateurUseCase {
   public async execute(dto: CreateRestaurateurDTO): Promise<Either<CreateRestaurateurErrors, Restaurateur>> {
     const restaurateurOrError = this.restaurateurFactory.make({
       id: {},
-      document: {
-        ...dto.document,
-        toSanitize: true
-      },
+      document: { type: 'CNPJ', toSanitize: true, value: dto.document },
       userId: { value: dto.userId }
     });
 
