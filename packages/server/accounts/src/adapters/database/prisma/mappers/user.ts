@@ -19,7 +19,7 @@ export class UserMapper {
         toEncode: false
       },
       phone: {
-        value: persistence.phone,
+        value: persistence.phone
       }
     });
 
