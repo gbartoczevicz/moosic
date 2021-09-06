@@ -9,6 +9,16 @@ export class FakeRestaurateurRepo implements RestaurateurRepo {
     return Promise.resolve(right(restaurateur));
   }
 
+  public async findByUserId(userId: Id): Promise<FindUniqueRestaurateur> {
+    const restaurateur = Restaurateur.create({
+      id: makeId({ value: 'restaurateur_id' }).value as Id,
+      userId,
+      document: Document.create({ value: 'document' }).value as Document
+    }).value as Restaurateur;
+
+    return Promise.resolve(right(restaurateur));
+  }
+
   public async findByDocument(document: Document): Promise<FindUniqueRestaurateur> {
     const restaurateur = Restaurateur.create({
       id: makeId({ value: 'restaurateur_id' }).value as Id,
