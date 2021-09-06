@@ -2,7 +2,7 @@
   <img src="./.github/doc/banner.webp" width="60%">
 </h1>
 
-<h2 align="center">Moosic - Em construção 🚧</h2>
+<h3 align="center">Moosic - Em construção 🚧</h3>
 
 ### Sobre
 
