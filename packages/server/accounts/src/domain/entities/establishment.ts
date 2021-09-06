@@ -52,4 +52,13 @@ export class Establishment {
 
     return right(establishment);
   }
+
+  public toPlain() {
+    return {
+      id: this.id.value,
+      name: this.name,
+      phone: this.phone.value,
+      restaurateurId: this.restaurateurId.value
+    };
+  }
 }

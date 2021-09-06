@@ -21,6 +21,13 @@ describe('Establishment Unitary Tests', () => {
     expect(establishment.phone.value).toEqual('0000-0000');
     expect(establishment.id.value).toEqual('id');
     expect(establishment.restaurateurId.value).toEqual('id');
+
+    expect(establishment.toPlain()).toEqual({
+      id: 'id',
+      name: 'establishment',
+      phone: '0000-0000',
+      restaurateurId: 'id'
+    });
   });
 
   it('should validate props itself', () => {
