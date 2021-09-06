@@ -8,6 +8,8 @@ import { Establishment } from '@/domain/entities';
 import { PropsAreRequired } from '@/domain/entities/errors';
 import { PhoneAlreadyInUse, RestaurateurNotFound } from '@/domain/use-cases/errors';
 import { InfraError } from '@/ports/errors';
+import { makeId, makePhone } from '../entities/values/fakes';
+import { Id, Phone } from '../entities/values';
 
 const makeSut = () => {
   const idFactory = new IdFactory(new FakeIdProvider());
@@ -54,6 +56,31 @@ describe('CreateEstablishmentUseCase Unitary Tests', () => {
     const { sut, establishmentFactory } = makeSut();
 
     jest.spyOn(establishmentFactory, 'make').mockImplementation(() => left(new PropsAreRequired()));
+
+    const testable = await sut.execute(makeFixture());
+
+    expect(testable.isLeft()).toBeTruthy();
+    expect(testable.value).toBeInstanceOf(PropsAreRequired);
+  });
+
+  it('should validate establishment factory on second call', async () => {
+    const { sut, establishmentFactory, establishmentRepo } = makeSut();
+
+    jest.spyOn(establishmentRepo, 'findByPhone').mockImplementation(() => Promise.resolve(right(null)));
+
+    jest
+      .spyOn(establishmentFactory, 'make')
+      .mockImplementationOnce(() => {
+        const establishment = Establishment.create({
+          id: makeId({}).value as Id,
+          name: 'any',
+          phone: makePhone({}).value as Phone,
+          restaurateurId: makeId({}).value as Id
+        });
+
+        return right(establishment.value as Establishment);
+      })
+      .mockImplementationOnce(() => left(new PropsAreRequired()));
 
     const testable = await sut.execute(makeFixture());
 

@@ -63,6 +63,22 @@ export class CreateEstablishmentUseCase {
       return left(restaurateurOrError.value);
     }
 
-    return this.establishmentRepo.save(establishment);
+    /** @todo Add restaurateur HTTP request middleware to find by user id */
+    const plainEstablishment = establishment.toPlain();
+
+    const toPersistEstablishmentOrError = this.establishmentFactory.make({
+      id: { value: plainEstablishment.id },
+      name: plainEstablishment.name,
+      phone: { value: plainEstablishment.phone },
+      restaurateurId: { value: restaurateurOrError.value.id.value }
+    });
+
+    if (toPersistEstablishmentOrError.isLeft()) {
+      return left(toPersistEstablishmentOrError.value);
+    }
+
+    const toPersistEstablishment = toPersistEstablishmentOrError.value;
+
+    return this.establishmentRepo.save(toPersistEstablishment);
   }
 }
