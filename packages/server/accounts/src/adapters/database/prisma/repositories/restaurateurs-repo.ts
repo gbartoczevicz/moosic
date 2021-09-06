@@ -4,7 +4,7 @@ import { Restaurateur } from '@/domain/entities';
 import { left, right } from '@shared/utils';
 import { InfraError } from '@/ports/errors';
 import { prismaClient } from '@/adapters/database/prisma';
-import { Document } from '@/domain/entities/values';
+import { Document, Id } from '@/domain/entities/values';
 
 export class PrismaRestaurateurRepo implements RestaurateurRepo {
   private readonly restaurateurMapper: RestaurateurMapper;
@@ -24,6 +24,26 @@ export class PrismaRestaurateurRepo implements RestaurateurRepo {
           id: persistence.id
         }
       });
+
+      const domain = this.restaurateurMapper.toDomain(savedPersistence);
+
+      return right(domain);
+    } catch (err) {
+      return left(new InfraError(err.message));
+    }
+  }
+
+  public async findByUserId(userId: Id): Promise<FindUniqueRestaurateur> {
+    try {
+      const savedPersistence = await prismaClient.restaurateur.findUnique({
+        where: {
+          userId: userId.value
+        }
+      });
+
+      if (!savedPersistence) {
+        return right(null);
+      }
 
       const domain = this.restaurateurMapper.toDomain(savedPersistence);
 

@@ -29,5 +29,18 @@ model Restaurateur {
 
   user User @relation(fields: [userId], references: [id])
 
+  Establishment Establishment[]
+
   @@map("restaurateurs")
+}
+
+model Establishment {
+  id             String @id @default(uuid())
+  name           String
+  phone          String @unique
+  restaurateurId String @map("restaurateur_id")
+
+  restaurateur Restaurateur @relation(fields: [restaurateurId], references: [id])
+
+  @@map("establishments")
 }
