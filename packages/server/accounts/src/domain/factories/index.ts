@@ -4,3 +4,4 @@ export * from '@/domain/factories/document';
 export * from '@/domain/factories/phone';
 export * from '@/domain/factories/id';
 export * from '@/domain/factories/restaurateur';
+export * from '@/domain/factories/establishment';
