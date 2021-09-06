@@ -38,7 +38,7 @@ model Establishment {
   id             String @id @default(uuid())
   name           String
   phone          String @unique
-  restaurateurId String @unique @map("restaurateur_id")
+  restaurateurId String @map("restaurateur_id")
 
   restaurateur Restaurateur @relation(fields: [restaurateurId], references: [id])
 
