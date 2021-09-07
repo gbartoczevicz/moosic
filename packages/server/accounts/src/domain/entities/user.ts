@@ -1,4 +1,4 @@
-import { Either, left, right } from '@shared/utils';
+import { Either, left, right } from '@/utils';
 
 import { Email, Id, Password, Phone } from '@/domain/entities/values';
 import { PropsAreRequired, FieldIsRequired } from '@/domain/entities/errors';

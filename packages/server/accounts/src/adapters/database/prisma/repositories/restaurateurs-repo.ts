@@ -1,7 +1,7 @@
 import { RestaurateurRepo, SaveRestaurateur, FindUniqueRestaurateur } from '@/ports/database';
 import { RestaurateurMapper } from '@/adapters/database/prisma/mappers';
 import { Restaurateur } from '@/domain/entities';
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { InfraError } from '@/ports/errors';
 import { prismaClient } from '@/adapters/database/prisma';
 import { Document, Id } from '@/domain/entities/values';

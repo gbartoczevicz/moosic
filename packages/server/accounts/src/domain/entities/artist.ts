@@ -2,54 +2,52 @@ import { Either, left, right } from '@/utils';
 import { Document, Id } from '@/domain/entities/values';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
-export type RestaurateurProps = {
+type ArtistProps = {
   id: Id;
-  userId: Id;
   document: Document;
+  userId: Id;
 };
 
-export class Restaurateur {
+export class Artist {
   public readonly id: Id;
-
-  public readonly userId: Id;
 
   public readonly document: Document;
 
-  private constructor(id: Id, userId: Id, document: Document) {
+  public readonly userId: Id;
+
+  private constructor(id: Id, document: Document, userId: Id) {
     this.id = id;
-    this.userId = userId;
     this.document = document;
+    this.userId = userId;
   }
 
-  public static create(props: RestaurateurProps): Either<FieldIsRequired | PropsAreRequired, Restaurateur> {
+  public static create(props: ArtistProps): Either<PropsAreRequired | FieldIsRequired, Artist> {
     if (!props) {
       return left(new PropsAreRequired());
     }
 
-    const { id, userId, document } = props;
+    const { id, document, userId } = props;
 
     if (!id) {
       return left(new FieldIsRequired('id'));
-    }
-
-    if (!userId) {
-      return left(new FieldIsRequired('userId'));
     }
 
     if (!document) {
       return left(new FieldIsRequired('document'));
     }
 
-    const restaurateur = new Restaurateur(id, userId, document);
+    if (!userId) {
+      return left(new FieldIsRequired('userId'));
+    }
 
-    return right(restaurateur);
+    return right(new Artist(id, document, userId));
   }
 
   public toPlain() {
     return {
       id: this.id.value,
-      userId: this.userId.value,
-      document: this.document.value
+      document: this.document.value,
+      userId: this.userId.value
     };
   }
 }

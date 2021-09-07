@@ -1,4 +1,4 @@
-import { Either, left, right } from '@shared/utils';
+import { Either, left, right } from '@/utils';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 export type DocumentProps = {

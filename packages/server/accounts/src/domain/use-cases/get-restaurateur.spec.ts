@@ -3,7 +3,7 @@ import { IdFactory } from '@/domain/factories';
 import { FakeIdProvider } from '@/ports/providers/fakes';
 import { GetRestaurateurUseCase } from '@/domain/use-cases';
 import { Restaurateur } from '@/domain/entities';
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { PropsAreRequired } from '@/domain/entities/errors';
 import { RestaurateurNotFound } from '@/domain/use-cases/errors';
 import { InfraError } from '@/ports/errors';

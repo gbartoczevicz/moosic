@@ -1,21 +1,18 @@
 import { Either, left } from '@/utils';
 import { IdFactory, DocumentFactory, MakeIdProps, MakeDocumentProps } from '@/domain/factories';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
-import { Restaurateur } from '@/domain/entities';
+import { Artist } from '@/domain/entities';
 import { InvalidDocumentPattern, InvalidDocumentType } from '@/domain/factories/errors';
 
-export type MakeRestaurateurProps = {
+export type MakeArtistProps = {
   id: MakeIdProps;
   userId: MakeIdProps;
   document: MakeDocumentProps;
 };
 
-type RestaurateurEither = Either<
-  PropsAreRequired | FieldIsRequired | InvalidDocumentType | InvalidDocumentPattern,
-  Restaurateur
->;
+type ArtistEither = Either<PropsAreRequired | FieldIsRequired | InvalidDocumentType | InvalidDocumentPattern, Artist>;
 
-export class RestaurateurFactory {
+export class ArtistFactory {
   private readonly idFactory: IdFactory;
 
   private readonly documentFactory: DocumentFactory;
@@ -25,7 +22,7 @@ export class RestaurateurFactory {
     this.documentFactory = documentFactory;
   }
 
-  public make(props: MakeRestaurateurProps): RestaurateurEither {
+  public make(props: MakeArtistProps): ArtistEither {
     if (!props) {
       return left(new PropsAreRequired());
     }
@@ -50,7 +47,7 @@ export class RestaurateurFactory {
       return left(documentOrError.value);
     }
 
-    return Restaurateur.create({
+    return Artist.create({
       id: idOrError.value,
       userId: userIdOrError.value,
       document: documentOrError.value

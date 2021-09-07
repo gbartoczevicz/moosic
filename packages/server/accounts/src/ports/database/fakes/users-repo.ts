@@ -1,4 +1,4 @@
-import { right } from '@shared/utils';
+import { right } from '@/utils';
 import { User } from '@/domain/entities/user';
 import { Email, Id, Password, Phone } from '@/domain/entities/values';
 import { UsersRepo, SaveUser, FindUniqueUser } from '@/ports/database';

@@ -1,4 +1,4 @@
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { CreateRestaurateurUseCase, GetUserUseCase } from '@/domain/use-cases';
 import { FakeDocumentProvider, FakeIdProvider } from '@/ports/providers/fakes';
 import { Restaurateur, User } from '@/domain/entities';

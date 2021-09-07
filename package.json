@@ -18,12 +18,8 @@
   },
   "homepage": "https://github.com/gabrielbartoczevicz/moosic#readme",
   "workspaces": [
-    "packages/server/accounts",
-    "packages/_shared"
+    "packages/server/accounts"
   ],
-  "dependencies": {
-    "@shared/utils": "*"
-  },
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.13",

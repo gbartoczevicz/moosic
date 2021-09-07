@@ -1,4 +1,4 @@
-import { Either, left } from '@shared/utils';
+import { Either, left } from '@/utils';
 import { RestaurateurFactory } from '@/domain/factories';
 import { RestaurateurRepo } from '@/ports/database';
 import { CreateRestaurateurDTO } from '@/domain/use-cases/dtos';

@@ -2,7 +2,7 @@ import { EstablishmentsRepo, FindUniqueEstablishment, SaveEstablishment } from '
 import { EstablishmentMapper } from '@/adapters/database/prisma/mappers';
 import { Establishment } from '@/domain/entities';
 import { prismaClient } from '@/adapters/database/prisma';
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { InfraError } from '@/ports/errors';
 import { Phone } from '@/domain/entities/values';
 

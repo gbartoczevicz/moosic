@@ -1,4 +1,4 @@
-import { right } from '@shared/utils';
+import { right } from '@/utils';
 import { Establishment } from '@/domain/entities';
 import { Id, Phone } from '@/domain/entities/values';
 import { EstablishmentsRepo, FindUniqueEstablishment, SaveEstablishment } from '@/ports/database';

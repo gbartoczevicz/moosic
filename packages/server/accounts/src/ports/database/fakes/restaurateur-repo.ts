@@ -1,4 +1,4 @@
-import { right } from '@shared/utils';
+import { right } from '@/utils';
 import { Restaurateur } from '@/domain/entities';
 import { RestaurateurRepo, SaveRestaurateur, FindUniqueRestaurateur } from '@/ports/database';
 import { Document, Id } from '@/domain/entities/values';
