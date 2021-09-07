@@ -18,6 +18,7 @@ model User {
   phone    String @unique
 
   Restaurateur Restaurateur?
+  Artist       Artist?
 
   @@map("users")
 }
@@ -43,4 +44,14 @@ model Establishment {
   restaurateur Restaurateur @relation(fields: [restaurateurId], references: [id])
 
   @@map("establishments")
+}
+
+model Artist {
+  id       String @id @default(uuid())
+  document String @unique
+  userId   String @unique @map("user_id")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("artists")
 }
