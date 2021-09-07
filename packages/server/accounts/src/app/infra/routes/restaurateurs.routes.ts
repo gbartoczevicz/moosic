@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { makeCreateRestaurateur } from '@/app/factories';
+import { makeCreateRestaurateurController } from '@/app/factories';
 
-const createRestaurateur = makeCreateRestaurateur();
+const createRestaurateur = makeCreateRestaurateurController();
 
 const restaurateursRoutes = Router();
 

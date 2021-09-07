@@ -13,7 +13,7 @@ import {
 import { CreateRestaurateurUseCase, GetUserUseCase } from '@/domain/use-cases';
 import { Factory } from '@/ports/app';
 
-export const makeCreateRestaurateur = (): Factory => {
+export const makeCreateRestaurateurController = (): Factory => {
   const idFactory = new IdFactory(new IdProviderImpl());
 
   const passwordFactory = new PasswordFactory(new PasswordProviderImpl(), 8);

@@ -12,7 +12,7 @@ import {
 import { CreateEstablishmentUseCase, GetRestaurateurUseCase } from '@/domain/use-cases';
 import { Factory } from '@/ports/app';
 
-export const makeCreateEstablishment = (): Factory => {
+export const makeCreateEstablishmentController = (): Factory => {
   const idFactory = new IdFactory(new IdProviderImpl());
   const phoneFactory = new PhoneFactory(new PhoneProviderImpl());
 

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { makeCreateArtist } from '@/app/factories';
+import { makeCreateArtistController } from '@/app/factories';
 
-const createArtist = makeCreateArtist();
+const createArtist = makeCreateArtistController();
 
 const artistsRoutes = Router();
 

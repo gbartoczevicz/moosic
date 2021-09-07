@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { makeCreateEstablishment } from '@/app/factories';
+import { makeCreateEstablishmentController } from '@/app/factories';
 
-const createEstablishment = makeCreateEstablishment();
+const createEstablishment = makeCreateEstablishmentController();
 
 const establishmentsRoutes = Router();
 

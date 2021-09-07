@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { makeCreateUser } from '@/app/factories';
+import { makeCreateUserController } from '@/app/factories';
 
-const createUser = makeCreateUser();
+const createUser = makeCreateUserController();
 
 const usersRoutes = Router();
 

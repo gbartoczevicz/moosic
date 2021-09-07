@@ -13,7 +13,7 @@ import {
 import { CreateArtistUseCase, GetUserUseCase } from '@/domain/use-cases';
 import { Factory } from '@/ports/app';
 
-export const makeCreateArtist = (): Factory => {
+export const makeCreateArtistController = (): Factory => {
   const idFactory = new IdFactory(new IdProviderImpl());
 
   const passwordFactory = new PasswordFactory(new PasswordProviderImpl(), 8);
