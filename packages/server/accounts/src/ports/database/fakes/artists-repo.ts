@@ -4,7 +4,7 @@ import { ArtistsRepo, SaveArtist, FindUniqueArtist } from '@/ports/database';
 import { Document, Id } from '@/domain/entities/values';
 import { makeId } from '@/domain/entities/values/fakes';
 
-export class FakeArtistRepo implements ArtistsRepo {
+export class FakeArtistsRepo implements ArtistsRepo {
   public async save(artist: Artist): Promise<SaveArtist> {
     return Promise.resolve(right(artist));
   }
