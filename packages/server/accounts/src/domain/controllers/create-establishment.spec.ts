@@ -5,7 +5,7 @@ import { FakeRestaurateurEstablishmentsRepo } from '@/ports/database/fakes';
 import { Establishment } from '@/domain/entities';
 import { makeId, makePhone } from '@/domain/entities/values/fakes';
 import { Id, Phone } from '@/domain/entities/values';
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { badRequest, ok, serverError } from '@/ports/http/helpers';
 import { InfraError } from '@/ports/errors';
 import { UserNotFound } from '../use-cases/errors';

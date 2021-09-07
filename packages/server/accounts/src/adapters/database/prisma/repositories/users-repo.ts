@@ -1,4 +1,4 @@
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { prismaClient } from '@/adapters/database/prisma';
 import { FindUniqueUser, SaveUser, UsersRepo } from '@/ports/database';
 import { UserMapper } from '@/adapters/database/prisma/mappers';

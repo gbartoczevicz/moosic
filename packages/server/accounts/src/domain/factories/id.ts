@@ -1,4 +1,4 @@
-import { Either, left } from '@shared/utils';
+import { Either, left } from '@/utils';
 
 import { IdProvider } from '@/ports/providers';
 import { Id } from '@/domain/entities/values';

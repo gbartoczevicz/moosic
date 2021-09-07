@@ -1,4 +1,4 @@
-import { Either } from '@shared/utils';
+import { Either } from '@/utils';
 import { InfraError } from '@/ports/errors';
 import { Establishment } from '@/domain/entities';
 import { Phone } from '@/domain/entities/values';

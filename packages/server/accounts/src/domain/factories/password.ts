@@ -1,4 +1,4 @@
-import { Either } from '@shared/utils';
+import { Either } from '@/utils';
 import { Password } from '@/domain/entities/values';
 import { PasswordProvider } from '@/ports/providers';
 import { FieldIsRequired, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';

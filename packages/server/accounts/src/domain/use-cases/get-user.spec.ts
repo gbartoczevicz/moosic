@@ -1,4 +1,4 @@
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { GetUserUseCase } from '@/domain/use-cases';
 import { FakeIdProvider } from '@/ports/providers/fakes';
 import { IdFactory } from '@/domain/factories';

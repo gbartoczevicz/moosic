@@ -1,4 +1,4 @@
-import { Either, left } from '@shared/utils';
+import { Either, left } from '@/utils';
 import { PhoneProvider } from '@/ports/providers';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 import { InvalidPhonePattern } from '@/domain/factories/errors';

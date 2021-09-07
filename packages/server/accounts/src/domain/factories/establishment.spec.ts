@@ -1,9 +1,9 @@
 import { EstablishmentFactory, IdFactory, PhoneFactory, MakeEstablishmentProps } from '@/domain/factories';
 import { FakeIdProvider, FakePhoneProvider } from '@/ports/providers/fakes';
 import { Establishment } from '@/domain/entities';
-import { nullAsType } from '@/utils';
+import { nullAsType, left, right } from '@/utils';
 import { PropsAreRequired } from '@/domain/entities/errors';
-import { left, right } from '@shared/utils';
+
 import { Id } from '@/domain/entities/values';
 
 const makeSut = () => {

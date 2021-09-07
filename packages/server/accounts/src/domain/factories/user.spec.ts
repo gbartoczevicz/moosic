@@ -1,6 +1,5 @@
-import { left } from '@shared/utils';
+import { left, nullAsType } from '@/utils';
 
-import { nullAsType } from '@/utils';
 import { User } from '@/domain/entities';
 import { Email } from '@/domain/entities/values';
 import { MinimumLength, PropsAreRequired } from '@/domain/entities/errors';

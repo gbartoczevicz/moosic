@@ -1,7 +1,7 @@
 import { RestaurateurRepo } from '@/ports/database';
 import { GetRestaurateurDTO } from '@/domain/use-cases/dtos';
 import { IdFactory } from '@/domain/factories';
-import { Either, left, right } from '@shared/utils';
+import { Either, left, right } from '@/utils';
 import { RestaurateurNotFound } from '@/domain/use-cases/errors';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 import { InfraError } from '@/ports/errors';

@@ -1,4 +1,4 @@
-import { Either, left } from '@shared/utils';
+import { Either, left } from '@/utils';
 import { IdFactory, DocumentFactory, MakeIdProps, MakeDocumentProps } from '@/domain/factories';
 import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 import { Restaurateur } from '@/domain/entities';

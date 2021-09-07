@@ -1,4 +1,4 @@
-import { Either, left } from '@shared/utils';
+import { Either, left } from '@/utils';
 
 import { User } from '@/domain/entities/user';
 import { Email } from '@/domain/entities/values';

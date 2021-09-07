@@ -1,4 +1,4 @@
-import { Either, left } from '@shared/utils';
+import { Either, left } from '@/utils';
 import { EstablishmentFactory } from '@/domain/factories';
 import { GetRestaurateurUseCase } from '@/domain/use-cases';
 import { CreateEstablishmentDTO } from '@/domain/use-cases/dtos';

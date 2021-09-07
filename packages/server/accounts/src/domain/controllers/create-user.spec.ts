@@ -1,4 +1,4 @@
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { CreateUserController } from '@/domain/controllers';
 import { CreateUserUseCase } from '@/domain/use-cases';
 import { FakeUsersRepo } from '@/ports/database/fakes';

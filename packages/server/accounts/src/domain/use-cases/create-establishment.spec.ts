@@ -3,7 +3,7 @@ import { EstablishmentFactory, IdFactory, PhoneFactory } from '@/domain/factorie
 import { FakeRestaurateurEstablishmentsRepo, FakeRestaurateurRepo } from '@/ports/database/fakes';
 import { FakeIdProvider, FakePhoneProvider } from '@/ports/providers/fakes';
 import { CreateEstablishmentDTO } from '@/domain/use-cases/dtos';
-import { left, right } from '@shared/utils';
+import { left, right } from '@/utils';
 import { Establishment } from '@/domain/entities';
 import { PropsAreRequired } from '@/domain/entities/errors';
 import { PhoneAlreadyInUse, RestaurateurNotFound } from '@/domain/use-cases/errors';

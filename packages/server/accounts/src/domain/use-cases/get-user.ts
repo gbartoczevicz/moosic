@@ -1,4 +1,4 @@
-import { Either, left, right } from '@shared/utils';
+import { Either, left, right } from '@/utils';
 import { UsersRepo } from '@/ports/database';
 import { GetUserDTO } from '@/domain/use-cases/dtos';
 import { UserNotFound } from '@/domain/use-cases/errors';
