@@ -21,7 +21,7 @@ export class Artist {
     this.userId = userId;
   }
 
-  public static create(props: ArtistProps): Either<PropsAreRequired, Artist> {
+  public static create(props: ArtistProps): Either<PropsAreRequired | FieldIsRequired, Artist> {
     if (!props) {
       return left(new PropsAreRequired());
     }
