@@ -4,3 +4,4 @@ export * from '@/domain/use-cases/get-user';
 export * from '@/domain/use-cases/get-restaurateur';
 export * from '@/domain/use-cases/create-establishment';
 export * from '@/domain/use-cases/create-artist';
+export * from '@/domain/use-cases/create-session';

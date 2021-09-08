@@ -5,7 +5,7 @@ export interface HttpResponse {
 
 export interface HttpRequest {
   body?: unknown;
-  applicationData: ApplicationData;
+  applicationData?: ApplicationData;
 }
 
 export interface ApplicationData {
