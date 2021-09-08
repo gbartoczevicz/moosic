@@ -1,5 +1,5 @@
 import { JwtProvider } from '@/ports/providers';
-import { GetUserFromBearerDTO } from '@/domain/use-cases/dtos';
+import { SetSessionDTO } from '@/domain/use-cases/dtos';
 import { left, right } from '@/utils';
 import { PropsAreRequired } from '@/domain/entities/errors';
 import { InvalidCredentials } from '@/domain/use-cases/errors';
@@ -20,7 +20,7 @@ export class GetUserFromBearer {
     this.secret = secret;
   }
 
-  public execute(props: GetUserFromBearerDTO) {
+  public execute(props: SetSessionDTO) {
     if (!props) {
       return left(new PropsAreRequired());
     }
