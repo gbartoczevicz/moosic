@@ -1,3 +1,3 @@
-export interface SetUserFromBearer {
+export interface GetUserFromBearerDTO {
   bearer: string;
 }

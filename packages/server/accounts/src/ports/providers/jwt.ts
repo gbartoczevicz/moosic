@@ -8,4 +8,5 @@ export type JwtSignOptions = {
 
 export interface JwtProvider {
   sign(payload: JwtSignPayload, secret: string, options: JwtSignOptions): string;
+  verify(token: string, secret: string): string;
 }
