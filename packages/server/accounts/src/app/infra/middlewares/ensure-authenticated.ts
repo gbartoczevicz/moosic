@@ -1,25 +1,25 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { forbidden } from '@/ports/http/helpers';
+import { makeSetSessionMiddleware } from '@/app/factories';
 
-/** @todo use jwt token */
+const setSessionUseCase = makeSetSessionMiddleware().middleware;
+
 export const ensureAuthenticated = () => {
   return async (request: Request, response: Response, next: NextFunction) => {
-    const forbiddenStatus = forbidden().statusCode;
+    const idOrError = setSessionUseCase.execute({ bearer: String(request.headers.authorization) });
 
-    const authHeader = request.headers.authorization;
+    if (idOrError.isLeft()) {
+      console.warn(idOrError.value);
 
-    if (!authHeader) {
-      return response.sendStatus(forbiddenStatus);
+      return response.sendStatus(forbidden().statusCode);
     }
 
-    const [, userId] = authHeader.split('user_id:');
+    const id = idOrError.value;
 
-    if (!userId) {
-      return response.sendStatus(forbiddenStatus);
-    }
-
-    request.applicationData = { userId };
+    request.applicationData = {
+      userId: id.value
+    };
 
     return next();
   };

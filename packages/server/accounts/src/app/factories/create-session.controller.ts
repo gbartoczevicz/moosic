@@ -18,7 +18,7 @@ export const makeCreateSessionController = (): Factory => {
 
   const createSessionUseCase = new CreateSessionUseCase(userRepo, new PasswordProviderImpl(), new JwtProviderImpl(), {
     secret: 'very secret',
-    expiresAt: 2
+    expiresAt: 600
   });
 
   const createSessionController = new CreateSessionController(createSessionUseCase);

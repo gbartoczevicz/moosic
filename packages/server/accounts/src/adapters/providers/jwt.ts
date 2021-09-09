@@ -8,18 +8,18 @@ export class JwtProviderImpl implements JwtProvider {
 
   /** @todo check if is working */
   public verify(token: string, secret: string): string {
-    const { sub } = Provider.verify(token, secret);
+    const sub = Provider.verify(token, secret) as any;
 
     if (!sub) {
       throw new Error('Sub value not found');
     }
 
-    console.log({ sub });
+    const { userId } = sub;
 
-    if (!(typeof sub === 'string')) {
-      throw new Error('Sub value is not a string');
+    if (!userId) {
+      throw new Error('Sub value is invalid');
     }
 
-    return sub;
+    return String(userId);
   }
 }

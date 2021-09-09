@@ -30,8 +30,6 @@ export class SetSessionUseCase {
       return left(new InvalidCredentials());
     }
 
-    console.log({ bearer });
-
     const [, token] = bearer.split(this.bearerPrefix);
 
     if (!token) {
@@ -42,7 +40,9 @@ export class SetSessionUseCase {
 
     try {
       decoded = this.jwtProvider.verify(token, this.secret);
-    } catch {
+    } catch (err) {
+      console.warn(err);
+
       return left(new InvalidCredentials());
     }
 
