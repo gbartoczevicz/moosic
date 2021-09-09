@@ -12,7 +12,12 @@ export class CreateRestaurateurController implements Controller {
   }
 
   public async handle(request: HttpRequest): Promise<HttpResponse> {
-    const restaurateurOrError = await this.createRestaurateurUseCase.execute(request.body as CreateRestaurateurDTO);
+    const dto = {
+      ...request.body,
+      userId: request.applicationData.userId
+    } as CreateRestaurateurDTO;
+
+    const restaurateurOrError = await this.createRestaurateurUseCase.execute(dto);
 
     if (restaurateurOrError.isLeft()) {
       const error = restaurateurOrError.value;
