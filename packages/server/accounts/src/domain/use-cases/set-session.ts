@@ -15,7 +15,7 @@ export class SetSessionUseCase {
 
   private readonly secret: string;
 
-  private readonly bearerPrefix = 'Authorization: Bearer ';
+  private readonly bearerPrefix = 'Bearer ';
 
   public constructor(jwtProvider: JwtProvider, idFactory: IdFactory, secret: string) {
     this.jwtProvider = jwtProvider;
@@ -29,6 +29,8 @@ export class SetSessionUseCase {
     if (!bearer) {
       return left(new InvalidCredentials());
     }
+
+    console.log({ bearer });
 
     const [, token] = bearer.split(this.bearerPrefix);
 

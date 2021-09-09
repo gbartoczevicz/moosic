@@ -15,7 +15,7 @@ const makeSut = () => {
   };
 };
 
-const makeFixture = () => ({ bearer: 'Authorization: Bearer any' });
+const makeFixture = () => ({ bearer: 'Bearer any' });
 
 describe('SetSessionUseCase Unitary Test', () => {
   it('should create a valid Id', () => {
