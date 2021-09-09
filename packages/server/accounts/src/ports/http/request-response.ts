@@ -10,6 +10,4 @@ export interface HttpRequest {
 
 export interface ApplicationData {
   userId?: string;
-  restaurateurId?: string;
-  artistId?: string;
 }
