@@ -28,7 +28,8 @@ const makeFixture = () => ({
     name: 'Establishment name',
     phone: '0000-0000',
     restaurateurId: 'restaurateur_id'
-  }
+  },
+  applicationData: { userId: 'any' }
 });
 
 const establishmentFixture = () => {
