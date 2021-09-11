@@ -34,7 +34,8 @@ const makeFixture = (): HttpRequest => ({
     email: 'email',
     password: 'password',
     phone: 'phone'
-  }
+  },
+  applicationData: {}
 });
 
 const userFixture = () => {

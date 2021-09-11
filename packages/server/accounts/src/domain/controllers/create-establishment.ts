@@ -12,7 +12,12 @@ export class CreateEstablishmentController implements Controller {
   }
 
   public async handle(request: HttpRequest): Promise<HttpResponse> {
-    const establishmentOrError = await this.createEstablishmentUseCase.execute(request.body as CreateEstablishmentDTO);
+    const dto = {
+      ...request.body,
+      restaurateurId: request.applicationData.restaurateurId
+    } as CreateEstablishmentDTO;
+
+    const establishmentOrError = await this.createEstablishmentUseCase.execute(dto);
 
     if (establishmentOrError.isLeft()) {
       const error = establishmentOrError.value;

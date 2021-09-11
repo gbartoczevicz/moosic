@@ -25,18 +25,20 @@ const makeSut = () => {
 
 const makeFixture = () => ({
   body: {
-    userId: 'any user id',
     document: 'any document'
+  },
+  applicationData: {
+    userId: 'any user id'
   }
 });
 
 const restaurateurFixture = () => {
-  const { userId, document } = makeFixture().body;
+  const { applicationData, body } = makeFixture();
 
   return Restaurateur.create({
     id: makeId({}).value as Id,
-    userId: makeId({ value: userId }).value as Id,
-    document: Document.create({ value: document }).value as Document
+    userId: makeId({ value: applicationData.userId }).value as Id,
+    document: Document.create({ value: body.document }).value as Document
   }).value as Restaurateur;
 };
 
@@ -55,6 +57,7 @@ describe('Create Restaurateur Controller Unitary Tests', () => {
     expect(testable.statusCode).toEqual(ok({}).statusCode);
     expect(testable.body).toEqual({
       ...fixture.body,
+      ...fixture.applicationData,
       id: 'id'
     });
   });

@@ -1,13 +1,11 @@
 import { Router } from 'express';
 
-import { makeCreateEstablishment } from '@/app/factories';
-
-const createEstablishment = makeCreateEstablishment();
+import { createEstablishmentController } from '@/app/factories/controllers';
 
 const establishmentsRoutes = Router();
 
-establishmentsRoutes.post(createEstablishment.route, async (request, response) => {
-  const res = await createEstablishment.controller.handle(request);
+establishmentsRoutes.post('/', async (request, response) => {
+  const res = await createEstablishmentController.handle(request);
   return response.status(res.statusCode).json(res.body);
 });
 

@@ -1,13 +1,11 @@
 import { Router } from 'express';
 
-import { makeCreateUser } from '@/app/factories';
-
-const createUser = makeCreateUser();
+import { createUserController } from '@/app/factories/controllers';
 
 const usersRoutes = Router();
 
-usersRoutes.post(createUser.route, async (request, response) => {
-  const res = await createUser.controller.handle(request);
+usersRoutes.post('/', async (request, response) => {
+  const res = await createUserController.handle(request);
   return response.status(res.statusCode).json(res.body);
 });
 

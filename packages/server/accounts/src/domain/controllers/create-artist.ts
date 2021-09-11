@@ -12,7 +12,12 @@ export class CreateArtistController implements Controller {
   }
 
   public async handle(request: HttpRequest): Promise<HttpResponse> {
-    const artistOrError = await this.createArtistUseCase.execute(request.body as CreateArtistDTO);
+    const dto = {
+      ...request.body,
+      userId: request.applicationData.userId
+    } as CreateArtistDTO;
+
+    const artistOrError = await this.createArtistUseCase.execute(dto);
 
     if (artistOrError.isLeft()) {
       const error = artistOrError.value;

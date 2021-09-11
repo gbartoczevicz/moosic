@@ -1,8 +1,14 @@
 export interface HttpResponse {
   statusCode: number;
-  body?: unknown;
+  body?: any;
 }
 
 export interface HttpRequest {
-  body?: unknown;
+  body?: any;
+  applicationData: ApplicationData;
+}
+
+export interface ApplicationData {
+  userId?: string;
+  restaurateurId?: string;
 }

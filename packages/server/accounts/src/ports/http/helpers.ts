@@ -10,6 +10,10 @@ export const serverError = (): HttpResponse => ({
   statusCode: 500
 });
 
+export const forbidden = (): HttpResponse => ({
+  statusCode: 403
+});
+
 export const ok = (data: any): HttpResponse => ({
   statusCode: 200,
   body: data
