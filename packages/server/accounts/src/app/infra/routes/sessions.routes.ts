@@ -1,13 +1,11 @@
 import { Router } from 'express';
 
-import { makeCreateSessionController } from '@/app/factories';
-
-const createSession = makeCreateSessionController();
+import { createSessionController } from '@/app/factories/controllers';
 
 const sessionsRoutes = Router();
 
-sessionsRoutes.post(createSession.route, async (request, response) => {
-  const res = await createSession.controller.handle(request);
+sessionsRoutes.post('/', async (request, response) => {
+  const res = await createSessionController.handle(request);
   return response.status(res.statusCode).json(res.body);
 });
 

@@ -1,13 +1,11 @@
 import { Router } from 'express';
 
-import { makeCreateArtistController } from '@/app/factories';
-
-const createArtist = makeCreateArtistController();
+import { createArtistController } from '@/app/factories/controllers';
 
 const artistsRoutes = Router();
 
-artistsRoutes.post(createArtist.route, async (request, response) => {
-  const res = await createArtist.controller.handle(request);
+artistsRoutes.post('/', async (request, response) => {
+  const res = await createArtistController.handle(request);
   return response.status(res.statusCode).json(res.body);
 });
 

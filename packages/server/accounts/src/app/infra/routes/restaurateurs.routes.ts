@@ -1,13 +1,11 @@
 import { Router } from 'express';
 
-import { makeCreateRestaurateurController } from '@/app/factories';
-
-const createRestaurateur = makeCreateRestaurateurController();
+import { createRestaurateurControlle } from '@/app/factories/controllers';
 
 const restaurateursRoutes = Router();
 
-restaurateursRoutes.post(createRestaurateur.route, async (request, response) => {
-  const res = await createRestaurateur.controller.handle(request);
+restaurateursRoutes.post('/', async (request, response) => {
+  const res = await createRestaurateurControlle.handle(request);
   return response.status(res.statusCode).json(res.body);
 });
 

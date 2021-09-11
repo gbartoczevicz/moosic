@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { forbidden } from '@/ports/http/helpers';
-import { makeSetSessionMiddleware } from '@/app/factories';
-
-const setSessionUseCase = makeSetSessionMiddleware().middleware;
+import { setSessionUseCase } from '@/app/factories/use-cases';
 
 export const ensureAuthenticated = () => {
   return async (request: Request, response: Response, next: NextFunction) => {
