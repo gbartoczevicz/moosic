@@ -27,15 +27,14 @@ export const getRestaurateurUseCase = new UseCases.GetRestaurateurUseCase(
 
 export const createEstablishmentUseCase = new UseCases.CreateEstablishmentUseCase(
   Domain.establishmentFactory,
-  Repositories.establishmentsRepo,
-  getRestaurateurUseCase
+  Repositories.establishmentsRepo
 );
 
 export const createSessionUseCase = new UseCases.CreateSessionUseCase(
   Repositories.usersRepo,
   Providers.passwordProvider,
   Providers.jwtProvider,
-  { expiresAt: 100, secret: 'secret' }
+  { expiresAt: 600, secret: 'secret' }
 );
 
 export const setSessionUseCase = new UseCases.SetSessionUseCase(Providers.jwtProvider, Domain.idFactory, 'secret');

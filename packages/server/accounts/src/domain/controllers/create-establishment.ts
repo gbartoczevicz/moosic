@@ -14,7 +14,7 @@ export class CreateEstablishmentController implements Controller {
   public async handle(request: HttpRequest): Promise<HttpResponse> {
     const dto = {
       ...request.body,
-      userId: request.applicationData.userId
+      restaurateurId: request.applicationData.restaurateurId
     } as CreateEstablishmentDTO;
 
     const establishmentOrError = await this.createEstablishmentUseCase.execute(dto);

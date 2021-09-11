@@ -1,4 +1,4 @@
-import { CreateEstablishmentUseCase, GetRestaurateurUseCase } from '@/domain/use-cases';
+import { CreateEstablishmentUseCase } from '@/domain/use-cases';
 import { CreateEstablishmentController } from '@/domain/controllers';
 import { EstablishmentFactory } from '@/domain/factories';
 import { FakeRestaurateurEstablishmentsRepo } from '@/ports/database/fakes';
@@ -13,8 +13,7 @@ import { UserNotFound } from '../use-cases/errors';
 const makeSut = () => {
   const createEstablishmentUseCase = new CreateEstablishmentUseCase(
     {} as EstablishmentFactory,
-    {} as FakeRestaurateurEstablishmentsRepo,
-    {} as GetRestaurateurUseCase
+    {} as FakeRestaurateurEstablishmentsRepo
   );
 
   return {
