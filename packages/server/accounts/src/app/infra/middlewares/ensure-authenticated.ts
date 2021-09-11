@@ -8,8 +8,6 @@ export const ensureAuthenticated = () => {
     const idOrError = setSessionUseCase.execute({ bearer: String(request.headers.authorization) });
 
     if (idOrError.isLeft()) {
-      console.warn(idOrError.value);
-
       return response.sendStatus(forbidden().statusCode);
     }
 
