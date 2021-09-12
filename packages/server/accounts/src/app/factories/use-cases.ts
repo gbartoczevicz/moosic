@@ -1,8 +1,9 @@
+import jwtConfig from '@/config/jwt';
+
+import * as UseCases from '@/domain/use-cases';
 import * as Repositories from '@/app/factories/repositories';
 import * as Domain from '@/app/factories/domain';
 import * as Providers from '@/app/factories/providers';
-
-import * as UseCases from '@/domain/use-cases';
 
 export const createUserUseCase = new UseCases.CreateUserUseCase(Domain.userFactory, Repositories.usersRepo);
 
@@ -34,7 +35,11 @@ export const createSessionUseCase = new UseCases.CreateSessionUseCase(
   Repositories.usersRepo,
   Providers.passwordProvider,
   Providers.jwtProvider,
-  { expiresAt: 600, secret: 'secret' }
+  { expiresAt: jwtConfig.expiresIn, secret: jwtConfig.secret }
 );
 
-export const setSessionUseCase = new UseCases.SetSessionUseCase(Providers.jwtProvider, Domain.idFactory, 'secret');
+export const setSessionUseCase = new UseCases.SetSessionUseCase(
+  Providers.jwtProvider,
+  Domain.idFactory,
+  jwtConfig.secret
+);

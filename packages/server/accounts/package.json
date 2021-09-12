@@ -4,7 +4,7 @@
   "description": "Accounts application server",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd -r tsconfig-paths/register --transpile-only --clear --ignore-watch node_modules src/server.ts",
+    "dev": "tsnd -r tsconfig-paths/register -r dotenv/config --transpile-only --clear --ignore-watch node_modules src/server.ts",
     "migrate": "prisma migrate dev",
     "test:coverage": "jest --coverage"
   },
@@ -32,6 +32,7 @@
     "@prisma/client": "^2.30.0",
     "bcryptjs": "^2.4.3",
     "cpf-cnpj-validator": "^1.0.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
