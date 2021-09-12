@@ -1,8 +1,10 @@
+import passwordConfig from '@/config/password';
+
 import * as Providers from '@/app/factories/providers';
 import * as Factories from '@/domain/factories';
 
 export const idFactory = new Factories.IdFactory(Providers.idProvider);
-export const passwordFactory = new Factories.PasswordFactory(Providers.passwordProvider, 8);
+export const passwordFactory = new Factories.PasswordFactory(Providers.passwordProvider, passwordConfig.salt);
 export const phoneFactory = new Factories.PhoneFactory(Providers.phoneProvider);
 export const documentFactory = new Factories.DocumentFactory(Providers.documentProvider);
 
