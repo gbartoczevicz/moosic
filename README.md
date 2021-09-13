@@ -21,6 +21,7 @@
 - NPM: v7.22.0
 - Python: 3.9
 - pipenv: 2021.5.29
+- Docker e Docker Compose (Opcional): de preferência mais atualizado
 
 ### Getting started
 
