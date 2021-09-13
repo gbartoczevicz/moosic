@@ -13,5 +13,22 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2048M
+          memory: 512M
           cpus: '1.0'
+
+  invites_dc:
+    image: 'cassandra:4'
+    restart: always
+    ports:
+      - '9042:9042'
+    environment:
+      - CASSANDRA_USER=root
+      - CASSANDRA_PASSWORD=secret
+      - CASSANDRA_DC=invites_datacenter
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_CQL_PORT_NUMBER=9042
+    deploy:
+      resources:
+        limits:
+          memory: 3072M
+          cpus: '2.6'
