@@ -1,21 +1,6 @@
 version: '3.9'
 
 services:
-  accounts_db:
-    image: 'bitnami/postgresql:13'
-    restart: always
-    ports:
-      - '5432:5432'
-    environment:
-      - POSTGRESQL_PASSWORD=secret
-      - POSTGRESQL_USERNAME=root
-      - POSTGRESQL_DATABASE=accounts_database
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-          cpus: '1.0'
-
   invites_dc:
     image: 'cassandra:4'
     restart: always
