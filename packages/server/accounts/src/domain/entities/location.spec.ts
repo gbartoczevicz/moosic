@@ -2,7 +2,7 @@ import { Location, LocationProps } from '@/domain/entities';
 import { nullAsType } from '@/utils';
 import { makeId } from '@/domain/entities/values/fakes';
 import { Id } from '@/domain/entities/values';
-import { FieldIsRequired } from '@/domain/entities/errors';
+import { FieldIsRequired, PropsAreRequired } from '@/domain/entities/errors';
 
 const makeSut = () => ({ sut: Location });
 
@@ -33,6 +33,15 @@ describe('Location Unitary Tests', () => {
     expect(location.num).toEqual(fixture.num);
     expect(location.postalCode).toEqual(fixture.postalCode);
     expect(location.establishmentId.value).toEqual(fixture.establishmentId.value);
+  });
+
+  it('should validate props', () => {
+    const { sut } = makeSut();
+
+    const testable = sut.create(nullAsType());
+
+    expect(testable.isLeft()).toBeTruthy();
+    expect(testable.value).toEqual(new PropsAreRequired());
   });
 
   it('should validate establishmentId param', () => {
