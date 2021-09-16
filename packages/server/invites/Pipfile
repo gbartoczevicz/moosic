@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+pyjwt = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
