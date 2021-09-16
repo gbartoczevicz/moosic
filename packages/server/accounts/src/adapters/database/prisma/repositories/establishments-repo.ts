@@ -4,7 +4,7 @@ import { Establishment } from '@/domain/entities';
 import { prismaClient } from '@/adapters/database/prisma';
 import { left, right } from '@/utils';
 import { InfraError } from '@/ports/errors';
-import { Phone } from '@/domain/entities/values';
+import { Id, Phone } from '@/domain/entities/values';
 
 export class PrismaEstablishmentsRepo implements EstablishmentsRepo {
   private readonly establishmentMapper: EstablishmentMapper;
@@ -26,6 +26,22 @@ export class PrismaEstablishmentsRepo implements EstablishmentsRepo {
       });
 
       const domain = this.establishmentMapper.toDomain(savedPersistence);
+
+      return right(domain);
+    } catch (err) {
+      return left(new InfraError(err.message));
+    }
+  }
+
+  public async findById(id: Id): Promise<FindUniqueEstablishment> {
+    try {
+      const savedPersistence = await prismaClient.establishment.findUnique({
+        where: {
+          id: id.value
+        }
+      });
+
+      const domain = savedPersistence ? this.establishmentMapper.toDomain(savedPersistence) : null;
 
       return right(domain);
     } catch (err) {
