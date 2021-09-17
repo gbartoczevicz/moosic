@@ -42,8 +42,23 @@ model Establishment {
   restaurateurId String @map("restaurateur_id")
 
   restaurateur Restaurateur @relation(fields: [restaurateurId], references: [id])
+  location     Location?
 
   @@map("establishments")
+}
+
+model Location {
+  establishmentId String @unique @map("establishment_id")
+  address         String
+  num             Int
+  postalCode      String @unique
+  latitude        Float
+  longitude       Float
+
+  establishment Establishment @relation(fields: [establishmentId], references: [id])
+
+  @@unique([latitude, longitude], name: "locations_coordinates")
+  @@map("locations")
 }
 
 model Artist {
