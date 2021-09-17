@@ -33,6 +33,8 @@ describe('Location Unitary Tests', () => {
     expect(location.num).toEqual(fixture.num);
     expect(location.postalCode).toEqual(fixture.postalCode);
     expect(location.establishmentId.value).toEqual(fixture.establishmentId.value);
+
+    expect(location.toPlain()).toStrictEqual({ ...fixture, establishmentId: fixture.establishmentId.value });
   });
 
   it('should validate props', () => {

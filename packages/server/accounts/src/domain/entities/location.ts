@@ -75,4 +75,15 @@ export class Location {
 
     return right(coordinate);
   }
+
+  public toPlain() {
+    return {
+      establishmentId: this.establishmentId.value,
+      address: this.address,
+      num: this.num,
+      postalCode: this.postalCode,
+      latitude: this.latitude,
+      longitude: this.longitude
+    };
+  }
 }
