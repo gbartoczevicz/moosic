@@ -43,3 +43,9 @@ export const setSessionUseCase = new UseCases.SetSessionUseCase(
   Domain.idFactory,
   jwtConfig.secret
 );
+
+export const upsertLocationUseCase = new UseCases.UpsertLocationUseCase(
+  Repositories.locationsRepo,
+  Repositories.establishmentsRepo,
+  Domain.locationFactory
+);

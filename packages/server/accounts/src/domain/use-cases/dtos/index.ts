@@ -6,3 +6,4 @@ export * from '@/domain/use-cases/dtos/create-establishment';
 export * from '@/domain/use-cases/dtos/create-artist';
 export * from '@/domain/use-cases/dtos/create-session';
 export * from '@/domain/use-cases/dtos/set-session';
+export * from '@/domain/use-cases/dtos/upsert-location';

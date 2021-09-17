@@ -12,3 +12,4 @@ export const userFactory = new Factories.UserFactory(idFactory, passwordFactory,
 export const artistFactory = new Factories.ArtistFactory(idFactory, documentFactory);
 export const restaurateurFactory = new Factories.RestaurateurFactory(idFactory, documentFactory);
 export const establishmentFactory = new Factories.EstablishmentFactory(idFactory, phoneFactory);
+export const locationFactory = new Factories.LocationFactory(idFactory);

@@ -2,10 +2,21 @@ import { right } from '@/utils';
 import { Establishment } from '@/domain/entities';
 import { Id, Phone } from '@/domain/entities/values';
 import { EstablishmentsRepo, FindUniqueEstablishment, SaveEstablishment } from '@/ports/database';
-import { makeId } from '@/domain/entities/values/fakes';
+import { makeId, makePhone } from '@/domain/entities/values/fakes';
 
 export class FakeRestaurateurEstablishmentsRepo implements EstablishmentsRepo {
   public async save(establishment: Establishment): Promise<SaveEstablishment> {
+    return Promise.resolve(right(establishment));
+  }
+
+  public async findById(id: Id): Promise<FindUniqueEstablishment> {
+    const establishment = Establishment.create({
+      id,
+      name: 'establishment name',
+      phone: makePhone({}).value as Phone,
+      restaurateurId: makeId({ value: 'restaurateur_id' }).value as Id
+    }).value as Establishment;
+
     return Promise.resolve(right(establishment));
   }
 

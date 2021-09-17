@@ -6,3 +6,4 @@ export * from '@/domain/factories/id';
 export * from '@/domain/factories/restaurateur';
 export * from '@/domain/factories/establishment';
 export * from '@/domain/factories/artist';
+export * from '@/domain/factories/location';
