@@ -6,8 +6,8 @@ import { UpsertLocationDTO } from '@/domain/use-cases/dtos';
 import { Location } from '@/domain/entities';
 import { left, right } from '@/utils';
 import { InfraError } from '@/ports/errors';
-import { PropsAreRequired } from '../entities/errors';
-import { EstablishmentNotFound, LocationAlreadyInUse, PostalCodeAlreadyInUse } from './errors';
+import { PropsAreRequired } from '@/domain/entities/errors';
+import { EstablishmentNotFound, LocationAlreadyInUse, PostalCodeAlreadyInUse } from '@/domain/use-cases/errors';
 
 const makeSut = () => {
   const locationsRepo = new FakeLocationsRepo();
