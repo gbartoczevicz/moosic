@@ -10,3 +10,4 @@ export const createEstablishmentController = new Controllers.CreateEstablishment
   UseCases.createEstablishmentUseCase
 );
 export const createArtistController = new Controllers.CreateArtistController(UseCases.createArtistUseCase);
+export const upsertLocationController = new Controllers.UpsertLocationController(UseCases.upsertLocationUseCase);
