@@ -51,7 +51,7 @@ model Location {
   establishmentId String @unique @map("establishment_id")
   address         String
   num             Int
-  postalCode      String @unique
+  postalCode      String @unique @map("postal_code")
   latitude        Float
   longitude       Float
 
