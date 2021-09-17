@@ -65,7 +65,7 @@ export class UpsertLocationUseCase {
       return left(latitudeAndLongitudeAlreadyInUseOrError.value);
     }
 
-    if (!latitudeAndLongitudeAlreadyInUseOrError.value) {
+    if (latitudeAndLongitudeAlreadyInUseOrError.value) {
       return left(new LocationAlreadyInUse());
     }
 
@@ -75,7 +75,7 @@ export class UpsertLocationUseCase {
       return left(postalCodeInUseOrError.value);
     }
 
-    if (!postalCodeInUseOrError.value) {
+    if (postalCodeInUseOrError.value) {
       return left(new PostalCodeAlreadyInUse());
     }
 
