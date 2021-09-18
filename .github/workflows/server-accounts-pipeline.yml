@@ -15,9 +15,6 @@ jobs:
       matrix:
         node-version: [14.x]
 
-    env:
-      PACKAGE_NAME: packages/server/accounts
-
     steps:
       - uses: actions/checkout@v2
       - name: Setup timezone
@@ -32,4 +29,21 @@ jobs:
           NODE_ENV: test
       - run: npm i -g npm
       - run: npm i
-      - run: npm run test:coverage --workspace=$PACKAGE_NAME
+      - run: npm run test:coverage --workspace=packages/server/accounts
+
+  deployment-step:
+    runs-on: ubuntu-latest
+    needs: test-routine
+
+    steps:
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "${{ env.GITHUB_REPOSITORY_SLUG }}-${{ env.GITHUB_REF_SLUG }}"
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          branch: ${{ github.ref }}
+          appdir: packages/server/accounts
