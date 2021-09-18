@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register -r dotenv/config --transpile-only --clear --ignore-watch node_modules src/server.ts",
     "migrate": "prisma migrate dev",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "build": "babel src --extensions '.ts' --out-dir dist",
+    "start": "node -r dotenv/config dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +21,16 @@
   },
   "homepage": "https://github.com/gabrielbartoczevicz/give-me-a-chorus#readme",
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.15.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/node": "^16.7.6",
     "@types/uuid": "^8.3.1",
+    "babel-plugin-module-resolver": "^4.1.0",
     "prisma": "^2.30.0",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.11.0"
