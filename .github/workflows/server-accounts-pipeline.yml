@@ -1,7 +1,9 @@
 name: Accounts Server CI Workflow
 
 on:
-  push:
+  pull_request:
+    branches:
+      - "main"
     paths:
       - "packages/server/accounts/**"
 
@@ -12,6 +14,9 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+
+    env:
+      PACKAGE_NAME: packages/server/accounts
 
     steps:
       - uses: actions/checkout@v2
@@ -25,6 +30,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
         env:
           NODE_ENV: test
-      - run: npm i && cd packages/server/accounts
-      - run: npm i && npm run test:coverage
-
+      - run: npm i -g npm
+      - run: npm i
+      - run: npm run test:coverage --workspace=$PACKAGE_NAME
