@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register -r dotenv/config --transpile-only --clear --ignore-watch node_modules src/server.ts",
     "migrate": "prisma migrate dev",
-    "test": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "build": "babel src --extensions '.ts' --out-dir dist",
     "start": "node -r dotenv/config dist/server.js"
   },
