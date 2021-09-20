@@ -45,5 +45,5 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "batata-1632181839939"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          branch: ${{ github.ref }}
+          branch: "main"
           appdir: packages/server/accounts
