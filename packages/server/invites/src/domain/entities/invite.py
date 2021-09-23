@@ -6,7 +6,7 @@ from .comment import Comment
 
 
 class Invite(BaseModel):
-  id: str
+  id: Optional[str]
   date: date
   establishment_id: str
   artist_id: str
