@@ -1,7 +1,8 @@
 import jwt
+from ...ports.providers import JwtProvider
 
 
-class JwtProvider:
+class JwtProviderImpl(JwtProvider):
   def __init__(self, secret: str) -> None:
     self._secret_ = secret
 

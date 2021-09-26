@@ -1,11 +1,11 @@
 from ..entities import Invite
-from ...app.infra.database.fakes import FakeInvitesRepo
+from ...ports.database import InvitesRepo
 
 
 class CreateInviteUseCase:
 
-  def __init__(self, invites_repo: FakeInvitesRepo) -> None:
-    self.__invites_repo: FakeInvitesRepo = invites_repo
+  def __init__(self, invites_repo: InvitesRepo) -> None:
+    self.__invites_repo: InvitesRepo = invites_repo
 
   def execute(self, invite: Invite) -> Invite:
     return self.__invites_repo.save(invite)

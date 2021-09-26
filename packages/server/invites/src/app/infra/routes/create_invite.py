@@ -2,7 +2,6 @@ from fastapi import APIRouter
 from fastapi.param_functions import Depends
 from pydantic.main import BaseModel
 from datetime import date
-
 from ....domain.controller import create_invite_controller
 from ..middlewares import ensure_authenticated
 
