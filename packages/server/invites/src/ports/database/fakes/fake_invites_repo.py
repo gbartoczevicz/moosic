@@ -1,9 +1,10 @@
 from typing import List
 
-from .....domain.entities import Invite
+from .. import InvitesRepo
+from ....domain.entities import Invite
 
 
-class FakeInvitesRepo:
+class FakeInvitesRepo(InvitesRepo):
 
   def __init__(self) -> None:
       self.__invites: List[Invite] = []
