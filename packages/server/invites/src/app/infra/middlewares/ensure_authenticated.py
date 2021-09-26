@@ -1,16 +1,16 @@
 from fastapi import HTTPException
-from fastapi.param_functions import Depends
-from fastapi.security.oauth2 import OAuth2PasswordBearer
-
+from ....ports.providers import JwtProvider
 from ....domain.entities import UserAuth
 
-from ....providers import jwtProvider
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+class EnsureIsAuthenticated:
 
-def ensure_authenticated(token: str = Depends(oauth2_scheme)) -> UserAuth:
-  try:
-    return UserAuth(**jwtProvider.verify(token))
-  except:
-    raise HTTPException(status_code=403)
+  def __init__(self, jwtProvider: JwtProvider) -> None:
+    self.__jwtProvider: JwtProvider = jwtProvider
+
+  def execute(self, token: str) -> UserAuth:
+    try:
+      return UserAuth(**self.__jwtProvider.verify(token))
+    except:
+      raise HTTPException(status_code=403)
 
