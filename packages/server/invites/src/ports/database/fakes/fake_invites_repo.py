@@ -1,5 +1,4 @@
 from typing import List
-
 from .. import InvitesRepo
 from ....domain.entities import Invite
 

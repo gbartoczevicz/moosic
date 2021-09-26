@@ -1,5 +1,4 @@
 import jwt
-
 from ...ports.providers import JwtProvider
 
 
