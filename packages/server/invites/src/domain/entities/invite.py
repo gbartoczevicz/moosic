@@ -1,8 +1,8 @@
 from datetime import date
 from typing import Optional
 from pydantic import BaseModel
-from .comment import Comment
-from.location import Location
+from .location import Location
+from .rating import Rating
 
 
 class Invite(BaseModel):
@@ -11,7 +11,4 @@ class Invite(BaseModel):
   establishment_id: str
   artist_id: str
   location: Location
-  artist_rating: Optional[int]
-  establishment_rating: Optional[int]
-  artist_comment: Optional[Comment]
-  establishment_commnet: Optional[Comment]
+  rating: Optional[Rating]
