@@ -2,6 +2,7 @@ from datetime import date
 from typing import Optional
 from pydantic import BaseModel
 from .comment import Comment
+from.location import Location
 
 
 class Invite(BaseModel):
@@ -9,11 +10,7 @@ class Invite(BaseModel):
   date: date
   establishment_id: str
   artist_id: str
-  latitude: float
-  longitude: float
-  postal_code: str
-  address: str
-  address_number: int
+  location: Location
   artist_rating: Optional[int]
   establishment_rating: Optional[int]
   artist_comment: Optional[Comment]
