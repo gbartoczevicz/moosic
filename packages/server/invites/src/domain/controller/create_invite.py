@@ -1,4 +1,5 @@
-from ..entities import Invite, Location
+from ..entities import Invite
+from ..entities.values import Location
 from ..usecases import CreateInviteUseCase
 
 

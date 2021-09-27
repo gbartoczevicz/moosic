@@ -1,8 +1,7 @@
 from datetime import date
 from typing import Optional
 from pydantic import BaseModel
-from .location import Location
-from .rating import Rating
+from .values import Location, Rating
 
 
 class Invite(BaseModel):
