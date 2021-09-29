@@ -1,12 +1,15 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { Title, Button, Container } from '@/lib';
 
-const SignIn: React.FC = () => (
-  <Container>
-    <Title>Bem-vindo</Title>
-    <Button>Entrar</Button>
-  </Container>
-);
+export const SignIn: React.FC = () => {
+  const navigation = useNavigation();
 
-export default SignIn;
+  return (
+    <Container>
+      <Title>Bem-vindo</Title>
+      <Button onPress={() => navigation.navigate('App')}>Entrar</Button>
+    </Container>
+  );
+};
