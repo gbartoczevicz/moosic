@@ -1,14 +1,19 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
 
-import { AppRouter } from '@/routes/app';
+import React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+
+import { AuthProvider } from '@/hooks/auth';
+import { Routes } from '@/routes';
 
 const App: React.FC = () => (
-  <>
-    <AppRouter />
+  <NavigationContainer>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
     <StatusBar style="auto" />
-  </>
+  </NavigationContainer>
 );
 
 export default App;
