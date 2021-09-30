@@ -14,6 +14,8 @@ export const SignIn: React.FC = () => {
 
   const handleSignIn = useCallback((data) => {
     console.log({ data });
+
+    navigation.navigate('App');
   }, []);
 
   return (
@@ -38,7 +40,7 @@ export const SignIn: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Button onPress={() => navigation.navigate('App')}>Entrar</Button>
+        <Button onPress={() => formRef.current?.submitForm()}>Entrar</Button>
       </Form>
     </Container>
   );
