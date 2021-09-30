@@ -1,4 +1,4 @@
-import React, { useEffect, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { TextInputProps } from 'react-native';
 import styled from 'styled-components/native';
 import { useField } from '@unform/core';
@@ -18,7 +18,7 @@ interface InputRef {
 }
 
 /** @todo */
-export const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ name, ...delegate }, ref) => {
+export const InputImpl: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ name, ...delegate }, ref) => {
   const inputElementRef = useRef<any>(null);
 
   const { registerField, defaultValue = '', fieldName } = useField(name);
@@ -50,3 +50,5 @@ export const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = ({ na
     />
   );
 };
+
+export const Input = forwardRef(InputImpl);
