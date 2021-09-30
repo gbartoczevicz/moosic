@@ -1,10 +1,11 @@
 import React, { useRef, useCallback } from 'react';
-import { TextInput } from 'react-native';
+import { Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
 
 import { Title, Button, Container, Input } from '@/lib';
+import { accountsClient } from '@/services/http-client';
 
 export const SignIn: React.FC = () => {
   const navigation = useNavigation();
@@ -12,11 +13,22 @@ export const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
-  const handleSignIn = useCallback((data) => {
-    console.log({ data });
+  const handleSignIn = useCallback(
+    async (data) => {
+      try {
+        console.log('Payload', data);
 
-    navigation.navigate('App');
-  }, []);
+        const result = await accountsClient.post('/sessions', data);
+
+        console.log('Sessions', result);
+      } catch (err) {
+        return Alert.alert('Erro de autenticação', JSON.stringify(err, Object.getOwnPropertyNames(err)));
+      }
+
+      return navigation.navigate('App');
+    },
+    [navigation]
+  );
 
   return (
     <Container>
