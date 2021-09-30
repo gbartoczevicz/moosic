@@ -4,10 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
 
+import { useAuth } from '@/hooks/auth';
 import { Title, Button, Container, Input } from '@/lib';
-import { accountsClient } from '@/services/http-client';
 
 export const SignIn: React.FC = () => {
+  const { signIn } = useAuth();
   const navigation = useNavigation();
 
   const formRef = useRef<FormHandles>(null);
@@ -16,11 +17,7 @@ export const SignIn: React.FC = () => {
   const handleSignIn = useCallback(
     async (data) => {
       try {
-        console.log('Payload', data);
-
-        const result = await accountsClient.post('/sessions', data);
-
-        console.log('Sessions', result);
+        await signIn(data);
       } catch (err) {
         return Alert.alert('Erro de autenticação', JSON.stringify(err, Object.getOwnPropertyNames(err)));
       }
