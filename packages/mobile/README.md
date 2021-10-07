@@ -6,3 +6,7 @@
 - Install the dependencies with `npm i`
 - Execute *Expo* application with `npm run start`
 - Follow *Expo CLI* instructions
+
+### Reminder
+
+- Clear all *Expo Go App* data to clean *Async Storage*
