@@ -6,11 +6,14 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { AuthProvider } from '@/hooks/auth';
 import { Routes } from '@/routes';
+import { CanSkipMainProvider } from '@/hooks/skip-main';
 
 const App: React.FC = () => (
   <NavigationContainer>
     <AuthProvider>
-      <Routes />
+      <CanSkipMainProvider>
+        <Routes />
+      </CanSkipMainProvider>
     </AuthProvider>
     <StatusBar style="auto" />
   </NavigationContainer>

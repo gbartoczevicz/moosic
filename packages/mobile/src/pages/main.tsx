@@ -3,6 +3,7 @@ import { Text, View, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 
+import { useCanSkipMain } from '@/hooks/skip-main';
 import { Container, Button } from '@/lib';
 
 const exampleItems = [
@@ -30,6 +31,7 @@ const exampleItems = [
 
 export const Main: React.FC = () => {
   const navigation = useNavigation();
+  const { updateCanSkipMain } = useCanSkipMain();
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [canSignUp, setCanSignUp] = useState(false);
@@ -56,6 +58,11 @@ export const Main: React.FC = () => {
     ),
     []
   );
+
+  const goToSignUp = (page: string) => {
+    navigation.navigate(page);
+    updateCanSkipMain(true);
+  };
 
   useEffect(() => {
     setCanSignUp(activeIndex === exampleItems.length - 1);
@@ -87,7 +94,7 @@ export const Main: React.FC = () => {
                 justifyContent: 'center',
                 backgroundColor: 'red'
               }}
-              onPress={() => navigation.navigate('SignUp')}
+              onPress={() => goToSignUp('SignUp')}
             >
               Cadastrar
             </Button>
@@ -100,7 +107,7 @@ export const Main: React.FC = () => {
                 justifyContent: 'center',
                 backgroundColor: 'green'
               }}
-              onPress={() => navigation.navigate('SignIn')}
+              onPress={() => goToSignUp('SignIn')}
             >
               Entrar
             </Button>
