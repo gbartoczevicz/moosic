@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import Carousel from 'react-native-snap-carousel';
 
 import { useCanSkipMain } from '@/hooks/skip-main';
-import { Container, Button } from '@/lib';
+import { Container } from '@/lib';
+import { Button } from '@/styles/main.styles';
 
 const exampleItems = [
   {
@@ -85,31 +86,11 @@ export const Main: React.FC = () => {
 
         {canSignUp && (
           <>
-            <Button
-              style={{
-                bottom: 50,
-                position: 'relative',
-                height: 100,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'red'
-              }}
-              onPress={() => goToSignUp('SignUp')}
-            >
-              Cadastrar
+            <Button color="red" onPress={() => goToSignUp('SignUp')}>
+              SignUp
             </Button>
-            <Button
-              style={{
-                bottom: 40,
-                position: 'relative',
-                height: 100,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'green'
-              }}
-              onPress={() => goToSignUp('SignIn')}
-            >
-              Entrar
+            <Button color="green" onPress={() => goToSignUp('SignIn')}>
+              SignIn
             </Button>
           </>
         )}
