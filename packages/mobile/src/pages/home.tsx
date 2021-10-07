@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { useAuth } from '@/hooks';
 import { Container, Title, Button } from '@/lib';
 import { RedTitle } from '@/styles/home.styles';
-import { useAuth } from '@/hooks/auth';
 
 const Home: React.FC = () => {
   const { user, signOut } = useAuth();
