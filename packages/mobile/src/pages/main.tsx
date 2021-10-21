@@ -1,31 +1,26 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 import { Container } from '@/lib';
 import { Button } from '@/styles/main.styles';
 
-const exampleItems = [
+const carouselItems = [
   {
-    title: 'Item 1',
-    text: 'Text 1'
+    title: 'Encontre Profissionais',
+    text: 'Moosic vai posibilitar encontrar com facilidade os melhores artistas e bandas da sua região.',
+    imgPath: <Image  source={require('../../assets/carouselImage1.png')} />
   },
   {
-    title: 'Item 2',
-    text: 'Text 2'
+    title: 'Agende com facilidade',
+    text: 'Moosic também vai tornar o processo de agendamento muito mais prático e eficiente.',
+    imgPath: <Image source={require('../../assets/carouselImage2.png')} />
   },
   {
-    title: 'Item 3',
-    text: 'Text 3'
-  },
-  {
-    title: 'Item 4',
-    text: 'Text 4'
-  },
-  {
-    title: 'Item 5',
-    text: 'Text 5'
+    title: 'Tenha presença na sua região',
+    text: 'Participe de uma rede de restaurantes e alavanque seu negocio.',
+    imgPath: <Image style= {{width: 200, height: 200}} source={require('../../assets/carouselImage3.png')} />
   }
 ];
 
@@ -41,17 +36,19 @@ export const Main: React.FC = () => {
     ({ item, index }) => (
       <View
         style={{
-          backgroundColor: 'floralwhite',
-          borderRadius: 5,
-          height: 250,
-          padding: 50,
-          marginLeft: 25,
-          marginRight: 25
+          padding: 25,
+          marginLeft: 5,
+          marginRight: 5,
+          alignItems: 'center'
         }}
       >
-        <Text style={{ fontSize: 30 }}>{item.title}</Text>
-        <Text>
-          {item.text} Index {index}
+        {item.imgPath}
+        <View>
+          <Text style={{ 'textAlign': 'center','fontSize': 20, 'fontWeight': "bold", 'width': 280, 'marginTop': 15, 'marginBottom': 15 }}>{item.title}</Text>
+        </View>
+        
+        <Text style={{ 'fontSize': 14, 'width': 300 }}>
+          {item.text}
         </Text>
       </View>
     ),
@@ -59,32 +56,59 @@ export const Main: React.FC = () => {
   );
 
   useEffect(() => {
-    setCanSignUp(activeIndex === exampleItems.length - 1);
-  }, [activeIndex, exampleItems]);
+    setCanSignUp(activeIndex === carouselItems.length - 1);
+  }, [activeIndex, carouselItems]);
 
   return (
     <Container>
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'purple', paddingTop: 100 }}>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+      <SafeAreaView style={{ 'flex': 1, 'paddingTop': 50 }}>
+        <View style={{ 'height': 400, 'justifyContent': 'center' }}>
           <Carousel
             layout="default"
             ref={ref}
-            data={exampleItems}
+            data={carouselItems}
             sliderWidth={300}
             itemWidth={300}
             renderItem={renderItem}
             onSnapToItem={(index) => setActiveIndex(index)}
           />
+
+          <View>
+            <Pagination
+                dotsLength={carouselItems.length}
+                activeDotIndex={activeIndex}
+                carouselRef={ref}
+                dotStyle={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: 4,
+                  marginHorizontal: 0,
+                  backgroundColor: 'rgba(0, 0, 0, 0.92)'
+                }}
+                inactiveDotOpacity={0.4}
+                inactiveDotScale={0.6}
+                tappableDots={true}
+                
+              />
+          </View>
         </View>
+        
 
         {canSignUp && (
           <>
-            <Button color="red" onPress={() => navigation.navigate('SignUp')}>
+          <View style={{ 'marginTop': 50, 'height': 50 }}>
+            <Button color="#2F2E41" onPress={() => navigation.navigate('SignUp')}>
               SignUp
             </Button>
-            <Button color="green" onPress={() => navigation.navigate('SignIn')}>
+          </View>
+          <View style={{ 'height': 50 }}>
+            <Button color="#FFFFFF" onPress={() => navigation.navigate('SignIn')}>
               SignIn
             </Button>
+          </View>
+
+            
+            
           </>
         )}
       </SafeAreaView>
