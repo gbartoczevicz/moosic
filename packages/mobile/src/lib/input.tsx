@@ -4,7 +4,12 @@ import styled from 'styled-components/native';
 import { useField } from '@unform/core';
 import { Title } from '.';
 
-const Container = styled.TextInput``;
+const Container = styled.TextInput`
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    width: 220px;
+    border: 1px solid #000;
+`;
 
 type InputProps = TextInputProps & {
   name: string;

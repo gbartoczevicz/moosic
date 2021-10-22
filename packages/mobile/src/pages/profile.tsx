@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from '@/lib/container';
+import { Container } from '@/lib/styles/container';
 import { BlueTitle } from '@/styles/profile.styles';
 
 const Profile: React.FC = () => (
