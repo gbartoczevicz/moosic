@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/drawer": "^6.1.4",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.2.2",
@@ -23,11 +24,12 @@
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-web": "~0.13.12",
-    "styled-components": "^5.3.1",
-    "@react-native-async-storage/async-storage": "~1.15.0"
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
+    "@types/react-native-snap-carousel": "^3.8.4",
     "@babel/core": "^7.9.0",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",

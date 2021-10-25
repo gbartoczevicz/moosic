@@ -4,11 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
 
-import { useAuth } from '@/hooks/auth';
+import { useAuth, useCanSkipMain } from '@/hooks';
 import { Title, Button, Container, Input } from '@/lib';
 
 export const SignIn: React.FC = () => {
   const { signIn } = useAuth();
+  const { updateCanSkipMain } = useCanSkipMain();
   const navigation = useNavigation();
 
   const formRef = useRef<FormHandles>(null);
@@ -18,11 +19,13 @@ export const SignIn: React.FC = () => {
     async (data) => {
       try {
         await signIn(data);
+        await updateCanSkipMain(true);
       } catch (err) {
-        return Alert.alert('Erro de autenticação', JSON.stringify(err, Object.getOwnPropertyNames(err)));
+        Alert.alert('Erro de autenticação', JSON.stringify(err, Object.getOwnPropertyNames(err)));
+        return;
       }
 
-      return navigation.navigate('App');
+      navigation.navigate('App');
     },
     [navigation]
   );
