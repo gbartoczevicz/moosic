@@ -10,7 +10,7 @@ const carouselItems = [
   {
     title: 'Encontre Profissionais',
     text: 'Moosic vai posibilitar encontrar com facilidade os melhores artistas e bandas da sua região.',
-    imgPath: <Image  source={require('../../assets/carouselImage1.png')} />
+    imgPath: <Image source={require('../../assets/carouselImage1.png')} />
   },
   {
     title: 'Agende com facilidade',
@@ -20,7 +20,7 @@ const carouselItems = [
   {
     title: 'Tenha presença na sua região',
     text: 'Participe de uma rede de restaurantes e alavanque seu negocio.',
-    imgPath: <Image style= {{width: 200, height: 200}} source={require('../../assets/carouselImage3.png')} />
+    imgPath: <Image style={{ width: 200, height: 200 }} source={require('../../assets/carouselImage3.png')} />
   }
 ];
 
@@ -44,12 +44,21 @@ export const Main: React.FC = () => {
       >
         {item.imgPath}
         <View>
-          <Text style={{ 'textAlign': 'center','fontSize': 20, 'fontWeight': "bold", 'width': 280, 'marginTop': 15, 'marginBottom': 15 }}>{item.title}</Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: 'bold',
+              width: 280,
+              marginTop: 15,
+              marginBottom: 15
+            }}
+          >
+            {item.title}
+          </Text>
         </View>
-        
-        <Text style={{ 'fontSize': 14, 'width': 300 }}>
-          {item.text}
-        </Text>
+
+        <Text style={{ fontSize: 14, width: 300 }}>{item.text}</Text>
       </View>
     ),
     []
@@ -61,8 +70,8 @@ export const Main: React.FC = () => {
 
   return (
     <Container>
-      <SafeAreaView style={{ 'flex': 1, 'paddingTop': 50 }}>
-        <View style={{ 'height': 400, 'justifyContent': 'center' }}>
+      <SafeAreaView style={{ flex: 1, paddingTop: 50 }}>
+        <View style={{ height: 400, justifyContent: 'center' }}>
           <Carousel
             layout="default"
             ref={ref}
@@ -75,40 +84,33 @@ export const Main: React.FC = () => {
 
           <View>
             <Pagination
-                dotsLength={carouselItems.length}
-                activeDotIndex={activeIndex}
-                carouselRef={ref}
-                dotStyle={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: 4,
-                  marginHorizontal: 0,
-                  backgroundColor: 'rgba(0, 0, 0, 0.92)'
-                }}
-                inactiveDotOpacity={0.4}
-                inactiveDotScale={0.6}
-                tappableDots={true}
-                
-              />
+              dotsLength={carouselItems.length}
+              activeDotIndex={activeIndex}
+              carouselRef={ref}
+              dotStyle={{
+                width: 6,
+                height: 6,
+                borderRadius: 4,
+                marginHorizontal: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.92)'
+              }}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={0.6}
+              tappableDots={true}
+            />
           </View>
         </View>
-        
 
         {canSignUp && (
           <>
-          <View style={{ 'marginTop': 50, 'height': 50 }}>
-            <Button color="#2F2E41" onPress={() => navigation.navigate('SignUp')}>
-              SignUp
-            </Button>
-          </View>
-          <View style={{ 'height': 50 }}>
-            <Button color="#FFFFFF" onPress={() => navigation.navigate('SignIn')}>
-              SignIn
-            </Button>
-          </View>
-
-            
-            
+            <View style={{ marginTop: 50, height: 50 }}>
+              <Button variant="dark" onPress={() => navigation.navigate('SignUp')}>
+                SignUp
+              </Button>
+            </View>
+            <View style={{ height: 50 }}>
+              <Button onPress={() => navigation.navigate('SignIn')}>SignIn</Button>
+            </View>
           </>
         )}
       </SafeAreaView>
