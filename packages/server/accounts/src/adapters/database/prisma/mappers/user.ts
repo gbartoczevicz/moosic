@@ -20,7 +20,8 @@ export class UserMapper {
       },
       phone: {
         value: persistence.phone
-      }
+      },
+      avatar: persistence.avatar ?? undefined
     });
 
     if (domain.isLeft()) {
@@ -36,7 +37,8 @@ export class UserMapper {
       name: domain.name,
       email: domain.email.value,
       password: domain.password.value,
-      phone: domain.phone.value
+      phone: domain.phone.value,
+      avatar: domain.avatar ?? null
     };
 
     return persistence;
