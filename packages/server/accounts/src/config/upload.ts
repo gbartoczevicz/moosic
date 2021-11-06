@@ -11,14 +11,12 @@ export enum StorageDriver {
 
 const rawStorageDriver = assertAndReturn(process.env.STORAGE_DRIVER);
 
-const nullishDriver = getEnumByValue(StorageDriver, rawStorageDriver);
-
-if (!nullishDriver) throw new Error('Driver is null');
+const storageDriver = assertAndReturn(getEnumByValue(StorageDriver, rawStorageDriver));
 
 const uploadConfig = {
   temporaryDir,
   uploadsDir: resolve(temporaryDir, 'uploads'),
-  storageDriver: nullishDriver
+  storageDriver
 };
 
 export default uploadConfig;
