@@ -1,5 +1,5 @@
-import { assertAndReturn, getEnumByValue } from '@/utils';
 import { resolve } from 'path';
+import { assertAndReturn, getEnumByValue } from '@/utils';
 
 const temporaryDir = resolve(__dirname, '..', '..', 'temp');
 
@@ -16,7 +16,15 @@ const storageDriver = assertAndReturn(getEnumByValue(StorageDriver, rawStorageDr
 const uploadConfig = {
   temporaryDir,
   uploadsDir: resolve(temporaryDir, 'uploads'),
-  storageDriver
+  storageDriver,
+  drivers: {
+    [StorageDriver.disk]: {},
+    [StorageDriver.s3]: {
+      accessKeyId: assertAndReturn(process.env.AWS_ACCESS_KEY_ID),
+      secretAccessKey: assertAndReturn(process.env.AWS_SECRET_ACCESS_KEY_ID),
+      region: assertAndReturn(process.env.AWS_DEFAULT_REGION)
+    }
+  }
 };
 
 export default uploadConfig;
