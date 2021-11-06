@@ -11,11 +11,12 @@ generator client {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String
   password String
-  email    String @unique
-  phone    String @unique
+  email    String  @unique
+  phone    String  @unique
+  avatar   String?
 
   Restaurateur Restaurateur?
   Artist       Artist?
