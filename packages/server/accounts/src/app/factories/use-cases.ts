@@ -49,3 +49,10 @@ export const upsertLocationUseCase = new UseCases.UpsertLocationUseCase(
   Repositories.establishmentsRepo,
   Domain.locationFactory
 );
+
+export const upsertAvatarUseCase = new UseCases.UpsertAvatarUseCase(
+  Providers.storageProvider,
+  Repositories.usersRepo,
+  Domain.userFactory,
+  Domain.idFactory
+);

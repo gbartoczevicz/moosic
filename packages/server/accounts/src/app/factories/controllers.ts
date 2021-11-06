@@ -11,3 +11,4 @@ export const createEstablishmentController = new Controllers.CreateEstablishment
 );
 export const createArtistController = new Controllers.CreateArtistController(UseCases.createArtistUseCase);
 export const upsertLocationController = new Controllers.UpsertLocationController(UseCases.upsertLocationUseCase);
+export const upsertAvatarController = new Controllers.UpsertAvatarController(UseCases.upsertAvatarUseCase);
