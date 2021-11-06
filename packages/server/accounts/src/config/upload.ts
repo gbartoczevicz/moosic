@@ -20,6 +20,7 @@ const uploadConfig = {
   drivers: {
     [StorageDriver.disk]: {},
     [StorageDriver.s3]: {
+      bucket: assertAndReturn(process.env.BUCKET),
       accessKeyId: assertAndReturn(process.env.AWS_ACCESS_KEY_ID),
       secretAccessKey: assertAndReturn(process.env.AWS_SECRET_ACCESS_KEY_ID),
       region: assertAndReturn(process.env.AWS_DEFAULT_REGION)
