@@ -1,4 +1,6 @@
+import crypto from 'crypto';
 import { resolve } from 'path';
+import multer from 'multer';
 import { assertAndReturn, getEnumByValue } from '@/utils';
 
 const temporaryDir = resolve(__dirname, '..', '..', 'temp');
@@ -25,6 +27,18 @@ const uploadConfig = {
       secretAccessKey: assertAndReturn(process.env.AWS_SECRET_ACCESS_KEY_ID),
       region: assertAndReturn(process.env.AWS_DEFAULT_REGION)
     }
+  },
+  multer: {
+    storage: multer.diskStorage({
+      destination: temporaryDir,
+      filename: (_req, file, cb) => {
+        const hash = crypto.randomBytes(10).toString('hex');
+
+        const fileName = `${hash}-${file.originalname}`;
+
+        return cb(null, fileName);
+      }
+    })
   }
 };
 
