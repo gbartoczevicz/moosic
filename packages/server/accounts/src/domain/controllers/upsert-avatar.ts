@@ -13,7 +13,7 @@ export class UpsertAvatarController implements Controller {
 
   public async handle(request: HttpRequest): Promise<HttpResponse> {
     const avatarOrError = await this.usertAvatarUseCase.execute({
-      filename: request.body.filename,
+      filename: request.file.filename,
       userId: request.applicationData.userId
     } as UpsertAvatarDTO);
 

@@ -18,7 +18,7 @@ function makeSut() {
 function makeFixture() {
   return {
     applicationData: { userId: 'any_id' },
-    body: { filename: 'file.png' }
+    file: { filename: 'file.png' }
   };
 }
 
@@ -38,7 +38,7 @@ describe('UpsertAvatarController', () => {
     const { sut, usecase } = makeSut();
 
     const fixture = makeFixture();
-    const user = makeUser(fixture.applicationData.userId, fixture.body.filename);
+    const user = makeUser(fixture.applicationData.userId, fixture.file.filename);
 
     jest.spyOn(usecase, 'execute').mockImplementation(() => Promise.resolve(right(user)));
 
