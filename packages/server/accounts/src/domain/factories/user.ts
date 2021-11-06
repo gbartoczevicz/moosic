@@ -19,6 +19,7 @@ export type MakeUserProps = {
   email: string;
   password: MakePasswordProps;
   phone: MakePhoneProps;
+  avatar?: string;
 };
 
 type UserEither = Either<PropsAreRequired | InvalidEmail | MinimumLength | FieldIsRequired | InvalidPhonePattern, User>;
@@ -41,7 +42,7 @@ export class UserFactory {
       return left(new PropsAreRequired());
     }
 
-    const { id, name, email, password, phone } = props;
+    const { id, name, email, password, phone, avatar } = props;
 
     const idOrError = this.idFactory.make(id);
 
@@ -74,7 +75,8 @@ export class UserFactory {
       name,
       email: emailOrError.value,
       password: passwordOrError.value,
-      phone: phoneOrError.value
+      phone: phoneOrError.value,
+      avatar
     });
 
     return userOrError;
