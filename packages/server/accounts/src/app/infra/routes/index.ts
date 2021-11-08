@@ -5,6 +5,7 @@ import { sessionsRoutes } from '@/app/infra/routes/sessions.routes';
 import { restaurateursRoutes } from '@/app/infra/routes/restaurateurs.routes';
 import { establishmentsRoutes } from '@/app/infra/routes/establishments.routes';
 import { artistsRoutes } from '@/app/infra/routes/artists.routes';
+import { avatarRoutes } from '@/app/infra/routes/avatar.routes';
 import { ensureAuthenticated, restaurateurAuthenticated } from '@/app/infra/middlewares';
 
 const routes = Router();
@@ -17,5 +18,6 @@ routes.use(ensureAuthenticated());
 routes.use('/restaurateurs', restaurateursRoutes);
 routes.use('/establishments', restaurateurAuthenticated(), establishmentsRoutes);
 routes.use('/artists', artistsRoutes);
+routes.use('/avatar', avatarRoutes);
 
 export { routes };

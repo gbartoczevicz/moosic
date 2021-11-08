@@ -9,6 +9,7 @@ type UserProps = {
   email: Email;
   password: Password;
   phone: Phone;
+  avatar?: string;
 };
 
 export class User {
@@ -22,12 +23,15 @@ export class User {
 
   public readonly phone: Phone;
 
-  private constructor(id: Id, name: string, email: Email, password: Password, phone: Phone) {
+  public readonly avatar?: string;
+
+  private constructor(id: Id, name: string, email: Email, password: Password, phone: Phone, avatar?: string) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.password = password;
     this.phone = phone;
+    this.avatar = avatar;
   }
 
   public static create(props: UserProps): Either<FieldIsRequired | PropsAreRequired, User> {
@@ -35,7 +39,7 @@ export class User {
       return left(new PropsAreRequired());
     }
 
-    const { id, name, email, password, phone } = props;
+    const { id, name, email, password, phone, avatar } = props;
 
     if (!id) {
       return left(new FieldIsRequired('id'));
@@ -57,7 +61,7 @@ export class User {
       return left(new FieldIsRequired('phone'));
     }
 
-    const user = new User(id, name, email, password, phone);
+    const user = new User(id, name, email, password, phone, avatar);
 
     return right(user);
   }
@@ -67,7 +71,8 @@ export class User {
       id: this.id.value,
       name: this.name,
       email: this.email.value,
-      phone: this.phone.value
+      phone: this.phone.value,
+      avatar: this.avatar
     };
   }
 }

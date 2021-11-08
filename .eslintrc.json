@@ -35,7 +35,14 @@
   },
   "overrides": [
     {
-      "files": ["**/ports/*.ts", "**/fakes/*.ts", "**/ports/**/*.ts", "express.d.ts", "**/hooks/*.tsx"],
+      "files": [
+        "**/ports/*.ts",
+        "**/fakes/*.ts",
+        "**/ports/**/*.ts",
+        "express.d.ts",
+        "**/hooks/*.tsx",
+        "**/config/*.ts"
+      ],
       "rules": {
         "no-unused-vars": "off"
       }

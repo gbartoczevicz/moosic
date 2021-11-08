@@ -4,3 +4,4 @@ export * from '@/domain/controllers/create-establishment';
 export * from '@/domain/controllers/create-artist';
 export * from '@/domain/controllers/create-session';
 export * from '@/domain/controllers/upsert-location';
+export * from '@/domain/controllers/upsert-avatar';
