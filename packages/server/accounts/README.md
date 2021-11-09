@@ -12,3 +12,7 @@
 - Run all the existing migrations with *Prisma* executing `npm run migrate`
 - Run all *Jest* tests with `npm run test:coverage`
 - Run the project with *tsnd* executing `npm run dev`
+
+### Requests
+
+Follow the files located at [.github/examples](../../../.github/examples) to send request to API via [Insomnia](https://insomnia.rest/download), importing the YAML files into the HTTP client.
