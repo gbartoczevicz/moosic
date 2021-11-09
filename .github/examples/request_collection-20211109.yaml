@@ -1,0 +1,389 @@
+_type: export
+__export_format: 4
+__export_date: 2021-11-09T23:49:24.358Z
+__export_source: insomnia.desktop.app:v2021.5.2
+resources:
+  - _id: req_640426f523184979a35b22b8d04da5ad
+    parentId: fld_7a2733285f6242948d94c65160c2a45e
+    modified: 1636416286187
+    created: 1630857044913
+    url: "{{ _.base_url }}/users"
+    name: create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "User 04",
+        	"email": "user+04@email.com",
+        	"password": "secret_123",
+        	"phone": "43 0000 0004"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_123efbadf6814cd8a83b79c0fb7c6953
+    authentication: {}
+    metaSortKey: -1630857044913
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_7a2733285f6242948d94c65160c2a45e
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1636501653005
+    created: 1630857034496
+    name: Users
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630857028804
+    _type: request_group
+  - _id: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    parentId: null
+    modified: 1630856993715
+    created: 1630856993715
+    name: Moosic
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_4521e0ae656d4fbcb46204fa0482682b
+    parentId: fld_7a2733285f6242948d94c65160c2a45e
+    modified: 1636411961307
+    created: 1636223455600
+    url: "{{ _.base_url }}/avatar"
+    name: avatar
+    description: ""
+    method: PATCH
+    body:
+      mimeType: multipart/form-data
+      params:
+        - name: avatar
+          value: ""
+          id: pair_5262720381c64795a3425d71dd23ec55
+          type: file
+          fileName: /home/traumerei/Downloads/bnuy.jpg
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+        id: pair_123efbadf6814cd8a83b79c0fb7c6953
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    metaSortKey: -1630857044863
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_537aed4fb2f748c2b47f9c225b3e8a0b
+    parentId: fld_134095e5ea3c491cb970ff81803a975a
+    modified: 1636416297237
+    created: 1631136074409
+    url: "{{ _.base_url }}/sessions"
+    name: create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "user+04@email.com",
+        	"password": "secret_123"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_123efbadf6814cd8a83b79c0fb7c6953
+    authentication: {}
+    metaSortKey: -1630857044913
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_134095e5ea3c491cb970ff81803a975a
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1636501656232
+    created: 1631136074399
+    name: Sessions
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630857028779
+    _type: request_group
+  - _id: req_85fa93807fdf4c0da47eb0f6790de797
+    parentId: fld_d4cc54ae8a574632a916fdf9258d448f
+    modified: 1631371730835
+    created: 1630857072500
+    url: "{{ _.base_url }}/restaurateurs"
+    name: create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"document": "07928184000101"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_123efbadf6814cd8a83b79c0fb7c6953
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    metaSortKey: -1630857044913
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_d4cc54ae8a574632a916fdf9258d448f
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1636501660938
+    created: 1630857072499
+    name: Restaurateurs
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630857028766.5
+    _type: request_group
+  - _id: req_3af93d5c64bb4981bdd138f4e535baf9
+    parentId: fld_ffcf2412a51041b3bd3d84b856cfb8a1
+    modified: 1636501569933
+    created: 1631027342684
+    url: "{{ _.base_url }}/artists"
+    name: create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"document": "000.000.000-00"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_123efbadf6814cd8a83b79c0fb7c6953
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    metaSortKey: -1630857044913
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_ffcf2412a51041b3bd3d84b856cfb8a1
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1636501662368
+    created: 1631027342672
+    name: Artists
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630857028760.25
+    _type: request_group
+  - _id: req_38afb0248d374457a660ee21745bc21b
+    parentId: fld_5001167672424de6aa6712621d462f93
+    modified: 1633043159727
+    created: 1630964545609
+    url: "{{ _.base_url }}/establishments"
+    name: create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Estabelecimento",
+        	"phone": "43 0000 0002"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_123efbadf6814cd8a83b79c0fb7c6953
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    metaSortKey: -1630857044913
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_5001167672424de6aa6712621d462f93
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1636501663657
+    created: 1630964545596
+    name: Establishments
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630857028757.125
+    _type: request_group
+  - _id: req_3e21cec4f2f24508a916e01e7ad076c6
+    parentId: fld_0412422e07914b1980260892c1715e0b
+    modified: 1632267706084
+    created: 1631920147029
+    url: "{{ _.base_url }}/establishments/location"
+    name: create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"establishmentId": "2c277a3f-66b1-4936-a8bb-fcabe5d716e7",
+        	"address": "User 01",
+        	"num": 2,
+        	"postalCode": "any_",
+        	"latitude": 1,
+        	"longitude": 2
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_123efbadf6814cd8a83b79c0fb7c6953
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    metaSortKey: -1630857044913
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_0412422e07914b1980260892c1715e0b
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1636501665200
+    created: 1631920147022
+    name: Locations
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630857028755.5625
+    _type: request_group
+  - _id: req_d6340e30dd2b486bbbc9c9f27224a819
+    parentId: fld_24210ca17cb740e8ba0499a3da1ce2bb
+    modified: 1636501690409
+    created: 1636224905174
+    url: "{{ _.base_url }}/files/c0d07ea5a2e650a86956-bnuy.jpg"
+    name: show single
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    metaSortKey: -1630857028704
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_24210ca17cb740e8ba0499a3da1ce2bb
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1636501717134
+    created: 1636501683778
+    name: Files
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630857028705.5625
+    _type: request_group
+  - _id: env_139f0ebc97ff643929082c71c2f87165f5a1a16a
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1630856993735
+    created: 1630856993735
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1630856993735
+    _type: environment
+  - _id: jar_139f0ebc97ff643929082c71c2f87165f5a1a16a
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1630856993737
+    created: 1630856993737
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_9cffb401eba34368ab3e82531e40d377
+    parentId: wrk_557f706b6bb64119b1f8a36823e6b8ff
+    modified: 1630856993723
+    created: 1630856993723
+    fileName: Moosic
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_7971be04ddb545498e645bbb41e33bae
+    parentId: env_139f0ebc97ff643929082c71c2f87165f5a1a16a
+    modified: 1636411669600
+    created: 1630857000200
+    name: dev
+    data:
+      base_url: http://localhost:3333
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YzA1YmE2MS0wMGU4LTRjZmMtOGRhMy1iNjkyOTA0ZWRkMDUiLCJpYXQiOjE2MzY0MTE2NjIsImV4cCI6MTYzNjQxNzY2Mn0.gI873mdVSiA_HVabQbqD_5ZY7PLKE3lupVOM1mN4DuQ
+    dataPropertyOrder:
+      "&":
+        - base_url
+        - token
+    color: null
+    isPrivate: false
+    metaSortKey: 1630857000200
+    _type: environment
+  - _id: env_35ccbfa5e9e848f7853bf9134fc06376
+    parentId: env_139f0ebc97ff643929082c71c2f87165f5a1a16a
+    modified: 1636416307801
+    created: 1632184379522
+    name: prod
+    data:
+      base_url: https://gbartoczevicz-moosic-12-merge.herokuapp.com
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlM2VkYmUwMC02NTVhLTQ4ODgtOWU3Mi1kNTc1NzQxM2E1ZTAiLCJpYXQiOjE2MzY0MTYyOTgsImV4cCI6MTYzNjQxODA5OH0.fdpyEo5m-65xMKlfqj_vhYKDYDOe-sB91m_HxbS5x4g
+    dataPropertyOrder:
+      "&":
+        - base_url
+        - token
+    color: null
+    isPrivate: false
+    metaSortKey: 1630857000250
+    _type: environment
