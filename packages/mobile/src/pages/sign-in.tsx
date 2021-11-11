@@ -33,27 +33,28 @@ export const SignIn: React.FC = () => {
 
   return (
     <>
-  <View style={{ backgroundColor: "#7CA1B4", flex: 1, alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-        <View style={{ display: 'flex', flexDirection: 'row', width: '100%' , flexWrap: 'wrap' }}>
-          <View style={{ backgroundColor: 'green', width: '50%' }} >
-            <Title>Bem</Title>
-            <Title>Vindo</Title>
+  <View style={{ flex: 1, alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+        <View style={{ display: 'flex', flexDirection: 'row', width: '100%' , flexWrap: 'wrap', alignItems: "center", justifyContent: "center"  }}>
+          <View style={{ width: '50%' }} >
+            <Title style={{ fontSize: 45 }}>Bem</Title>
+            <Title style={{ fontSize: 45 }}>Vindo</Title>
           </View>
 
           <View style={{ width: '50%', alignItems: "center", justifyContent: "center" }} >
             <Image source={require('../../assets/logoSignin.png')} />
           </View>
 
-          <View style={{ backgroundColor: 'yellow', width: '100%' }} >
-            <Form onSubmit={handleSignIn} ref={formRef}>
+          <View style={{ width: '80%', height: 300 }} >
+            <Form onSubmit={handleSignIn} ref={formRef} style={{ height: 300 }} >
               <Input
                 name="email"
-                placeholder="E-email"
+                placeholder="E-mail"
                 autoCorrect={false}
                 autoCapitalize="none"
                 keyboardType="email-address"
                 returnKeyType="next"
                 onSubmitEditing={() => passwordInputRef.current?.focus()}
+                style={{ width: '100%', height: 45, borderRadius: 15, borderWidth: 1, padding: 10, marginTop: 40 }}
               />
               <Input
                 name="password"
@@ -62,8 +63,9 @@ export const SignIn: React.FC = () => {
                 secureTextEntry
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
+                style={{ width: '100%', height: 45, marginTop: 40, borderColor: 'black', borderRadius: 15, borderWidth: 1, padding: 10 }}
               />
-            <Button onPress={() => formRef.current?.submitForm()}>Entrar</Button>
+              <Button onPress={() => formRef.current?.submitForm()}>Entrar</Button>
             </Form>
           </View>
         </View>

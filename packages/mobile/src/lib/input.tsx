@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react
 import { TextInputProps } from 'react-native';
 import styled from 'styled-components/native';
 import { useField } from '@unform/core';
+import { Title } from '.';
 
 const Container = styled.TextInput``;
 
@@ -40,14 +41,17 @@ export const InputImpl: React.ForwardRefRenderFunction<InputRef, InputProps> = (
   }, [registerField, fieldName]);
 
   return (
-    <Container
-      {...delegate}
-      ref={inputElementRef}
-      defaultValue={defaultValue}
-      onChangeText={(value) => {
-        inputValueRef.current.value = value;
-      }}
-    />
+    <>
+      <Container
+        {...delegate}
+        ref={inputElementRef}
+        defaultValue={defaultValue}
+        onChangeText={(value) => {
+          inputValueRef.current.value = value;
+        }}
+        
+      />
+    </>
   );
 };
 
