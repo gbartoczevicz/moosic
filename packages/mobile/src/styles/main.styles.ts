@@ -13,7 +13,7 @@ export const Button = styled(Lib.Button)`
   margin-top: 40px;
   border-width: 1px;
   border-radius: 15px;
-  border-color: #2F2E41;
   border-style: solid;
   color: white;
+  border-color: #2f2e41;
 `;
