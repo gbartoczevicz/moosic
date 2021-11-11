@@ -6,8 +6,25 @@ import { StyleProp, ViewStyle } from 'react-native';
 const light = '#fff';
 const dark = '#2f2e41';
 
-const Container = styled(RectButton)``;
+const Container = styled.View`
+  border-color: ${dark};
+  border-radius: 8px;
+`;
+
+const Pressable = styled(RectButton)`
+  flex: 1;
+  align-items: center;
+  border-radius: 8px;
+  justify-content: center;
+`;
+
 const Label = styled.Text``;
+
+const containerStyle: StyleProp<ViewStyle> = {
+  borderWidth: 1,
+  borderColor: dark,
+  borderRadius: 8
+};
 
 type Variant = 'dark' | 'light';
 type ButtonProps = RectButtonProps & { children: string; variant?: Variant };
@@ -19,17 +36,21 @@ export const Button: React.FC<ButtonProps> = (props) => {
   const labelFontColor = variant === 'dark' ? light : dark;
 
   const styleGuard = delegate.style ?? {};
-  const containerStyle = (styleGuard as StyleProp<ViewStyle> as Array<unknown>)[0] as object;
+  const pressableStyle = (styleGuard as StyleProp<ViewStyle> as Array<unknown>)[0] as object;
+
+  const borderStyling = variant === 'light' ? containerStyle : {};
 
   return (
-    <Container
-      {...delegate}
-      style={{
-        ...containerStyle,
-        backgroundColor: containerBackgroundColor
-      }}
-    >
-      <Label style={{ color: labelFontColor }}>{children}</Label>
+    <Container style={borderStyling}>
+      <Pressable
+        {...delegate}
+        style={{
+          ...pressableStyle,
+          backgroundColor: containerBackgroundColor
+        }}
+      >
+        <Label style={{ color: labelFontColor }}>{children}</Label>
+      </Pressable>
     </Container>
   );
 };
