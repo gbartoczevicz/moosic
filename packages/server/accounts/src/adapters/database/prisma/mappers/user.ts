@@ -21,7 +21,7 @@ export class UserMapper {
       phone: {
         value: persistence.phone
       },
-      avatar: persistence.avatar ?? undefined
+      avatar: { value: persistence.avatar ?? undefined }
     });
 
     if (domain.isLeft()) {

@@ -20,7 +20,7 @@ export type MakeUserProps = {
   email: string;
   password: MakePasswordProps;
   phone: MakePhoneProps;
-  avatar?: string;
+  avatar?: { value?: string; isGoingToPersist?: boolean };
 };
 
 type UserEither = Either<PropsAreRequired | InvalidEmail | MinimumLength | FieldIsRequired | InvalidPhonePattern, User>;
@@ -77,13 +77,17 @@ export class UserFactory {
       email: emailOrError.value,
       password: passwordOrError.value,
       phone: phoneOrError.value,
-      avatar: avatar ? `${this.getUrl()}/${avatar}` : undefined
+      avatar: this.getUrl(avatar?.value, avatar?.isGoingToPersist)
     });
 
     return userOrError;
   }
 
-  private getUrl(): string {
+  private getUrl(avatar?: string, isGoingToPersist?: boolean): string | undefined {
+    if (!avatar) return;
+    if (avatar.startsWith('http')) return avatar;
+    if (isGoingToPersist) return avatar;
+
     let url: string;
 
     switch (uploadConfig.storageDriver) {
@@ -98,6 +102,6 @@ export class UserFactory {
         throw new Error(`Driver ${uploadConfig.storageDriver} is invalid`);
     }
 
-    return url;
+    return `${url}/${avatar}`;
   }
 }
