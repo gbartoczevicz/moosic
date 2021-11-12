@@ -12,6 +12,7 @@ import {
 } from '@/domain/factories';
 import { FieldIsRequired, InvalidEmail, MinimumLength, PropsAreRequired } from '@/domain/entities/errors';
 import { InvalidPhonePattern } from '@/domain/factories/errors';
+import uploadConfig, { StorageDriver } from '@/config/upload';
 
 export type MakeUserProps = {
   id: MakeIdProps;
@@ -19,7 +20,7 @@ export type MakeUserProps = {
   email: string;
   password: MakePasswordProps;
   phone: MakePhoneProps;
-  avatar?: string;
+  avatar?: { value?: string; isGoingToPersist?: boolean };
 };
 
 type UserEither = Either<PropsAreRequired | InvalidEmail | MinimumLength | FieldIsRequired | InvalidPhonePattern, User>;
@@ -76,9 +77,31 @@ export class UserFactory {
       email: emailOrError.value,
       password: passwordOrError.value,
       phone: phoneOrError.value,
-      avatar
+      avatar: this.getUrl(avatar?.value, avatar?.isGoingToPersist)
     });
 
     return userOrError;
+  }
+
+  private getUrl(avatar?: string, isGoingToPersist?: boolean): string | undefined {
+    if (!avatar) return;
+    if (avatar.startsWith('http')) return avatar;
+    if (isGoingToPersist) return avatar;
+
+    let url: string;
+
+    switch (uploadConfig.storageDriver) {
+      case StorageDriver.disk:
+        url = `http://localhost:${uploadConfig.drivers[StorageDriver.disk].port}/files`;
+        break;
+      case StorageDriver.s3:
+        const { /* region // workaround, */ bucket } = uploadConfig.drivers[StorageDriver.s3];
+        url = `https://S3.us-west-1.amazonaws.com/${bucket}`;
+        break;
+      default:
+        throw new Error(`Driver ${uploadConfig.storageDriver} is invalid`);
+    }
+
+    return `${url}/${avatar}`;
   }
 }

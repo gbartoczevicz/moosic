@@ -48,6 +48,7 @@ export class UpsertAvatarUseCase {
 
     const user = userFoundOrError.value;
 
+    /** @todo fix url later */
     if (user.avatar) {
       await this.storageProvider.delete(user.avatar);
     }
@@ -60,7 +61,7 @@ export class UpsertAvatarUseCase {
       name: user.name,
       password: { value: user.password.value, toEncode: false },
       phone: { value: user.phone.value },
-      avatar
+      avatar: { value: avatar, isGoingToPersist: true }
     });
 
     if (userToSaveOrError.isLeft()) return left(userToSaveOrError.value);

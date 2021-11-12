@@ -11,6 +11,7 @@ export enum StorageDriver {
   s3 = 'S3'
 }
 
+const port = process.env.PORT || 3333;
 const rawStorageDriver = assertAndReturn(process.env.STORAGE_DRIVER);
 
 const storageDriver = assertAndReturn(getEnumByValue(StorageDriver, rawStorageDriver));
@@ -18,9 +19,11 @@ const storageDriver = assertAndReturn(getEnumByValue(StorageDriver, rawStorageDr
 const uploadConfig = {
   temporaryDir,
   uploadsDir: resolve(temporaryDir, 'uploads'),
-  storageDriver,
+  storageDriver: storageDriver as unknown as StorageDriver,
   drivers: {
-    [StorageDriver.disk]: {},
+    [StorageDriver.disk]: {
+      port
+    },
     [StorageDriver.s3]: {
       bucket: assertAndReturn(process.env.BUCKET),
       accessKeyId: assertAndReturn(process.env.AWS_ACCESS_KEY_ID),
