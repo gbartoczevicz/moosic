@@ -9,6 +9,8 @@ const dark = '#2f2e41';
 const Container = styled.View`
   border-color: ${dark};
   border-radius: 8px;
+  height: 40px;
+  width: 160px;
 `;
 
 const Pressable = styled(RectButton)`
