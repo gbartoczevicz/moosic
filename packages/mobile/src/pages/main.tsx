@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import * as Lib from '@/lib';
@@ -7,25 +6,27 @@ import * as Styles from '@/styles/main.styles';
 
 export const Main: React.FC = () => {
   const navigation = useNavigation();
-
-  const [canSignUp, setCanSignUp] = useState(false);
+  const [showActions, setShowActions] = useState(false);
 
   return (
     <Lib.Container>
-      <Lib.Carousel onChange={setCanSignUp} />
+      <Lib.Carousel onChange={setShowActions} />
 
-      {canSignUp && (
-        <>
-          <View style={{ marginTop: 50, height: 50 }}>
-            <Styles.Button variant="dark" onPress={() => navigation.navigate('SignUp')}>
-              SignUp
-            </Styles.Button>
-          </View>
-          <View style={{ height: 50 }}>
-            <Styles.Button onPress={() => navigation.navigate('SignIn')}>SignIn</Styles.Button>
-          </View>
-        </>
-      )}
+      <Styles.ActionsContainer isVisible={showActions}>
+        <Styles.Button
+          variant="dark"
+          enabled={showActions}
+          onPress={() => navigation.navigate('SignUp')}
+        >
+          SignUp
+        </Styles.Button>
+        <Styles.Button
+          enabled={showActions}
+          onPress={() => navigation.navigate('SignIn')}
+        >
+          SignIn
+        </Styles.Button>
+      </Styles.ActionsContainer>
     </Lib.Container>
   );
 };
