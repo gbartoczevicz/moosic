@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FormHandles } from '@unform/core';
 
 import { useAuth, useCanSkipMain } from '@/hooks';
-import { Button, Container, Input } from '@/lib';
+import { Button, Container } from '@/lib';
 
 import * as Styles from "@/styles/sign-in.styles";
 
