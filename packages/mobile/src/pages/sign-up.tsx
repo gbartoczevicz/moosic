@@ -3,10 +3,11 @@ import { Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { FormHandles } from '@unform/core';
 
-import { useAuth, useCanSkipMain } from '@/hooks';
+import { useCanSkipMain } from '@/hooks';
 import * as Lib from '@/lib';
 import * as Styles from '@/styles/sign-up.styles';
 import { accountsClient } from '@/services/http-client';
+import { alertError } from '@/utils';
 
 export const SignUp: React.FC = () => {
   const { updateCanSkipMain } = useCanSkipMain();
@@ -23,11 +24,10 @@ export const SignUp: React.FC = () => {
       await accountsClient.post('/users', data);
       await updateCanSkipMain(true);
       navigation.navigate('SignIn');
-    } catch (err: any) {
-      Alert.alert('Erro no cadastro', err.response.data.message);
-      return;
+    } catch (err) {
+      return alertError("Erro no cadastro", err);
     }
-  }, []);
+  }, [alertError]);
 
   return (
     <Lib.Container>
