@@ -3,7 +3,7 @@ import * as Unform from '@unform/mobile';
 
 import * as Lib from "@/lib";
 
-export const WelcomeTitle = styled(Lib.Title)`
+export const WelcomeTitle = styled(Lib.Text)`
   text-align: left;
   font-size: 45px;
 `;

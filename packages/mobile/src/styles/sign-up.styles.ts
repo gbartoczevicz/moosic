@@ -8,7 +8,7 @@ export const HeaderContainer = styled.View`
   align-items: flex-start;
 `;
 
-export const Title = styled(Lib.Title)`
+export const Title = styled(Lib.Text)`
   text-align: left;
   font-size: 36px;
 `;

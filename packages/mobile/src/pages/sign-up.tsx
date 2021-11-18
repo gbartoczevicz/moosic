@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/core';
 import { FormHandles } from '@unform/core';
 
 import { useCanSkipMain } from '@/hooks';
+import { alertError } from '@/utils';
+import { accountsClient } from '@/services/http-client';
 import * as Lib from '@/lib';
 import * as Styles from '@/styles/sign-up.styles';
-import { accountsClient } from '@/services/http-client';
-import { alertError } from '@/utils';
 
 export const SignUp: React.FC = () => {
   const { updateCanSkipMain } = useCanSkipMain();

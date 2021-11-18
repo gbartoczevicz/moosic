@@ -1,19 +1,17 @@
 import React from 'react';
 
 import { useAuth } from '@/hooks';
-import { Container, Title, Button } from '@/lib';
-import { RedTitle } from '@/styles/home.styles';
+import * as Lib from '@/lib';
 
 const Home: React.FC = () => {
   const { user, signOut } = useAuth();
 
   return (
-    <Container>
-      <Title>Home Page</Title>
-      <RedTitle>Título Vermelho 🥚</RedTitle>
-      <Title>{JSON.stringify(user)}</Title>
-      <Button onPress={signOut}>Sair</Button>
-    </Container>
+    <Lib.Container>
+      <Lib.Text>Home Page</Lib.Text>
+      <Lib.Text>{JSON.stringify(user)}</Lib.Text>
+      <Lib.Button variant="dark" onPress={signOut}>Sair</Lib.Button>
+    </Lib.Container>
   );
 };
 
