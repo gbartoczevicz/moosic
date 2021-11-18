@@ -1,5 +1,5 @@
 import React, { useRef, useCallback } from 'react';
-import { Alert, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { FormHandles } from '@unform/core';
 

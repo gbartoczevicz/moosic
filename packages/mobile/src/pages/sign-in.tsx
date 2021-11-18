@@ -1,8 +1,9 @@
 import React, { useRef, useCallback } from 'react';
-import { Alert, TextInput, Image } from 'react-native';
+import { TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FormHandles } from '@unform/core';
 
+import { alertError } from '@/utils';
 import { useAuth, useCanSkipMain } from '@/hooks';
 import { Button, Container } from '@/lib';
 
@@ -22,13 +23,12 @@ export const SignIn: React.FC = () => {
         await signIn(data);
         await updateCanSkipMain(true);
       } catch (err) {
-        Alert.alert('Erro de autenticação', JSON.stringify(err, Object.getOwnPropertyNames(err)));
-        return;
+        return alertError("Erro de autenticação", err);
       }
 
       navigation.navigate('App');
     },
-    [navigation]
+    [navigation, alertError]
   );
 
   return (
