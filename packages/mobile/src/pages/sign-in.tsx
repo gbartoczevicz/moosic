@@ -6,12 +6,11 @@ import { FormHandles } from '@unform/core';
 import { alertError } from '@/utils';
 import { useAuth, useCanSkipMain } from '@/hooks';
 import * as Lib from '@/lib';
-
 import * as Styles from "@/styles/sign-in.styles";
 
 export const SignIn: React.FC = () => {
   const { signIn } = useAuth();
-  const { updateCanSkipMain } = useCanSkipMain();
+  const { updateCanSkipMain, canSkipMain } = useCanSkipMain();
   const navigation = useNavigation();
 
   const formRef = useRef<FormHandles>(null);
@@ -60,7 +59,8 @@ export const SignIn: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Lib.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Entrar</Lib.Button>
+        <Styles.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Entrar</Styles.Button>
+        {!canSkipMain && <Styles.Button onPress={navigation.goBack}>Voltar</Styles.Button>}
       </Styles.Form>
     </Lib.Container>
   );

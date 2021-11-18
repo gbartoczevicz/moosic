@@ -84,7 +84,8 @@ export const SignUp: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Lib.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Cadastrar</Lib.Button>
+        <Styles.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Cadastrar</Styles.Button>
+        <Styles.Button onPress={navigation.goBack}>Voltar</Styles.Button>
       </Styles.Form>
     </Lib.Container>
   );

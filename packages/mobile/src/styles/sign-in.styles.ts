@@ -24,3 +24,6 @@ export const Input = styled(Lib.Input)`
   margin: 8px 0;
 `;
 
+export const Button = styled(Lib.Button)`
+  margin: 4px 0;
+`
