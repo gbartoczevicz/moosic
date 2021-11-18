@@ -1,13 +1,16 @@
 import React, { useRef, useCallback } from 'react';
 import { Alert, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import { FormHandles } from '@unform/core';
 
-import { useCanSkipMain } from '@/hooks';
+import { useAuth, useCanSkipMain } from '@/hooks';
 import * as Lib from '@/lib';
 import * as Styles from '@/styles/sign-up.styles';
+import { accountsClient } from '@/services/http-client';
 
 export const SignUp: React.FC = () => {
   const { updateCanSkipMain } = useCanSkipMain();
+  const navigation = useNavigation();
 
   const formRef = useRef<FormHandles>(null);
   const emailInputRef = useRef<TextInput>(null);
@@ -16,7 +19,14 @@ export const SignUp: React.FC = () => {
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
   const handleSignUp = useCallback(async (data) => {
-    Alert.alert("teste", JSON.stringify(data, Object.getOwnPropertyNames(data)))
+    try {
+      await accountsClient.post('/users', data);
+      await updateCanSkipMain(true);
+      navigation.navigate('SignIn');
+    } catch (err: any) {
+      Alert.alert('Erro no cadastro', err.response.data.message);
+      return;
+    }
   }, []);
 
   return (
