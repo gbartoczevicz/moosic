@@ -21,10 +21,6 @@ export const Form = styled(Unform.Form)`
 
 export const Input = styled(Lib.Input)`
   width: 100%;
-  border-color: #000;
-  border-radius: 16px;
-  border-width: 1px;
-  padding: 10px;
   margin: 8px 0;
 `;
 
