@@ -1,11 +1,13 @@
 import React, { useRef, useCallback } from 'react';
-import { Alert, TextInput } from 'react-native';
+import { TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FormHandles } from '@unform/core';
-import { Form } from '@unform/mobile';
 
+import { alertError } from '@/utils';
 import { useAuth, useCanSkipMain } from '@/hooks';
-import { Title, Button, Container, Input } from '@/lib';
+import { Button, Container } from '@/lib';
+
+import * as Styles from "@/styles/sign-in.styles";
 
 export const SignIn: React.FC = () => {
   const { signIn } = useAuth();
@@ -21,30 +23,36 @@ export const SignIn: React.FC = () => {
         await signIn(data);
         await updateCanSkipMain(true);
       } catch (err) {
-        Alert.alert('Erro de autenticação', JSON.stringify(err, Object.getOwnPropertyNames(err)));
-        return;
+        return alertError("Erro de autenticação", err);
       }
 
       navigation.navigate('App');
     },
-    [navigation]
+    [navigation, alertError]
   );
 
   return (
     <Container>
-      <Title>Bem-vindo</Title>
+      <Styles.HeaderContainer>
+        <Styles.WelcomeTitle>
+          Bem
+          {"\n"}
+          Vindo
+        </Styles.WelcomeTitle>
+        <Image source={require('../../assets/logoSignin.png')} />
+      </Styles.HeaderContainer>
 
-      <Form onSubmit={handleSignIn} ref={formRef}>
-        <Input
+      <Styles.Form onSubmit={handleSignIn} ref={formRef}>
+        <Styles.Input
           name="email"
-          placeholder="E-email"
+          placeholder="E-mail"
           autoCorrect={false}
           autoCapitalize="none"
           keyboardType="email-address"
           returnKeyType="next"
           onSubmitEditing={() => passwordInputRef.current?.focus()}
         />
-        <Input
+        <Styles.Input
           name="password"
           ref={passwordInputRef}
           placeholder="Senha"
@@ -52,8 +60,8 @@ export const SignIn: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Button onPress={() => formRef.current?.submitForm()}>Entrar</Button>
-      </Form>
+        <Button variant="dark" onPress={() => formRef.current?.submitForm()}>Entrar</Button>
+      </Styles.Form>
     </Container>
   );
 };
