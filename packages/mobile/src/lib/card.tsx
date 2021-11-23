@@ -1,8 +1,7 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import { Alert, TextInput, View, Text } from 'react-native';
-import { Button } from '@/lib';
-
+import React from "react";
+import styled from "styled-components/native";
+import { Alert, Text, TextInput, View } from "react-native";
+import { Button } from "@/lib";
 
 const CardContainer = styled.View`
   border: 1px solid #000;
@@ -16,9 +15,9 @@ const CardContainer = styled.View`
 `;
 
 interface ICard {
-  date: string,
-  title: string,
-  price: string,
+  date: string;
+  title: string;
+  price: string;
 }
 
 export const Card: React.FC<ICard> = ({ title, price, date }) => {
@@ -30,5 +29,5 @@ export const Card: React.FC<ICard> = ({ title, price, date }) => {
         <Text>{price}</Text>
       </View>
     </CardContainer>
-  )
+  );
 };
