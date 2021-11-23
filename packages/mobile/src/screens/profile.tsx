@@ -2,6 +2,7 @@ import React from "react";
 
 import { ScrollView, View } from "react-native";
 import { Avatar, Badges, Button, Card, Text } from "@/lib";
+import { useAuth } from "@/hooks";
 
 import * as Lib from "@/lib";
 
@@ -41,6 +42,8 @@ const EVENTS = [
 const BADGES = ["medal", "medal", "medal", "medal", "medal"];
 
 export const Profile: React.FC = () => {
+  const { user } = useAuth();
+
   return (
     <Lib.Container>
       <View
@@ -59,7 +62,7 @@ export const Profile: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Text>Luiz Eduardo</Text>
+          <Text>{user.name}</Text>
           <Button
             style={{
               alignItems: "center",
