@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Calendar from "@react-native-community/datetimepicker";
 
-import { Container } from "@/lib/container";
+import * as Lib from "@/lib";
 
 const Schedules: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -15,14 +15,14 @@ const Schedules: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Lib.Container>
       <Calendar
         mode="date"
         display="calendar"
         value={currentDate}
         onChange={handleDateChange}
       />
-    </Container>
+    </Lib.Container>
   );
 };
 

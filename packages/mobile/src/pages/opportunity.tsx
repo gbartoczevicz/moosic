@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Container, Title } from '@/lib/container';
+import * as Lib from '@/lib';
 
 const Opportunity: React.FC = () => (
-  <Container>
-    <Title>Oportunidades</Title>
-  </Container>
+  <Lib.Container>
+    <Lib.Text>Oportunidades</Lib.Text>
+  </Lib.Container>
 );
 
 export default Opportunity;

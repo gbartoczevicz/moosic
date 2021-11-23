@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Container, Title } from '@/lib/container';
+import * as Lib from '@/lib';
 
 const Bands: React.FC = () => (
-  <Container>
-    <Title>Bandas</Title>
-  </Container>
+  <Lib.Container>
+    <Lib.Text>Bandas</Lib.Text>
+  </Lib.Container>
 );
 
 export default Bands;

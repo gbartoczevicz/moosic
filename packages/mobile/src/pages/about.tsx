@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Container, Title } from '@/lib/container';
+import * as Lib from '@/lib';
 
 const About: React.FC = () => (
-  <Container>
-    <Title>Sobre o sistema</Title>
-  </Container>
+  <Lib.Container>
+    <Lib.Text>Sobre o sistema</Lib.Text>
+  </Lib.Container>
 );
 
 export default About;

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Container, Title } from '@/lib/container';
+import * as Lib from '@/lib';
 
 const Trends: React.FC = () => (
-  <Container>
-    <Title>Trends</Title>
-  </Container>
+  <Lib.Container>
+    <Lib.Text>Trends</Lib.Text>
+  </Lib.Container>
 );
 
 export default Trends;
