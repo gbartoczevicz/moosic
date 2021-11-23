@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { AppRouter } from "@/routes/app";
 import { useAuth, useCanSkipMain } from "@/hooks";
-import * as Screens from "@/pages";
+import * as Screens from "@/screens";
 
 const Stack = createNativeStackNavigator();
 
