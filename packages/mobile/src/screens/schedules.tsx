@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Calendar from "@react-native-community/datetimepicker";
 
 import * as Lib from "@/lib";
@@ -13,6 +13,14 @@ export const Schedules: React.FC = () => {
     }
   };
 
+  const formatDate = useCallback(
+    () =>
+      new Intl.DateTimeFormat("pt-BR").format(
+        currentDate,
+      ),
+    [currentDate],
+  );
+
   useEffect(() => {
     (() => setTogglePicker(false));
   }, []);
@@ -20,7 +28,7 @@ export const Schedules: React.FC = () => {
   return (
     <Lib.Container>
       <Lib.Text>
-        The current date selected is {currentDate.toISOString()}
+        The current date selected is {formatDate()}
       </Lib.Text>
       <Lib.Button onPress={() => setTogglePicker(!togglePicker)} variant="dark">
         Book a new date
