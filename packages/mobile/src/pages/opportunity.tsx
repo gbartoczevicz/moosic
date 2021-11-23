@@ -1,11 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import * as Lib from '@/lib';
+import * as Lib from "@/lib";
 
-const Opportunity: React.FC = () => (
+export const Opportunity: React.FC = () => (
   <Lib.Container>
     <Lib.Text>Oportunidades</Lib.Text>
   </Lib.Container>
 );
-
-export default Opportunity;

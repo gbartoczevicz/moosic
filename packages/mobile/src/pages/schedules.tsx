@@ -3,7 +3,7 @@ import Calendar from "@react-native-community/datetimepicker";
 
 import * as Lib from "@/lib";
 
-const Schedules: React.FC = () => {
+export const Schedules: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [togglePicker, setTogglePicker] = useState(false);
 
@@ -36,5 +36,3 @@ const Schedules: React.FC = () => {
     </Lib.Container>
   );
 };
-
-export default Schedules;

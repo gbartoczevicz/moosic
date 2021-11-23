@@ -1,11 +1,11 @@
-import React, { useRef, useCallback } from 'react';
-import { TextInput, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { FormHandles } from '@unform/core';
+import React, { useCallback, useRef } from "react";
+import { Image, TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { FormHandles } from "@unform/core";
 
-import { alertError } from '@/utils';
-import { useAuth, useCanSkipMain } from '@/hooks';
-import * as Lib from '@/lib';
+import { alertError } from "@/utils";
+import { useAuth, useCanSkipMain } from "@/hooks";
+import * as Lib from "@/lib";
 import * as Styles from "@/styles/sign-in.styles";
 
 export const SignIn: React.FC = () => {
@@ -25,9 +25,9 @@ export const SignIn: React.FC = () => {
         return alertError("Erro de autenticação", err);
       }
 
-      navigation.navigate('App');
+      navigation.navigate("App");
     },
-    [navigation, alertError]
+    [navigation, alertError],
   );
 
   return (
@@ -38,7 +38,7 @@ export const SignIn: React.FC = () => {
           {"\n"}
           Vindo
         </Styles.WelcomeTitle>
-        <Image source={require('../../assets/logoSignin.png')} />
+        <Image source={require("../../assets/logoSignin.png")} />
       </Styles.HeaderContainer>
 
       <Styles.Form onSubmit={handleSignIn} ref={formRef}>
@@ -59,8 +59,15 @@ export const SignIn: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Styles.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Entrar</Styles.Button>
-        {!canSkipMain && <Styles.Button onPress={navigation.goBack}>Voltar</Styles.Button>}
+        <Styles.Button
+          variant="dark"
+          onPress={() => formRef.current?.submitForm()}
+        >
+          Entrar
+        </Styles.Button>
+        {!canSkipMain && (
+          <Styles.Button onPress={navigation.goBack}>Voltar</Styles.Button>
+        )}
       </Styles.Form>
     </Lib.Container>
   );

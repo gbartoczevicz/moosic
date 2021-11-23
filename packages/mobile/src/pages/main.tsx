@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
-import * as Lib from '@/lib';
-import * as Styles from '@/styles/main.styles';
+import * as Lib from "@/lib";
+import * as Styles from "@/styles/main.styles";
 
 export const Main: React.FC = () => {
   const navigation = useNavigation();
@@ -16,13 +16,13 @@ export const Main: React.FC = () => {
         <Styles.Button
           variant="dark"
           enabled={showActions}
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate("SignUp")}
         >
           SignUp
         </Styles.Button>
         <Styles.Button
           enabled={showActions}
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={() => navigation.navigate("SignIn")}
         >
           SignIn
         </Styles.Button>

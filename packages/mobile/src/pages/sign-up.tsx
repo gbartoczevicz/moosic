@@ -1,13 +1,13 @@
-import React, { useRef, useCallback } from 'react';
-import { TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/core';
-import { FormHandles } from '@unform/core';
+import React, { useCallback, useRef } from "react";
+import { TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/core";
+import { FormHandles } from "@unform/core";
 
-import { useCanSkipMain } from '@/hooks';
-import { alertError } from '@/utils';
-import { accountsClient } from '@/services/http-client';
-import * as Lib from '@/lib';
-import * as Styles from '@/styles/sign-up.styles';
+import { useCanSkipMain } from "@/hooks";
+import { alertError } from "@/utils";
+import { accountsClient } from "@/services/http-client";
+import * as Lib from "@/lib";
+import * as Styles from "@/styles/sign-up.styles";
 
 export const SignUp: React.FC = () => {
   const { updateCanSkipMain } = useCanSkipMain();
@@ -21,9 +21,9 @@ export const SignUp: React.FC = () => {
 
   const handleSignUp = useCallback(async (data) => {
     try {
-      await accountsClient.post('/users', data);
+      await accountsClient.post("/users", data);
       await updateCanSkipMain(true);
-      navigation.navigate('SignIn');
+      navigation.navigate("SignIn");
     } catch (err) {
       return alertError("Erro no cadastro", err);
     }
@@ -34,7 +34,8 @@ export const SignUp: React.FC = () => {
       <Styles.HeaderContainer>
         <Styles.Title>Sign up page</Styles.Title>
         <Styles.Subtitle>
-          Crie sua conta para obter acesso ilimitado a todas as funcionalidades do nosso aplicativo!
+          Crie sua conta para obter acesso ilimitado a todas as funcionalidades
+          do nosso aplicativo!
         </Styles.Subtitle>
       </Styles.HeaderContainer>
 
@@ -84,7 +85,12 @@ export const SignUp: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Styles.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Cadastrar</Styles.Button>
+        <Styles.Button
+          variant="dark"
+          onPress={() => formRef.current?.submitForm()}
+        >
+          Cadastrar
+        </Styles.Button>
         <Styles.Button onPress={navigation.goBack}>Voltar</Styles.Button>
       </Styles.Form>
     </Lib.Container>

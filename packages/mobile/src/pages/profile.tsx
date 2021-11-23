@@ -1,11 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import * as Lib from '@/lib';
+import { useAuth } from "@/hooks";
+import * as Lib from "@/lib";
 
-const Profile: React.FC = () => (
-  <Lib.Container>
-    <Lib.Text>Profile Page</Lib.Text>
-  </Lib.Container>
-);
+export const Profile: React.FC = () => {
+  const { user, signOut } = useAuth();
 
-export default Profile;
+  return (
+    <Lib.Container>
+      <Lib.Text>Profile Page</Lib.Text>
+      <Lib.Text>{JSON.stringify(user)}</Lib.Text>
+      <Lib.Button variant="dark" onPress={signOut}>Sair</Lib.Button>
+    </Lib.Container>
+  );
+};
