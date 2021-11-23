@@ -3,7 +3,7 @@ import * as Unform from '@unform/mobile';
 
 import * as Lib from "@/lib";
 
-export const WelcomeTitle = styled(Lib.Title)`
+export const WelcomeTitle = styled(Lib.Text)`
   text-align: left;
   font-size: 45px;
 `;
@@ -21,10 +21,9 @@ export const Form = styled(Unform.Form)`
 
 export const Input = styled(Lib.Input)`
   width: 100%;
-  border-color: #000;
-  border-radius: 16px;
-  border-width: 1px;
-  padding: 10px;
   margin: 8px 0;
 `;
 
+export const Button = styled(Lib.Button)`
+  margin: 4px 0;
+`

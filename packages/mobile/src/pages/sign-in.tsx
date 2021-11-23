@@ -5,13 +5,12 @@ import { FormHandles } from '@unform/core';
 
 import { alertError } from '@/utils';
 import { useAuth, useCanSkipMain } from '@/hooks';
-import { Button, Container } from '@/lib';
-
+import * as Lib from '@/lib';
 import * as Styles from "@/styles/sign-in.styles";
 
 export const SignIn: React.FC = () => {
   const { signIn } = useAuth();
-  const { updateCanSkipMain } = useCanSkipMain();
+  const { updateCanSkipMain, canSkipMain } = useCanSkipMain();
   const navigation = useNavigation();
 
   const formRef = useRef<FormHandles>(null);
@@ -22,7 +21,7 @@ export const SignIn: React.FC = () => {
       try {
         await signIn(data);
         await updateCanSkipMain(true);
-      } catch (err) {
+      } catch (err: any) {
         return alertError("Erro de autenticação", err);
       }
 
@@ -32,7 +31,7 @@ export const SignIn: React.FC = () => {
   );
 
   return (
-    <Container>
+    <Lib.Container>
       <Styles.HeaderContainer>
         <Styles.WelcomeTitle>
           Bem
@@ -60,8 +59,9 @@ export const SignIn: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Button variant="dark" onPress={() => formRef.current?.submitForm()}>Entrar</Button>
+        <Styles.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Entrar</Styles.Button>
+        {!canSkipMain && <Styles.Button onPress={navigation.goBack}>Voltar</Styles.Button>}
       </Styles.Form>
-    </Container>
+    </Lib.Container>
   );
 };

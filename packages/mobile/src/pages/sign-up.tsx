@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/core';
 import { FormHandles } from '@unform/core';
 
 import { useCanSkipMain } from '@/hooks';
+import { alertError } from '@/utils';
+import { accountsClient } from '@/services/http-client';
 import * as Lib from '@/lib';
 import * as Styles from '@/styles/sign-up.styles';
-import { accountsClient } from '@/services/http-client';
-import { alertError } from '@/utils';
 
 export const SignUp: React.FC = () => {
   const { updateCanSkipMain } = useCanSkipMain();
@@ -84,7 +84,8 @@ export const SignUp: React.FC = () => {
           returnKeyType="send"
           onSubmitEditing={() => formRef.current?.submitForm()}
         />
-        <Lib.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Cadastrar</Lib.Button>
+        <Styles.Button variant="dark" onPress={() => formRef.current?.submitForm()}>Cadastrar</Styles.Button>
+        <Styles.Button onPress={navigation.goBack}>Voltar</Styles.Button>
       </Styles.Form>
     </Lib.Container>
   );

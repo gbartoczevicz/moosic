@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Container } from '@/lib/container';
-import { BlueTitle } from '@/styles/profile.styles';
+import * as Lib from '@/lib';
 
 const Profile: React.FC = () => (
-  <Container>
-    <BlueTitle>Profile Page</BlueTitle>
-  </Container>
+  <Lib.Container>
+    <Lib.Text>Profile Page</Lib.Text>
+  </Lib.Container>
 );
 
 export default Profile;

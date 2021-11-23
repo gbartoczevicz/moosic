@@ -8,14 +8,15 @@ export const HeaderContainer = styled.View`
   align-items: flex-start;
 `;
 
-export const Title = styled(Lib.Title)`
+export const Title = styled(Lib.Text)`
   text-align: left;
   font-size: 36px;
 `;
 
 export const Subtitle = styled.Text`
   color: #8A8A8A;
-`
+`;
+
 export const Form = styled(Unform.Form)`
   width: 100%;
   padding: 0 20px;
@@ -24,9 +25,9 @@ export const Form = styled(Unform.Form)`
 
 export const Input = styled(Lib.Input)`
   width: 100%;
-  border-color: #000;
-  border-radius: 16px;
-  border-width: 1px;
-  padding: 10px;
   margin: 8px 0;
 `;
+
+export const Button = styled(Lib.Button)`
+  margin: 4px 0;
+`
